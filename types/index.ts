@@ -97,12 +97,54 @@ export interface RegistrationData {
   availability: Availability;
 }
 
+export interface EventMaterial {
+  id: string;
+  eventId: string;
+  title: string;
+  description?: string;
+  type: 'presentation' | 'document' | 'video' | 'link' | 'image';
+  url: string;
+  uploadedBy: string;
+  uploadedAt: Date;
+  category?: string;
+  thumbnail?: string;
+}
+
+export interface EventAnalytics {
+  totalAttendees: number;
+  checkedIn: number;
+  connectionsMode: number;
+  messagesExchanged: number;
+  materialsDownloaded: number;
+  projectsCreated: number;
+}
+
 export interface Event {
   id: string;
   name: string;
-  date: string;
+  date: Date;
+  endDate?: Date;
   location: string;
   description: string;
+  category: 'hackathon' | 'networking' | 'workshop' | 'conference' | 'meetup';
+  organizers: string[]; // User IDs
+  attendees: string[]; // User IDs
+  maxAttendees?: number;
+  image?: string;
+  gallery?: string[];
+  agenda?: {
+    time: string;
+    title: string;
+    description?: string;
+    speaker?: string;
+  }[];
+  materials?: EventMaterial[];
+  analytics?: EventAnalytics;
+  status: 'upcoming' | 'ongoing' | 'completed';
+  registrationDeadline?: Date;
+  tags?: string[];
+  website?: string;
+  isPublic: boolean;
 }
 
 export interface Message {
