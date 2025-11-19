@@ -1,4 +1,4 @@
-import type { User, Channel, Post, Mentor, Project, Badge } from '@/types';
+import type { User, Channel, Post, Mentor, Project, Badge, Message, Conversation } from '@/types';
 
 // Badges
 export const mockBadges: Badge[] = [
@@ -466,5 +466,167 @@ export const mockPosts: Post[] = [
     createdAt: new Date('2024-11-16'),
     likes: 56,
     comments: 23,
+  },
+];
+
+// Mock Messages
+export const mockMessages: Message[] = [
+  // Conversation 1: with Lucie (about EventMatch project)
+  {
+    id: 'msg1',
+    conversationId: 'conv1',
+    senderId: 'user2',
+    content: 'Ahoj! Viděla jsem tvůj profil a myslím, že bychom mohli spolupracovat na EventMatch. Máš zájem?',
+    createdAt: new Date('2024-11-18T10:00:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg2',
+    conversationId: 'conv1',
+    senderId: 'user1', // current user
+    content: 'Ahoj Lucie! Určitě, to zní skvěle. EventMatch vypadá super, už jsem si to prohlížel. Kdy bys měla čas na call?',
+    createdAt: new Date('2024-11-18T10:15:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg3',
+    conversationId: 'conv1',
+    senderId: 'user2',
+    content: 'Co takhle ve čtvrtek odpoledne? Můžeme si projít tech stack a co všechno potřebujeme vybudovat.',
+    createdAt: new Date('2024-11-18T14:30:00'),
+    isRead: false,
+  },
+
+  // Conversation 2: with Martin (about StudyBuddy AI)
+  {
+    id: 'msg4',
+    conversationId: 'conv2',
+    senderId: 'user3',
+    content: 'Sup! Díky za add do StudyBuddy týmu. Kdy startujeme s backendem?',
+    createdAt: new Date('2024-11-17T16:00:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg5',
+    conversationId: 'conv2',
+    senderId: 'user1',
+    content: 'Hej! Můžeme začít hned. Posílám ti Notion s roadmapou a API specs.',
+    createdAt: new Date('2024-11-17T16:10:00'),
+    isRead: true,
+    attachments: [
+      {
+        type: 'link',
+        url: 'https://notion.so/studybuddy',
+        name: 'StudyBuddy Roadmap',
+      },
+    ],
+  },
+  {
+    id: 'msg6',
+    conversationId: 'conv2',
+    senderId: 'user3',
+    content: 'Super, díky! Mrknu na to dnes večer.',
+    createdAt: new Date('2024-11-17T16:15:00'),
+    isRead: true,
+  },
+
+  // Conversation 3: with Karolína (design collaboration)
+  {
+    id: 'msg7',
+    conversationId: 'conv3',
+    senderId: 'user1',
+    content: 'Ahoj Karolíno! Potřeboval bych pomoct s designem pro GreenCommute. Měla bys čas?',
+    createdAt: new Date('2024-11-16T11:00:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg8',
+    conversationId: 'conv3',
+    senderId: 'user4',
+    content: 'Ahoj! Samozřejmě, to zní jako cool projekt. Pošli mi víc detailů.',
+    createdAt: new Date('2024-11-16T11:30:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg9',
+    conversationId: 'conv3',
+    senderId: 'user1',
+    content: 'Je to platforma pro carpooling mezi studenty. Potřebujeme UI/UX pro onboarding a hlavní feed.',
+    createdAt: new Date('2024-11-16T12:00:00'),
+    isRead: true,
+  },
+
+  // Conversation 4: with Barbora (business development)
+  {
+    id: 'msg10',
+    conversationId: 'conv4',
+    senderId: 'user6',
+    content: 'Hej! Poznali jsme se na BeNextOne. Chtěla bych s tebou probrat možnost spolupráce na business stránce tvých projektů.',
+    createdAt: new Date('2024-11-15T14:00:00'),
+    isRead: true,
+  },
+  {
+    id: 'msg11',
+    conversationId: 'conv4',
+    senderId: 'user1',
+    content: 'Ahoj Barbaro! Jasně, pamatuju si tě. To by bylo skvělý, právě potřebuju pomoct s pitch deckem.',
+    createdAt: new Date('2024-11-15T15:00:00'),
+    isRead: true,
+  },
+];
+
+// Mock Conversations
+export const mockConversations: Conversation[] = [
+  {
+    id: 'conv1',
+    participants: [mockUsers[1]], // Lucie
+    lastMessage: mockMessages[2],
+    unreadCount: 1,
+    context: {
+      type: 'project',
+      name: 'EventMatch',
+      id: 'proj3',
+    },
+    createdAt: new Date('2024-11-18T10:00:00'),
+    updatedAt: new Date('2024-11-18T14:30:00'),
+  },
+  {
+    id: 'conv2',
+    participants: [mockUsers[2]], // Martin
+    lastMessage: mockMessages[5],
+    unreadCount: 0,
+    context: {
+      type: 'project',
+      name: 'StudyBuddy AI',
+      id: 'proj1',
+    },
+    createdAt: new Date('2024-11-17T16:00:00'),
+    updatedAt: new Date('2024-11-17T16:15:00'),
+  },
+  {
+    id: 'conv3',
+    participants: [mockUsers[3]], // Karolína
+    lastMessage: mockMessages[8],
+    unreadCount: 0,
+    context: {
+      type: 'project',
+      name: 'GreenCommute',
+      id: 'proj2',
+    },
+    createdAt: new Date('2024-11-16T11:00:00'),
+    updatedAt: new Date('2024-11-16T12:00:00'),
+  },
+  {
+    id: 'conv4',
+    participants: [mockUsers[5]], // Barbora
+    lastMessage: mockMessages[10],
+    unreadCount: 0,
+    context: {
+      type: 'event',
+      name: 'BeNextOne 2024',
+      id: '1',
+    },
+    createdAt: new Date('2024-11-15T14:00:00'),
+    updatedAt: new Date('2024-11-15T15:00:00'),
   },
 ];

@@ -104,3 +104,31 @@ export interface Event {
   location: string;
   description: string;
 }
+
+export interface Message {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  content: string;
+  createdAt: Date;
+  isRead: boolean;
+  attachments?: {
+    type: 'file' | 'image' | 'link';
+    url: string;
+    name: string;
+  }[];
+}
+
+export interface Conversation {
+  id: string;
+  participants: User[];
+  lastMessage?: Message;
+  unreadCount: number;
+  context?: {
+    type: 'event' | 'project' | 'discovery';
+    name: string;
+    id: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
