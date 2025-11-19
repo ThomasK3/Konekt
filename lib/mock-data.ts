@@ -22,7 +22,7 @@ export const mockBadges: Badge[] = [
   },
 ];
 
-// Mock Users (students)
+// Mock Users (students) - rozšířeno o galerie
 export const mockUsers: User[] = [
   {
     id: 'user1',
@@ -40,6 +40,15 @@ export const mockUsers: User[] = [
     },
     badges: [mockBadges[0], mockBadges[1]],
     projectIds: ['proj1', 'proj2'],
+    mainImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop',
+    ],
+    location: 'Praha',
+    isOnline: true,
   },
   {
     id: 'user2',
@@ -57,6 +66,14 @@ export const mockUsers: User[] = [
     },
     badges: [mockBadges[0]],
     projectIds: ['proj3'],
+    mainImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=300&fit=crop',
+    ],
+    location: 'Praha',
+    isOnline: false,
   },
   {
     id: 'user3',
@@ -74,6 +91,14 @@ export const mockUsers: User[] = [
     },
     badges: [mockBadges[0], mockBadges[2]],
     projectIds: ['proj1'],
+    mainImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=400&h=300&fit=crop',
+    ],
+    location: 'Brno',
+    isOnline: true,
   },
   {
     id: 'user4',
@@ -91,10 +116,115 @@ export const mockUsers: User[] = [
     },
     badges: [mockBadges[0], mockBadges[1]],
     projectIds: ['proj2', 'proj4'],
+    mainImage: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1572044162444-ad60f128bdea?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=300&fit=crop',
+    ],
+    location: 'Brno',
+    isOnline: true,
+  },
+  // Nové profily pro bohatší feed
+  {
+    id: 'user5',
+    name: 'Tomáš Novotný',
+    username: 'tomas-novotny',
+    email: 'tomas@example.com',
+    school: 'UK Praha',
+    skills: ['Blockchain', 'Solidity', 'Web3', 'Smart Contracts'],
+    bio: 'Blockchain developer. Pracuji na DeFi projektech a chci změnit finance.',
+    role: 'student',
+    lookingFor: ['Web3 Team', 'Co-founder'],
+    availability: {
+      hoursPerWeek: 30,
+      isPaid: false,
+    },
+    badges: [mockBadges[2]],
+    projectIds: ['proj5'],
+    mainImage: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
+    ],
+    location: 'Praha',
+    isOnline: false,
+  },
+  {
+    id: 'user6',
+    name: 'Barbora Malá',
+    username: 'barbora-mala',
+    email: 'barbora@example.com',
+    school: 'VŠE',
+    skills: ['Business Development', 'Sales', 'Pitching', 'Partnerships'],
+    bio: 'Startup enthusiast. Chci budovat business side tech projektů.',
+    role: 'student',
+    lookingFor: ['Tech Co-founder', 'Product Team'],
+    availability: {
+      hoursPerWeek: 20,
+      isPaid: true,
+    },
+    badges: [mockBadges[0], mockBadges[1]],
+    projectIds: ['proj6'],
+    mainImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=300&fit=crop',
+    ],
+    location: 'Praha',
+    isOnline: true,
+  },
+  {
+    id: 'user7',
+    name: 'Filip Král',
+    username: 'filip-kral',
+    email: 'filip@example.com',
+    school: 'VUT Brno',
+    skills: ['Mobile Dev', 'Flutter', 'React Native', 'iOS'],
+    bio: 'Mobile-first developer. Vytvářím appky, které lidi používají každý den.',
+    role: 'student',
+    lookingFor: ['Backend Developer', 'Designer'],
+    availability: {
+      hoursPerWeek: 15,
+      isPaid: false,
+    },
+    badges: [mockBadges[0]],
+    projectIds: [],
+    mainImage: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1555421689-491a97ff2040?w=400&h=300&fit=crop',
+    ],
+    location: 'Brno',
+    isOnline: true,
+  },
+  {
+    id: 'user8',
+    name: 'Anna Černá',
+    username: 'anna-cerna',
+    email: 'anna@example.com',
+    school: 'ČVUT',
+    skills: ['Data Analytics', 'SQL', 'Tableau', 'Python'],
+    bio: 'Data analyst. Pomáhám startupům dělat rozhodnutí založená na datech.',
+    role: 'student',
+    lookingFor: ['Startup s data-driven kulturou'],
+    availability: {
+      hoursPerWeek: 10,
+      isPaid: true,
+    },
+    badges: [mockBadges[1]],
+    projectIds: [],
+    mainImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop',
+    ],
+    location: 'Praha',
+    isOnline: false,
   },
 ];
 
-// Mock Projects
+// Mock Projects - rozšířeno o galerie
 export const mockProjects: Project[] = [
   {
     id: 'proj1',
@@ -102,6 +232,7 @@ export const mockProjects: Project[] = [
     description: 'AI asistent pro studenty, který pomáhá s učením pomocí personalizovaných quizů a vysvětlení. Automaticky generuje otázky z přednášek a učebnic.',
     stack: ['Next.js', 'OpenAI API', 'Python', 'FastAPI'],
     stage: 'mvp',
+    category: 'EdTech',
     lookingFor: [
       {
         role: 'Backend Developer',
@@ -117,6 +248,12 @@ export const mockProjects: Project[] = [
     teamMembers: [mockUsers[0], mockUsers[2]],
     ownerId: 'user1',
     createdAt: new Date('2024-11-10'),
+    image: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=400&h=300&fit=crop',
+    ],
   },
   {
     id: 'proj2',
@@ -124,6 +261,7 @@ export const mockProjects: Project[] = [
     description: 'Platforma pro sdílení jízd mezi studenty. Snižujeme emise a náklady na dopravu do školy. Gamifikace + odměny za eko-friendly rozhodnutí.',
     stack: ['React Native', 'Firebase', 'Google Maps API'],
     stage: 'idea',
+    category: 'CleanTech',
     lookingFor: [
       {
         role: 'Mobile Developer',
@@ -139,6 +277,11 @@ export const mockProjects: Project[] = [
     teamMembers: [mockUsers[0], mockUsers[3]],
     ownerId: 'user1',
     createdAt: new Date('2024-11-15'),
+    image: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=300&fit=crop',
+    ],
   },
   {
     id: 'proj3',
@@ -146,6 +289,7 @@ export const mockProjects: Project[] = [
     description: 'Networkingová app pro akce jako BeNextOne. Matchuje lidi podle zájmů před akcí, aby věděli, s kým si povídat.',
     stack: ['Flutter', 'Supabase', 'TypeScript'],
     stage: 'idea',
+    category: 'Social',
     lookingFor: [
       {
         role: 'Full-stack Developer',
@@ -161,6 +305,11 @@ export const mockProjects: Project[] = [
     teamMembers: [mockUsers[1]],
     ownerId: 'user2',
     createdAt: new Date('2024-11-12'),
+    image: 'https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1556761175-b413da4baf72?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1511578314322-379afb476865?w=400&h=300&fit=crop',
+    ],
   },
   {
     id: 'proj4',
@@ -168,6 +317,7 @@ export const mockProjects: Project[] = [
     description: 'P2P platforma pro výměnu skills mezi studenty. Nauč někoho programovat, získej lekci němčiny. Bez peněz, jen skills.',
     stack: ['Next.js', 'Prisma', 'PostgreSQL', 'tRPC'],
     stage: 'launched',
+    category: 'EdTech',
     lookingFor: [
       {
         role: 'Growth Marketer',
@@ -178,6 +328,57 @@ export const mockProjects: Project[] = [
     teamMembers: [mockUsers[3]],
     ownerId: 'user4',
     createdAt: new Date('2024-10-20'),
+    image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop',
+    ],
+  },
+  {
+    id: 'proj5',
+    name: 'CryptoLearn',
+    description: 'Vzdělávací platforma pro blockchain a Web3. Interaktivní kurzy s praktickými projekty.',
+    stack: ['Next.js', 'Solidity', 'Hardhat', 'Ethers.js'],
+    stage: 'mvp',
+    category: 'EdTech',
+    lookingFor: [
+      {
+        role: 'Content Creator',
+        skills: ['Writing', 'Video Production'],
+        count: 1,
+      },
+    ],
+    teamMembers: [mockUsers[4]],
+    ownerId: 'user5',
+    createdAt: new Date('2024-11-05'),
+    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=400&h=300&fit=crop',
+    ],
+  },
+  {
+    id: 'proj6',
+    name: 'LocalMarket',
+    description: 'Marketplace pro lokální farmáře a producenty. Čerstvé produkty přímo od výrobců.',
+    stack: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+    stage: 'idea',
+    category: 'E-commerce',
+    lookingFor: [
+      {
+        role: 'Full-stack Developer',
+        skills: ['React', 'Node.js', 'MongoDB'],
+        count: 2,
+      },
+    ],
+    teamMembers: [mockUsers[5]],
+    ownerId: 'user6',
+    createdAt: new Date('2024-11-14'),
+    image: 'https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=800&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1506617420156-8e4536971650?w=400&h=300&fit=crop',
+    ],
   },
 ];
 

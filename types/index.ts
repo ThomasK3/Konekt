@@ -20,6 +20,10 @@ export interface User {
   bio: string;
   videoUrl?: string;
   avatar?: string;
+  mainImage?: string;
+  gallery?: string[];
+  location?: string;
+  isOnline?: boolean;
   role: 'student' | 'mentor';
   lookingFor: string[];
   availability: Availability;
@@ -76,6 +80,9 @@ export interface Project {
   ownerId: string;
   createdAt: Date;
   image?: string;
+  gallery?: string[];
+  category?: string;
+  videoUrl?: string;
 }
 
 export interface RegistrationData {
