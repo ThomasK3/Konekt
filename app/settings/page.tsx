@@ -19,6 +19,7 @@ import {
   Trash2,
   AlertTriangle,
 } from 'lucide-react';
+import AppLayout from '@/components/layout/AppLayout';
 
 type TabType = 'profile' | 'account' | 'privacy' | 'notifications';
 
@@ -103,18 +104,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
-      {/* Header */}
-      <header className="bg-konekt-white border-b-2 border-konekt-black/10 sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <Link href="/feed" className="text-2xl font-bold text-konekt-black">
-            Konekt
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="mb-8">
+    <AppLayout>
+      <div className="mb-6">
           <h1 className="text-3xl font-bold text-konekt-black mb-2">⚙️ Nastavení</h1>
           <p className="text-konekt-black/60">Spravuj svůj účet a předvolby</p>
         </div>
@@ -553,7 +544,6 @@ export default function SettingsPage() {
             </div>
           </main>
         </div>
-      </div>
-    </div>
+    </AppLayout>
   );
 }

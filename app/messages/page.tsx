@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { mockConversations, mockMessages, mockUsers } from '@/lib/mock-data';
 import { useUserStore } from '@/lib/store';
-import { Conversation, Message } from '@/types';
-import { MessageCircle, Paperclip, Send, MapPin, Video, Phone, MoreVertical } from 'lucide-react';
+import { MessageCircle, Paperclip, Send, Video, Phone, MoreVertical } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import AppLayout from '@/components/layout/AppLayout';
 
 export default function MessagesPage() {
   const { user } = useUserStore();
@@ -19,7 +19,6 @@ export default function MessagesPage() {
 
   const handleSendMessage = () => {
     if (!messageInput.trim()) return;
-    // TODO: Add message to state/backend
     console.log('Sending message:', messageInput);
     setMessageInput('');
   };
@@ -39,13 +38,13 @@ export default function MessagesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
-      <div className="max-w-screen-2xl mx-auto h-[calc(100vh-80px)] flex gap-0 mt-20">
+    <AppLayout>
+      <div className="h-[calc(100vh-160px)] flex gap-0 -mx-6 rounded-2xl overflow-hidden border-2 border-konekt-black/10">
         {/* Left Panel - Conversations List */}
         <div className="w-full md:w-96 bg-konekt-white border-r border-konekt-black/10 flex flex-col">
           {/* Header */}
           <div className="p-5 border-b border-konekt-black/10">
-            <h1 className="text-2xl font-bold text-konekt-black mb-1">Zprávy</h1>
+            <h2 className="text-xl font-bold text-konekt-black mb-1">Zprávy</h2>
             <p className="text-sm text-konekt-black/60">
               {mockConversations.filter((c) => c.unreadCount > 0).length} nepřečtené konverzace
             </p>
@@ -268,18 +267,6 @@ export default function MessagesPage() {
                     </div>
                   );
                 })}
-
-                {/* Typing Indicator (placeholder for future) */}
-                {/* <div className="flex gap-3">
-                  <img src="..." className="w-8 h-8 rounded-full" />
-                  <div className="px-4 py-3 bg-konekt-white rounded-2xl rounded-tl-sm">
-                    <div className="flex gap-1">
-                      <div className="w-2 h-2 bg-konekt-black/40 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <div className="w-2 h-2 bg-konekt-black/40 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <div className="w-2 h-2 bg-konekt-black/40 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
-                    </div>
-                  </div>
-                </div> */}
               </div>
 
               {/* Message Input */}
@@ -336,6 +323,6 @@ export default function MessagesPage() {
           )}
         </div>
       </div>
-    </div>
+    </AppLayout>
   );
 }

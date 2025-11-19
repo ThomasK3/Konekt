@@ -2,9 +2,10 @@
 
 import { useUserStore } from '@/lib/store';
 import { mockEvents, mockProjects, mockConversations } from '@/lib/mock-data';
-import { Users2, MessageCircle, Briefcase, Calendar, TrendingUp, ArrowRight, ExternalLink } from 'lucide-react';
+import { Users2, MessageCircle, Briefcase, Calendar, TrendingUp, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import AppLayout from '@/components/layout/AppLayout';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
@@ -46,18 +47,8 @@ export default function DashboardPage() {
   const maxMessages = Math.max(...weekActivity.map((d) => d.messages));
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
-      {/* Header */}
-      <header className="bg-konekt-white border-b-2 border-konekt-black/10 sticky top-0 z-20">
-        <div className="max-w-[1400px] mx-auto px-6 py-4">
-          <Link href="/feed" className="text-2xl font-bold text-konekt-black">
-            Konekt
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-[1400px] mx-auto px-6 py-8">
-        {/* Welcome Section */}
+    <AppLayout>
+      {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-konekt-black mb-2">
             👋 Ahoj, {user.name.split(' ')[0]}!
@@ -305,7 +296,6 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+    </AppLayout>
   );
 }

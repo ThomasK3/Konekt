@@ -13,6 +13,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import AppLayout from '@/components/layout/AppLayout';
 
 interface Notification {
   id: string;
@@ -161,18 +162,8 @@ export default function NotificationsPage() {
   }, {} as Record<string, Notification[]>);
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
-      {/* Header */}
-      <header className="bg-konekt-white border-b-2 border-konekt-black/10 sticky top-0 z-20">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <Link href="/feed" className="text-2xl font-bold text-konekt-black">
-            Konekt
-          </Link>
-        </div>
-      </header>
-
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* Page Header */}
+    <AppLayout>
+      {/* Page Header */}
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-konekt-black mb-2">🔔 Notifikace</h1>
@@ -334,7 +325,6 @@ export default function NotificationsPage() {
             </p>
           </div>
         )}
-      </div>
-    </div>
+    </AppLayout>
   );
 }
