@@ -1,14 +1,16 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import type { User, RegistrationData } from '@/types';
+import type { User, RegistrationData, Project } from '@/types';
 
 interface UserStore {
   user: User | null;
   registrationData: RegistrationData;
   currentEvent: string;
+  projects: Project[];
   setUser: (user: User) => void;
   updateRegistrationData: (data: Partial<RegistrationData>) => void;
   setCurrentEvent: (event: string) => void;
+  addProject: (project: Project) => void;
   clearUser: () => void;
 }
 
@@ -20,6 +22,11 @@ const initialRegistrationData: RegistrationData = {
   skills: [],
   bio: '',
   videoUrl: undefined,
+  lookingFor: [],
+  availability: {
+    hoursPerWeek: 10,
+    isPaid: false,
+  },
 };
 
 export const useUserStore = create<UserStore>()(
@@ -28,13 +35,18 @@ export const useUserStore = create<UserStore>()(
       user: null,
       registrationData: initialRegistrationData,
       currentEvent: 'BeNextOne 2024',
+      projects: [],
       setUser: (user) => set({ user }),
       updateRegistrationData: (data) =>
         set((state) => ({
           registrationData: { ...state.registrationData, ...data },
         })),
       setCurrentEvent: (event) => set({ currentEvent: event }),
-      clearUser: () => set({ user: null, registrationData: initialRegistrationData }),
+      addProject: (project) =>
+        set((state) => ({
+          projects: [...state.projects, project],
+        })),
+      clearUser: () => set({ user: null, registrationData: initialRegistrationData, projects: [] }),
     }),
     {
       name: 'konekt-user-storage',

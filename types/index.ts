@@ -1,6 +1,19 @@
+export interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
+export interface Availability {
+  hoursPerWeek: number;
+  isPaid: boolean;
+}
+
 export interface User {
   id: string;
   name: string;
+  username: string;
   email: string;
   school: string;
   skills: string[];
@@ -8,6 +21,10 @@ export interface User {
   videoUrl?: string;
   avatar?: string;
   role: 'student' | 'mentor';
+  lookingFor: string[];
+  availability: Availability;
+  badges: Badge[];
+  projectIds: string[];
 }
 
 export interface Channel {
@@ -42,6 +59,25 @@ export interface Mentor {
   connectionReason?: string;
 }
 
+export interface ProjectRole {
+  role: string;
+  skills: string[];
+  count: number;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  stack: string[];
+  stage: 'idea' | 'mvp' | 'launched';
+  lookingFor: ProjectRole[];
+  teamMembers: User[];
+  ownerId: string;
+  createdAt: Date;
+  image?: string;
+}
+
 export interface RegistrationData {
   step: number;
   name: string;
@@ -50,6 +86,8 @@ export interface RegistrationData {
   skills: string[];
   bio: string;
   videoUrl?: string;
+  lookingFor: string[];
+  availability: Availability;
 }
 
 export interface Event {

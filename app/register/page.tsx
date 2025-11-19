@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Step1 } from '@/components/register/Step1';
 import { Step2 } from '@/components/register/Step2';
 import { Step3 } from '@/components/register/Step3';
+import { Step4 } from '@/components/register/Step4';
 import { useUserStore } from '@/lib/store';
 
 export default function RegisterPage() {
@@ -23,18 +24,19 @@ export default function RegisterPage() {
         <div className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <div className="text-sm font-medium text-konekt-black">
-              Krok {currentStep} ze 3
+              Krok {currentStep} ze 4
             </div>
             <div className="text-sm text-konekt-black/60">
               {currentStep === 1 && 'Základní informace'}
               {currentStep === 2 && 'Tvoje dovednosti'}
               {currentStep === 3 && 'Představ se'}
+              {currentStep === 4 && 'Co hledáš?'}
             </div>
           </div>
           <div className="w-full h-2 bg-konekt-white rounded-full overflow-hidden">
             <div
               className="h-full bg-konekt-green transition-all duration-300"
-              style={{ width: `${(currentStep / 3) * 100}%` }}
+              style={{ width: `${(currentStep / 4) * 100}%` }}
             />
           </div>
         </div>
@@ -48,7 +50,13 @@ export default function RegisterPage() {
               onBack={() => setCurrentStep(1)}
             />
           )}
-          {currentStep === 3 && <Step3 onBack={() => setCurrentStep(2)} />}
+          {currentStep === 3 && (
+            <Step3
+              onNext={() => setCurrentStep(4)}
+              onBack={() => setCurrentStep(2)}
+            />
+          )}
+          {currentStep === 4 && <Step4 onBack={() => setCurrentStep(3)} />}
         </div>
       </div>
     </div>
