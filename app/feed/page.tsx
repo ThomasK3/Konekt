@@ -92,7 +92,7 @@ export default function FeedPage() {
                   🔥 Aktuální projekty
                 </h2>
                 <div className="space-y-3">
-                  {mockProjects.slice(0, 2).map((project) => (
+                  {mockProjects?.slice(0, 2).map((project) => (
                     <Link key={project.id} href={`/projects/${project.id}`}>
                       <Card hover className="!p-4">
                         <h3 className="font-bold text-konekt-black mb-1">{project.name}</h3>
@@ -119,7 +119,7 @@ export default function FeedPage() {
                   👥 Hledají spolupráci
                 </h2>
                 <div className="space-y-3">
-                  {mockUsers.slice(0, 2).map((person) => (
+                  {mockUsers?.slice(0, 2).map((person) => (
                     <Link key={person.id} href={`/profile/${person.username}`}>
                       <Card hover className="!p-4">
                         <div className="flex items-center gap-3 mb-2">
