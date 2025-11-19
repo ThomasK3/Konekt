@@ -4,36 +4,21 @@ import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/Textarea';
 import { useUserStore } from '@/lib/store';
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { Video, Upload } from 'lucide-react';
 
 interface Step3Props {
   onBack: () => void;
+  onNext: () => void;
 }
 
-export const Step3: React.FC<Step3Props> = ({ onBack }) => {
-  const router = useRouter();
-  const { registrationData, updateRegistrationData, setUser } = useUserStore();
+export const Step3: React.FC<Step3Props> = ({ onBack, onNext }) => {
+  const { registrationData, updateRegistrationData } = useUserStore();
   const [bio, setBio] = useState(registrationData.bio);
   const [videoFile, setVideoFile] = useState<string | null>(null);
 
-  const handleComplete = () => {
+  const handleNext = () => {
     updateRegistrationData({ bio, videoUrl: videoFile || undefined });
-
-    // Create user profile
-    const newUser = {
-      id: Math.random().toString(36).substring(7),
-      name: registrationData.name,
-      email: registrationData.email,
-      school: registrationData.school,
-      skills: registrationData.skills,
-      bio,
-      videoUrl: videoFile || undefined,
-      role: 'student' as const,
-    };
-
-    setUser(newUser);
-    router.push('/feed');
+    onNext();
   };
 
   const handleVideoClick = () => {
@@ -45,10 +30,10 @@ export const Step3: React.FC<Step3Props> = ({ onBack }) => {
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold text-konekt-black mb-2">
-          Poslední krok!
+          Představ se
         </h2>
         <p className="text-konekt-black/60">
-          Představ se ostatním
+          Napiš něco o sobě
         </p>
       </div>
 
@@ -91,8 +76,8 @@ export const Step3: React.FC<Step3Props> = ({ onBack }) => {
         <Button onClick={onBack} variant="outline" className="flex-1">
           Zpět
         </Button>
-        <Button onClick={handleComplete} disabled={!bio} className="flex-1">
-          Dokončit registraci
+        <Button onClick={handleNext} disabled={!bio} className="flex-1">
+          Pokračovat
         </Button>
       </div>
     </div>
