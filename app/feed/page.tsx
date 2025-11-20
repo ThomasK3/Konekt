@@ -6,7 +6,7 @@ import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
 import { MentorPostCard } from '@/components/feed/MentorPost';
 import { ComposeMessageModal } from '@/components/ui/ComposeMessageModal';
 import { mockUsers, mockProjects, mockMentors, mockMentorPosts } from '@/lib/mock-data';
-import { Home, GraduationCap, Rocket, Search, Users } from 'lucide-react';
+import { Home, GraduationCap, Rocket, Search, Users, Filter, X } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import type { Mentor } from '@/types';
 
@@ -21,29 +21,87 @@ export default function FeedPage() {
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter people based on search
-  const filteredPeople = mockUsers.filter((user) => {
-    if (!searchQuery) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      user.name.toLowerCase().includes(query) ||
-      user.school.toLowerCase().includes(query) ||
-      user.skills.some((skill) => skill.toLowerCase().includes(query)) ||
-      user.bio.toLowerCase().includes(query)
+  // Filter states
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [selectedLookingFor, setSelectedLookingFor] = useState<string[]>([]);
+  const [selectedProjectStage, setSelectedProjectStage] = useState<string[]>([]);
+  const [selectedStack, setSelectedStack] = useState<string[]>([]);
+  const [selectedExpertise, setSelectedExpertise] = useState<string[]>([]);
+
+  // Popular filters
+  const popularSkills = ['React', 'Python', 'Design', 'Marketing', 'TypeScript', 'AI/ML'];
+  const popularLookingFor = ['Co-founder', 'Developer', 'Designer', 'Marketing Team'];
+  const projectStages = ['idea', 'mvp', 'launched'];
+  const popularStack = ['React', 'Python', 'Node.js', 'TypeScript', 'AI/ML'];
+  const popularExpertise = ['Product Management', 'React', 'Marketing', 'AI/ML', 'Leadership'];
+
+  // Toggle filter
+  const toggleFilter = (filter: string, setState: React.Dispatch<React.SetStateAction<string[]>>) => {
+    setState((prev) =>
+      prev.includes(filter) ? prev.filter((f) => f !== filter) : [...prev, filter]
     );
+  };
+
+  // Filter people based on search + filters
+  const filteredPeople = mockUsers.filter((user) => {
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesSearch =
+        user.name.toLowerCase().includes(query) ||
+        user.school.toLowerCase().includes(query) ||
+        user.skills.some((skill) => skill.toLowerCase().includes(query)) ||
+        user.bio.toLowerCase().includes(query);
+      if (!matchesSearch) return false;
+    }
+
+    // Skills filter
+    if (selectedSkills.length > 0) {
+      const hasMatchingSkill = selectedSkills.some((skill) =>
+        user.skills.some((userSkill) => userSkill.toLowerCase().includes(skill.toLowerCase()))
+      );
+      if (!hasMatchingSkill) return false;
+    }
+
+    // Looking for filter
+    if (selectedLookingFor.length > 0) {
+      const hasMatchingLookingFor = selectedLookingFor.some((lf) =>
+        user.lookingFor.some((userLf) => userLf.toLowerCase().includes(lf.toLowerCase()))
+      );
+      if (!hasMatchingLookingFor) return false;
+    }
+
+    return true;
   });
 
-  // Filter projects based on search
+  // Filter projects based on search + filters
   const filteredProjects = mockProjects.filter((project) => {
-    if (!searchQuery) return true;
-    const query = searchQuery.toLowerCase();
-    return (
-      project.name.toLowerCase().includes(query) ||
-      project.description.toLowerCase().includes(query) ||
-      project.stack.some((tech) => tech.toLowerCase().includes(query)) ||
-      project.lookingFor.some((role) => role.role.toLowerCase().includes(query)) ||
-      (project.category && project.category.toLowerCase().includes(query))
-    );
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesSearch =
+        project.name.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.stack.some((tech) => tech.toLowerCase().includes(query)) ||
+        project.lookingFor.some((role) => role.role.toLowerCase().includes(query)) ||
+        (project.category && project.category.toLowerCase().includes(query));
+      if (!matchesSearch) return false;
+    }
+
+    // Stage filter
+    if (selectedProjectStage.length > 0) {
+      if (!selectedProjectStage.includes(project.stage)) return false;
+    }
+
+    // Stack filter
+    if (selectedStack.length > 0) {
+      const hasMatchingStack = selectedStack.some((tech) =>
+        project.stack.some((projectTech) => projectTech.toLowerCase().includes(tech.toLowerCase()))
+      );
+      if (!hasMatchingStack) return false;
+    }
+
+    return true;
   });
 
   // Mentor posts with mentor data
@@ -54,7 +112,7 @@ export default function FeedPage() {
     }))
     .filter((item) => item.mentor);
 
-  // Filter mentor posts based on tab and search
+  // Filter mentor posts based on tab, search, and filters
   const filteredMentorPosts = (() => {
     let posts = mentorPostsWithData;
 
@@ -74,8 +132,35 @@ export default function FeedPage() {
       );
     }
 
+    // Filter by expertise
+    if (selectedExpertise.length > 0) {
+      posts = posts.filter((item) =>
+        selectedExpertise.some((exp) =>
+          item.mentor.expertise.some((mentorExp) =>
+            mentorExp.toLowerCase().includes(exp.toLowerCase())
+          )
+        )
+      );
+    }
+
     return posts;
   })();
+
+  // Clear all filters
+  const clearAllFilters = () => {
+    setSelectedSkills([]);
+    setSelectedLookingFor([]);
+    setSelectedProjectStage([]);
+    setSelectedStack([]);
+    setSelectedExpertise([]);
+  };
+
+  const hasActiveFilters =
+    selectedSkills.length > 0 ||
+    selectedLookingFor.length > 0 ||
+    selectedProjectStage.length > 0 ||
+    selectedStack.length > 0 ||
+    selectedExpertise.length > 0;
 
   const handleFollow = (mentorId: string) => {
     setFollowingMentors((prev) =>
@@ -168,6 +253,66 @@ export default function FeedPage() {
       {/* PEOPLE TAB - Only people */}
       {mainTab === 'people' && (
         <div>
+          {/* Filters for People */}
+          <div className="mb-6 space-y-4">
+            {/* Skills Filter */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Filter className="w-4 h-4 text-konekt-black/60" />
+                <span className="text-sm font-medium text-konekt-black/70">Skills:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {popularSkills.map((skill) => (
+                  <button
+                    key={skill}
+                    onClick={() => toggleFilter(skill, setSelectedSkills)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                      selectedSkills.includes(skill)
+                        ? 'bg-konekt-green text-konekt-white'
+                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                    }`}
+                  >
+                    {skill}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Looking For Filter */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Filter className="w-4 h-4 text-konekt-black/60" />
+                <span className="text-sm font-medium text-konekt-black/70">Hledá:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {popularLookingFor.map((lf) => (
+                  <button
+                    key={lf}
+                    onClick={() => toggleFilter(lf, setSelectedLookingFor)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                      selectedLookingFor.includes(lf)
+                        ? 'bg-konekt-pink text-konekt-white'
+                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-pink'
+                    }`}
+                  >
+                    {lf}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Clear Filters */}
+            {hasActiveFilters && (
+              <button
+                onClick={clearAllFilters}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+              >
+                <X className="w-4 h-4" />
+                Vymazat všechny filtry
+              </button>
+            )}
+          </div>
+
           {filteredPeople.length > 0 ? (
             <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
               {filteredPeople.map((person) => (
@@ -181,7 +326,7 @@ export default function FeedPage() {
                 Žádní lidé nenalezeni
               </h3>
               <p className="text-konekt-black/60">
-                Zkus změnit vyhledávací dotaz nebo zkus později
+                Zkus změnit vyhledávací dotaz nebo filtry
               </p>
             </div>
           )}
@@ -213,6 +358,38 @@ export default function FeedPage() {
             >
               Sleduji {followingMentors.length > 0 && `(${followingMentors.length})`}
             </button>
+          </div>
+
+          {/* Filters for Mentors */}
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-2">
+              <Filter className="w-4 h-4 text-konekt-black/60" />
+              <span className="text-sm font-medium text-konekt-black/70">Expertise:</span>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {popularExpertise.map((exp) => (
+                <button
+                  key={exp}
+                  onClick={() => toggleFilter(exp, setSelectedExpertise)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                    selectedExpertise.includes(exp)
+                      ? 'bg-konekt-green text-konekt-white'
+                      : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                  }`}
+                >
+                  {exp}
+                </button>
+              ))}
+            </div>
+            {hasActiveFilters && (
+              <button
+                onClick={clearAllFilters}
+                className="flex items-center gap-2 px-4 py-2 mt-3 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+              >
+                <X className="w-4 h-4" />
+                Vymazat všechny filtry
+              </button>
+            )}
           </div>
 
           {/* Mentor Posts */}
@@ -255,6 +432,66 @@ export default function FeedPage() {
       {/* PROJECTS TAB - Just projects */}
       {mainTab === 'projects' && (
         <div>
+          {/* Filters for Projects */}
+          <div className="mb-6 space-y-4">
+            {/* Stage Filter */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Filter className="w-4 h-4 text-konekt-black/60" />
+                <span className="text-sm font-medium text-konekt-black/70">Stádium:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {projectStages.map((stage) => (
+                  <button
+                    key={stage}
+                    onClick={() => toggleFilter(stage, setSelectedProjectStage)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all capitalize ${
+                      selectedProjectStage.includes(stage)
+                        ? 'bg-konekt-green text-konekt-white'
+                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                    }`}
+                  >
+                    {stage === 'idea' ? 'Nápad' : stage === 'mvp' ? 'MVP' : 'Launched'}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Stack Filter */}
+            <div>
+              <div className="flex items-center gap-2 mb-2">
+                <Filter className="w-4 h-4 text-konekt-black/60" />
+                <span className="text-sm font-medium text-konekt-black/70">Tech Stack:</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {popularStack.map((tech) => (
+                  <button
+                    key={tech}
+                    onClick={() => toggleFilter(tech, setSelectedStack)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                      selectedStack.includes(tech)
+                        ? 'bg-konekt-pink text-konekt-white'
+                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-pink'
+                    }`}
+                  >
+                    {tech}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Clear Filters */}
+            {hasActiveFilters && (
+              <button
+                onClick={clearAllFilters}
+                className="flex items-center gap-2 px-4 py-2 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+              >
+                <X className="w-4 h-4" />
+                Vymazat všechny filtry
+              </button>
+            )}
+          </div>
+
           {filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
               {filteredProjects.map((project) => (
@@ -268,7 +505,7 @@ export default function FeedPage() {
                 Žádné projekty nenalezeny
               </h3>
               <p className="text-konekt-black/60">
-                Zkus změnit vyhledávací dotaz nebo zkus později
+                Zkus změnit vyhledávací dotaz nebo filtry
               </p>
             </div>
           )}
