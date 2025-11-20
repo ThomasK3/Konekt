@@ -12,6 +12,8 @@ import {
   MessageCircle,
   Settings,
   TrendingUp,
+  Plus,
+  User,
 } from 'lucide-react';
 
 interface AppLayoutProps {
@@ -113,6 +115,53 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </button>
                 </Link>
               </nav>
+
+              {/* Moje Eventy */}
+              <div className="p-2 border-t border-konekt-black/10">
+                <div className="px-4 py-2">
+                  <h3 className="text-xs font-bold text-konekt-black/50 uppercase tracking-wider">
+                    Moje Eventy
+                  </h3>
+                </div>
+
+                {user && mockEvents
+                  .filter((event) => event.attendees.includes(user.id))
+                  .map((event) => {
+                    const eventIcon =
+                      event.category === 'hackathon'
+                        ? '🚀'
+                        : event.category === 'networking'
+                        ? '🎉'
+                        : event.category === 'workshop'
+                        ? '🤖'
+                        : event.category === 'meetup'
+                        ? '💼'
+                        : '📅';
+
+                    return (
+                      <Link key={event.id} href={`/events/${event.id}/space`}>
+                        <button
+                          className={`w-full flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all mb-1 text-sm ${
+                            pathname?.startsWith(`/events/${event.id}/space`)
+                              ? 'bg-konekt-green text-konekt-white'
+                              : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                          }`}
+                        >
+                          <span className="text-lg">{eventIcon}</span>
+                          <span className="truncate">{event.name}</span>
+                        </button>
+                      </Link>
+                    );
+                  })}
+
+                {/* Připojit se k eventu */}
+                <Link href="/events">
+                  <button className="w-full flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all text-sm text-konekt-black/50 hover:bg-konekt-cream hover:text-konekt-black border-2 border-dashed border-konekt-black/10 hover:border-konekt-black/20 mt-2">
+                    <Plus className="w-4 h-4" />
+                    <span>Připojit se</span>
+                  </button>
+                </Link>
+              </div>
 
               <div className="p-2 border-t border-konekt-black/10">
                 <Link href="/dashboard">

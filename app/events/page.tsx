@@ -2,10 +2,12 @@
 
 import { useState } from 'react';
 import { mockEvents } from '@/lib/mock-data';
-import { Calendar, MapPin, Users, Clock, ArrowRight, ExternalLink } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, ArrowRight, ExternalLink, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { JoinEventModal } from '@/components/ui/JoinEventModal';
 import Link from 'next/link';
 import AppLayout from '@/components/layout/AppLayout';
+import type { Event } from '@/types';
 
 type EventFilter = 'all' | 'upcoming' | 'ongoing' | 'completed';
 
@@ -39,11 +41,18 @@ const statusLabels = {
 
 export default function EventsPage() {
   const [activeFilter, setActiveFilter] = useState<EventFilter>('all');
+  const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
+  const [isJoinModalOpen, setIsJoinModalOpen] = useState(false);
 
   const filteredEvents = mockEvents.filter((event) => {
     if (activeFilter === 'all') return true;
     return event.status === activeFilter;
   });
+
+  const handleJoinEvent = (eventId: string, attended: boolean) => {
+    console.log(`Joining event ${eventId}, attended: ${attended}`);
+    // TODO: Implement join event logic
+  };
 
   const formatDate = (date: Date, endDate?: Date) => {
     const dateStr = date.toLocaleDateString('cs-CZ', {
@@ -207,9 +216,20 @@ export default function EventsPage() {
 
               {/* Actions */}
               <div className="flex gap-3">
+                <Button
+                  onClick={() => {
+                    setSelectedEvent(event);
+                    setIsJoinModalOpen(true);
+                  }}
+                  variant="outline"
+                  className="flex-1 flex items-center justify-center gap-2"
+                >
+                  <UserPlus className="w-4 h-4" />
+                  Připojit se
+                </Button>
                 <Link href={`/events/${event.id}`} className="flex-1">
                   <Button className="w-full group/btn">
-                    Detail události
+                    Detail
                     <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
@@ -218,7 +238,7 @@ export default function EventsPage() {
                     href={event.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 border-2 border-konekt-black/10 rounded-xl hover:bg-konekt-cream transition-colors"
+                    className="p-3 border-2 border-konekt-black/10 rounded-xl hover:bg-konekt-cream transition-colors flex items-center justify-center"
                   >
                     <ExternalLink className="w-5 h-5" />
                   </a>
@@ -238,6 +258,19 @@ export default function EventsPage() {
           </h3>
           <p className="text-konekt-black/60">Zkuste změnit filtr nebo se vraťte později</p>
         </div>
+      )}
+
+      {/* Join Event Modal */}
+      {selectedEvent && (
+        <JoinEventModal
+          event={selectedEvent}
+          isOpen={isJoinModalOpen}
+          onClose={() => {
+            setIsJoinModalOpen(false);
+            setSelectedEvent(null);
+          }}
+          onJoin={handleJoinEvent}
+        />
       )}
     </AppLayout>
   );
