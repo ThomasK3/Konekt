@@ -1,22 +1,17 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useUserStore } from '@/lib/store';
-import { mockEvents, mockUsers, mockProjects, mockConversations } from '@/lib/mock-data';
+import { mockEvents, mockConversations } from '@/lib/mock-data';
 import {
   Bell,
   Search,
   Home,
-  Briefcase,
-  Users2,
   Calendar,
   MessageCircle,
   Settings,
   TrendingUp,
-  ChevronDown,
-  ChevronRight,
 } from 'lucide-react';
 
 interface AppLayoutProps {
@@ -26,10 +21,8 @@ interface AppLayoutProps {
 export default function AppLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
   const { user } = useUserStore();
-  const [feedExpanded, setFeedExpanded] = useState(true);
 
   const isActive = (path: string) => pathname === path;
-  const isInFeedSection = pathname === '/feed' || pathname === '/people' || pathname?.startsWith('/projects');
 
   return (
     <div className="min-h-screen bg-konekt-cream">
@@ -74,62 +67,19 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </div>
 
               <nav className="p-2">
-                {/* Feed with Submenu */}
-                <div>
+                {/* Feed */}
+                <Link href="/feed">
                   <button
-                    onClick={() => setFeedExpanded(!feedExpanded)}
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
-                      isInFeedSection
+                      isActive('/feed')
                         ? 'bg-konekt-green text-konekt-white'
                         : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
                     }`}
                   >
                     <Home className="w-5 h-5" />
-                    <span className="flex-1 text-left">Feed</span>
-                    {feedExpanded ? (
-                      <ChevronDown className="w-4 h-4" />
-                    ) : (
-                      <ChevronRight className="w-4 h-4" />
-                    )}
+                    <span>Feed</span>
                   </button>
-
-                  {/* Feed Submenu */}
-                  {feedExpanded && (
-                    <div className="ml-4 mb-1 space-y-1">
-                      <Link href="/people">
-                        <button
-                          className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            isActive('/people')
-                              ? 'bg-konekt-green/20 text-konekt-green'
-                              : 'text-konekt-black/60 hover:bg-konekt-cream hover:text-konekt-black'
-                          }`}
-                        >
-                          <Users2 className="w-4 h-4" />
-                          <span className="flex-1 text-left">Lidé</span>
-                          <span className="text-xs bg-konekt-black/10 px-2 py-0.5 rounded-full">
-                            {mockUsers.length}
-                          </span>
-                        </button>
-                      </Link>
-
-                      <Link href="/projects">
-                        <button
-                          className={`w-full flex items-center gap-3 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            pathname?.startsWith('/projects')
-                              ? 'bg-konekt-green/20 text-konekt-green'
-                              : 'text-konekt-black/60 hover:bg-konekt-cream hover:text-konekt-black'
-                          }`}
-                        >
-                          <Briefcase className="w-4 h-4" />
-                          <span className="flex-1 text-left">Projekty</span>
-                          <span className="text-xs bg-konekt-black/10 px-2 py-0.5 rounded-full">
-                            {mockProjects.length}
-                          </span>
-                        </button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
+                </Link>
 
                 <Link href="/events">
                   <button
