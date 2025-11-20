@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 import { useUserStore } from '@/lib/store';
-import { mockEvents, mockConversations } from '@/lib/mock-data';
+import { mockEvents, mockConversations, mockUsers } from '@/lib/mock-data';
 import {
   Bell,
   Search,
@@ -22,7 +23,14 @@ interface AppLayoutProps {
 
 export default function AppLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
+
+  // DEV: Auto-login as user1 for testing
+  useEffect(() => {
+    if (!user && process.env.NODE_ENV === 'development') {
+      setUser(mockUsers[0]); // Auto-login as Jakub Procházka
+    }
+  }, [user, setUser]);
 
   const isActive = (path: string) => pathname === path;
 
