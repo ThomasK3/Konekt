@@ -942,6 +942,42 @@ export const mockEvents: Event[] = [
     tags: ['founders', 'meetup', 'casual'],
     isPublic: false,
   },
+  {
+    id: 'event5',
+    name: 'Konekt Beta Testing Event',
+    date: new Date('2024-12-10T18:00:00'),
+    endDate: new Date('2024-12-10T21:00:00'),
+    location: 'Online (Zoom)',
+    description: 'Testovací event pro ověření funkcionalit Konekt platformy. Připoj se a pomoz nám vyladit nové features! Společně otestujeme networking, badge systém a event space.',
+    category: 'networking',
+    organizers: ['organizer1'],
+    attendees: ['user1', 'user2', 'user3'],
+    maxAttendees: 50,
+    image: 'https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=1200&h=600&fit=crop',
+    gallery: [
+      'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=800&h=600&fit=crop',
+    ],
+    agenda: [
+      { time: '18:00', title: 'Úvodní presenting', description: 'Představení nových features' },
+      { time: '18:30', title: 'Guided Testing Session', description: 'Společné testování platformy' },
+      { time: '19:30', title: 'Feedback & Q&A', description: 'Zpětná vazba a dotazy' },
+      { time: '20:00', title: 'Networking Session', description: 'Volné networkování mezi účastníky' },
+    ],
+    materials: [],
+    analytics: {
+      totalAttendees: 3,
+      checkedIn: 0,
+      connectionsMode: 0,
+      messagesExchanged: 0,
+      materialsDownloaded: 0,
+      projectsCreated: 0,
+    },
+    status: 'upcoming',
+    registrationDeadline: new Date('2024-12-09T23:59:59'),
+    tags: ['testing', 'beta', 'feedback', 'online'],
+    website: 'https://konekt.cz/events/beta-testing',
+    isPublic: true,
+  },
 ];
 
 // Mock Mentors (verified professionals)

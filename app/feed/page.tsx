@@ -6,25 +6,45 @@ import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
 import { MentorPostCard } from '@/components/feed/MentorPost';
 import { ComposeMessageModal } from '@/components/ui/ComposeMessageModal';
 import { mockUsers, mockProjects, mockMentors, mockMentorPosts } from '@/lib/mock-data';
-import { Home, GraduationCap, Rocket, Search } from 'lucide-react';
+import { Home, GraduationCap, Rocket, Search, Users } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import type { Mentor } from '@/types';
 
-type MainTab = 'network' | 'mentors' | 'projects';
+type MainTab = 'people' | 'mentors' | 'projects';
 type MentorTab = 'following' | 'foryou';
 
 export default function FeedPage() {
-  const [mainTab, setMainTab] = useState<MainTab>('network');
+  const [mainTab, setMainTab] = useState<MainTab>('people');
   const [mentorTab, setMentorTab] = useState<MentorTab>('foryou');
   const [followingMentors, setFollowingMentors] = useState<string[]>([]);
   const [selectedMentor, setSelectedMentor] = useState<Mentor | null>(null);
   const [isMessageModalOpen, setIsMessageModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Network mix of people and projects
-  const allItems = [
-    ...mockUsers.map((u) => ({ type: 'person' as const, data: u, id: u.id })),
-    ...mockProjects.map((p) => ({ type: 'project' as const, data: p, id: p.id })),
-  ].sort(() => Math.random() - 0.5);
+  // Filter people based on search
+  const filteredPeople = mockUsers.filter((user) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      user.name.toLowerCase().includes(query) ||
+      user.school.toLowerCase().includes(query) ||
+      user.skills.some((skill) => skill.toLowerCase().includes(query)) ||
+      user.bio.toLowerCase().includes(query)
+    );
+  });
+
+  // Filter projects based on search
+  const filteredProjects = mockProjects.filter((project) => {
+    if (!searchQuery) return true;
+    const query = searchQuery.toLowerCase();
+    return (
+      project.name.toLowerCase().includes(query) ||
+      project.description.toLowerCase().includes(query) ||
+      project.stack.some((tech) => tech.toLowerCase().includes(query)) ||
+      project.lookingFor.some((role) => role.role.toLowerCase().includes(query)) ||
+      (project.category && project.category.toLowerCase().includes(query))
+    );
+  });
 
   // Mentor posts with mentor data
   const mentorPostsWithData = mockMentorPosts
@@ -34,14 +54,27 @@ export default function FeedPage() {
     }))
     .filter((item) => item.mentor);
 
-  // Filter mentor posts based on tab
+  // Filter mentor posts based on tab and search
   const filteredMentorPosts = (() => {
+    let posts = mentorPostsWithData;
+
+    // Filter by following
     if (mentorTab === 'following') {
-      return mentorPostsWithData.filter((item) =>
-        followingMentors.includes(item.mentor.id)
+      posts = posts.filter((item) => followingMentors.includes(item.mentor.id));
+    }
+
+    // Filter by search query
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      posts = posts.filter((item) =>
+        item.mentor.name.toLowerCase().includes(query) ||
+        item.mentor.expertise.some((exp) => exp.toLowerCase().includes(query)) ||
+        item.post.content.toLowerCase().includes(query) ||
+        (item.post.title && item.post.title.toLowerCase().includes(query))
       );
     }
-    return mentorPostsWithData; // For You - show all, sorted by newest/popular
+
+    return posts;
   })();
 
   const handleFollow = (mentorId: string) => {
@@ -73,18 +106,40 @@ export default function FeedPage() {
         </p>
       </div>
 
-      {/* Main Tabs - Network / Mentoři / Projekty */}
+      {/* Search Bar */}
+      <div className="mb-6">
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-konekt-black/40" />
+          <input
+            type="text"
+            placeholder="Hledej lidi, projekty, mentory, skills..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 bg-konekt-white border-2 border-konekt-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent transition-all"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-konekt-black/40 hover:text-konekt-black"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Main Tabs - Lidé / Mentoři / Projekty */}
       <div className="mb-6 flex gap-3">
         <button
-          onClick={() => setMainTab('network')}
+          onClick={() => setMainTab('people')}
           className={`flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all ${
-            mainTab === 'network'
+            mainTab === 'people'
               ? 'bg-konekt-green text-konekt-white'
               : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
           }`}
         >
-          <Home className="w-5 h-5" />
-          Network
+          <Users className="w-5 h-5" />
+          Lidé
         </button>
         <button
           onClick={() => setMainTab('mentors')}
@@ -110,16 +165,26 @@ export default function FeedPage() {
         </button>
       </div>
 
-      {/* NETWORK TAB - Mix of people and projects */}
-      {mainTab === 'network' && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
-          {allItems.map((item) => {
-            if (item.type === 'person') {
-              return <PersonCard key={item.id} person={item.data} />;
-            } else {
-              return <ProjectCardSreality key={item.id} project={item.data} />;
-            }
-          })}
+      {/* PEOPLE TAB - Only people */}
+      {mainTab === 'people' && (
+        <div>
+          {filteredPeople.length > 0 ? (
+            <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+              {filteredPeople.map((person) => (
+                <PersonCard key={person.id} person={person} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <Users className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
+              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+                Žádní lidé nenalezeni
+              </h3>
+              <p className="text-konekt-black/60">
+                Zkus změnit vyhledávací dotaz nebo zkus později
+              </p>
+            </div>
+          )}
         </div>
       )}
 
@@ -189,10 +254,24 @@ export default function FeedPage() {
 
       {/* PROJECTS TAB - Just projects */}
       {mainTab === 'projects' && (
-        <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
-          {mockProjects.map((project) => (
-            <ProjectCardSreality key={project.id} project={project} />
-          ))}
+        <div>
+          {filteredProjects.length > 0 ? (
+            <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+              {filteredProjects.map((project) => (
+                <ProjectCardSreality key={project.id} project={project} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <Rocket className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
+              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+                Žádné projekty nenalezeny
+              </h3>
+              <p className="text-konekt-black/60">
+                Zkus změnit vyhledávací dotaz nebo zkus později
+              </p>
+            </div>
+          )}
         </div>
       )}
 
