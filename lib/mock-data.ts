@@ -20,6 +20,36 @@ export const mockBadges: Badge[] = [
     description: 'Vytvořil 3+ projekty',
     icon: '🚀',
   },
+  {
+    id: 'super-connector',
+    name: 'Super Connector',
+    description: 'Navázal 10+ spojení',
+    icon: '🤝',
+  },
+  {
+    id: 'active-chatter',
+    name: 'Active Chatter',
+    description: 'Napsal 100+ zpráv',
+    icon: '💬',
+  },
+  {
+    id: 'verified-mentor',
+    name: 'Verified Mentor',
+    description: 'Ověřený mentor s expertízou',
+    icon: '🎓',
+  },
+  {
+    id: 'event-enthusiast',
+    name: 'Event Enthusiast',
+    description: 'Zúčastnil se 5+ eventů',
+    icon: '🎉',
+  },
+  {
+    id: 'hackathon-winner',
+    name: 'Hackathon Winner',
+    description: 'Vyhrál hackathon',
+    icon: '🏆',
+  },
 ];
 
 // Mock Users (students) - rozšířeno o galerie
@@ -38,7 +68,7 @@ export const mockUsers: User[] = [
       hoursPerWeek: 20,
       isPaid: false,
     },
-    badges: [mockBadges[0], mockBadges[1]],
+    badges: [mockBadges[0], mockBadges[1], mockBadges[3], mockBadges[6]], // Early Adopter, Aktivní člen, Super Connector, Event Enthusiast
     projectIds: ['proj1', 'proj2'],
     mainImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=600&fit=crop',
     gallery: [
@@ -96,7 +126,7 @@ export const mockUsers: User[] = [
       hoursPerWeek: 15,
       isPaid: true,
     },
-    badges: [mockBadges[0]],
+    badges: [mockBadges[0], mockBadges[4]], // Early Adopter, Active Chatter
     projectIds: ['proj3'],
     mainImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&h=600&fit=crop',
     gallery: [
@@ -151,7 +181,7 @@ export const mockUsers: User[] = [
       hoursPerWeek: 25,
       isPaid: false,
     },
-    badges: [mockBadges[0], mockBadges[2]],
+    badges: [mockBadges[0], mockBadges[2], mockBadges[3], mockBadges[7]], // Early Adopter, Project Starter, Super Connector, Hackathon Winner
     projectIds: ['proj1'],
     mainImage: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&h=600&fit=crop',
     gallery: [

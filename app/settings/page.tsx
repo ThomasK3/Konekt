@@ -19,10 +19,18 @@ import {
   Trash2,
   AlertTriangle,
   Plug,
+  Gift,
+  Palette,
+  Copy,
+  Check,
+  Download,
+  QrCode,
+  Moon,
+  Sun,
 } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 
-type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integrations';
+type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integrations' | 'referral' | 'preferences';
 
 export default function SettingsPage() {
   const { user, setUser } = useUserStore();
@@ -47,6 +55,14 @@ export default function SettingsPage() {
   );
   const [whoCanMessage, setWhoCanMessage] = useState<'everyone' | 'connections'>('everyone');
   const [showOnlineStatus, setShowOnlineStatus] = useState(true);
+
+  // Referral state
+  const referralLink = `https://konekt.cz/invite/${user?.username || 'user'}`;
+  const [copied, setCopied] = useState(false);
+  const [referredUsers, setReferredUsers] = useState(7); // Mock data
+
+  // Preferences state
+  const [darkMode, setDarkMode] = useState(false);
 
   // Notifications state
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -166,7 +182,7 @@ export default function SettingsPage() {
 
                 <button
                   onClick={() => setActiveTab('integrations')}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                     activeTab === 'integrations'
                       ? 'bg-konekt-green text-konekt-white'
                       : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
@@ -174,6 +190,30 @@ export default function SettingsPage() {
                 >
                   <Plug className="w-5 h-5" />
                   <span>Integrace</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('referral')}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                    activeTab === 'referral'
+                      ? 'bg-konekt-green text-konekt-white'
+                      : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                  }`}
+                >
+                  <Gift className="w-5 h-5" />
+                  <span>Pozvi přátele</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('preferences')}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
+                    activeTab === 'preferences'
+                      ? 'bg-konekt-green text-konekt-white'
+                      : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                  }`}
+                >
+                  <Palette className="w-5 h-5" />
+                  <span>Vzhled & Export</span>
                 </button>
               </nav>
             </div>
@@ -690,6 +730,348 @@ export default function SettingsPage() {
                       Propojené účty a osobnostní testy pomáhají ostatním lépe tě poznat a najít
                       spolupráci, která ti sedne. Všechny informace jsou volitelné a můžeš je kdykoli
                       upravit.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Referral Tab */}
+              {activeTab === 'referral' && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-konekt-black mb-1">Pozvi přátele</h2>
+                    <p className="text-sm text-konekt-black/60">
+                      Za každé 3 pozvané získáš 1 měsíc Premium zdarma
+                    </p>
+                  </div>
+
+                  {/* Referral Stats */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="p-6 bg-gradient-to-br from-konekt-green/10 to-konekt-green/5 rounded-xl border-2 border-konekt-green/20">
+                      <div className="text-3xl font-bold text-konekt-green mb-1">
+                        {referredUsers}
+                      </div>
+                      <div className="text-sm text-konekt-black/60">Pozvaných přátel</div>
+                    </div>
+
+                    <div className="p-6 bg-gradient-to-br from-konekt-pink/10 to-konekt-pink/5 rounded-xl border-2 border-konekt-pink/20">
+                      <div className="text-3xl font-bold text-konekt-pink mb-1">
+                        {Math.floor(referredUsers / 3)}
+                      </div>
+                      <div className="text-sm text-konekt-black/60">Měsíců Premium získáno</div>
+                    </div>
+
+                    <div className="p-6 bg-gradient-to-br from-yellow-500/10 to-yellow-500/5 rounded-xl border-2 border-yellow-500/20">
+                      <div className="text-3xl font-bold text-yellow-600 mb-1">
+                        {3 - (referredUsers % 3)}
+                      </div>
+                      <div className="text-sm text-konekt-black/60">Zbývá do dalšího měsíce</div>
+                    </div>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="p-6 bg-konekt-cream rounded-xl">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="font-medium text-konekt-black">Postup k dalšímu měsíci Premium</span>
+                      <span className="text-sm text-konekt-black/60">{referredUsers % 3} / 3</span>
+                    </div>
+                    <div className="w-full h-3 bg-konekt-white rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-konekt-green to-konekt-pink transition-all duration-500"
+                        style={{ width: `${((referredUsers % 3) / 3) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Referral Link */}
+                  <div>
+                    <h3 className="font-bold text-konekt-black mb-3">Tvůj referral link</h3>
+                    <div className="flex gap-3">
+                      <div className="flex-1 p-4 bg-konekt-cream rounded-xl border-2 border-konekt-black/10 font-mono text-sm text-konekt-black/70 truncate">
+                        {referralLink}
+                      </div>
+                      <Button
+                        onClick={() => {
+                          navigator.clipboard.writeText(referralLink);
+                          setCopied(true);
+                          setTimeout(() => setCopied(false), 2000);
+                        }}
+                        className="flex items-center gap-2"
+                      >
+                        {copied ? (
+                          <>
+                            <Check className="w-4 h-4" />
+                            Zkopírováno!
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-4 h-4" />
+                            Kopírovat
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Referred Users List */}
+                  {referredUsers > 0 && (
+                    <div>
+                      <h3 className="font-bold text-konekt-black mb-3">Pozvaní přátelé</h3>
+                      <div className="space-y-2">
+                        {Array.from({ length: Math.min(referredUsers, 5) }).map((_, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center justify-between p-3 bg-konekt-cream rounded-xl"
+                          >
+                            <div className="flex items-center gap-3">
+                              <div className="w-10 h-10 bg-konekt-green rounded-full flex items-center justify-center text-konekt-white font-bold">
+                                {String.fromCharCode(65 + idx)}
+                              </div>
+                              <div>
+                                <div className="font-medium text-konekt-black">
+                                  User {idx + 1}
+                                </div>
+                                <div className="text-xs text-konekt-black/60">
+                                  Připojen{' '}
+                                  {new Date(
+                                    Date.now() - (idx + 1) * 7 * 24 * 60 * 60 * 1000
+                                  ).toLocaleDateString('cs-CZ')}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="px-3 py-1 bg-konekt-green/10 text-konekt-green rounded-full text-xs font-medium">
+                              Aktivní
+                            </div>
+                          </div>
+                        ))}
+                        {referredUsers > 5 && (
+                          <div className="text-center text-sm text-konekt-black/60 pt-2">
+                            A {referredUsers - 5} dalších...
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* How it Works */}
+                  <div className="p-6 bg-gradient-to-br from-konekt-green/5 to-konekt-pink/5 border-2 border-konekt-black/10 rounded-xl">
+                    <h3 className="font-bold text-konekt-black mb-4">Jak to funguje?</h3>
+                    <div className="space-y-3">
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 bg-konekt-green text-konekt-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                          1
+                        </div>
+                        <div>
+                          <div className="font-medium text-konekt-black">Sdílej svůj link</div>
+                          <div className="text-sm text-konekt-black/60">
+                            Pošli referral link svým přátelům nebo sdílej na sociálních sítích
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 bg-konekt-green text-konekt-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                          2
+                        </div>
+                        <div>
+                          <div className="font-medium text-konekt-black">Přátelé se registrují</div>
+                          <div className="text-sm text-konekt-black/60">
+                            Když se registrují přes tvůj link, automaticky se to započítá
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex gap-3">
+                        <div className="w-8 h-8 bg-konekt-green text-konekt-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                          3
+                        </div>
+                        <div>
+                          <div className="font-medium text-konekt-black">Získej Premium</div>
+                          <div className="text-sm text-konekt-black/60">
+                            Za každé 3 aktivní pozvané automaticky dostaneš 1 měsíc Premium
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Preferences Tab (Dark Mode + Export) */}
+              {activeTab === 'preferences' && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-konekt-black mb-1">Vzhled & Export</h2>
+                    <p className="text-sm text-konekt-black/60">
+                      Přizpůsob si prostředí a exportuj svá data
+                    </p>
+                  </div>
+
+                  {/* Dark Mode Section */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-konekt-black mb-4">Vzhled aplikace</h3>
+                    <div className="p-6 bg-konekt-cream rounded-xl">
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          {darkMode ? (
+                            <Moon className="w-6 h-6 text-konekt-black" />
+                          ) : (
+                            <Sun className="w-6 h-6 text-konekt-black" />
+                          )}
+                          <div>
+                            <div className="font-medium text-konekt-black">Dark Mode</div>
+                            <div className="text-sm text-konekt-black/60">
+                              Přepni mezi světlým a tmavým režimem
+                            </div>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => setDarkMode(!darkMode)}
+                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
+                            darkMode ? 'bg-konekt-green' : 'bg-konekt-black/20'
+                          }`}
+                        >
+                          <span
+                            className={`inline-block h-6 w-6 transform rounded-full bg-konekt-white transition-transform ${
+                              darkMode ? 'translate-x-7' : 'translate-x-1'
+                            }`}
+                          />
+                        </button>
+                      </div>
+
+                      {/* Dark Mode Preview */}
+                      {darkMode && (
+                        <div className="mt-4 p-4 bg-gray-900 rounded-xl border-2 border-gray-700">
+                          <div className="text-gray-100 font-medium mb-2">
+                            Náhled Dark Mode 🌙
+                          </div>
+                          <div className="text-sm text-gray-400">
+                            Dark mode přizpůsobuje barvy pro pohodlnější práci v noci. Tmavé pozadí
+                            snižuje únavu očí a šetří baterii na OLED displejích.
+                          </div>
+                          <div className="mt-3 flex gap-2">
+                            <div className="px-3 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium">
+                              Primární tlačítko
+                            </div>
+                            <div className="px-3 py-2 bg-gray-800 border border-gray-600 text-gray-300 rounded-lg text-sm font-medium">
+                              Sekundární
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <p className="text-sm text-yellow-800">
+                          💡 <strong>Tip:</strong> Dark mode bude brzy dostupný! Momentálně se
+                          jedná o mockup náhled.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Export Data Section */}
+                  <div className="pt-6 border-t border-konekt-black/10">
+                    <h3 className="text-lg font-semibold text-konekt-black mb-4">Export dat</h3>
+
+                    {/* Export Profile to PDF */}
+                    <div className="p-6 bg-konekt-cream rounded-xl mb-4">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Download className="w-5 h-5 text-konekt-green" />
+                            <h4 className="font-medium text-konekt-black">
+                              Stáhnout profil jako PDF
+                            </h4>
+                          </div>
+                          <p className="text-sm text-konekt-black/60 mb-4">
+                            Exportuj svůj kompletní profil do PDF pro použití mimo platformu.
+                            Obsahuje tvoje info, skills, projekty a odznaky.
+                          </p>
+                          <div className="text-xs text-konekt-black/50 mb-4">
+                            PDF bude obsahovat:
+                            <ul className="list-disc list-inside mt-2 space-y-1">
+                              <li>Osobní informace a bio</li>
+                              <li>Skills a oblasti zájmu</li>
+                              <li>Projekty a portfolio</li>
+                              <li>Achievement badges</li>
+                              <li>Kontaktní údaje</li>
+                            </ul>
+                          </div>
+                          <Button className="flex items-center gap-2">
+                            <Download className="w-4 h-4" />
+                            Stáhnout PDF profilu
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Export All Data */}
+                    <div className="p-6 bg-konekt-cream rounded-xl">
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <Download className="w-5 h-5 text-konekt-pink" />
+                            <h4 className="font-medium text-konekt-black">
+                              Stáhnout všechna data (GDPR)
+                            </h4>
+                          </div>
+                          <p className="text-sm text-konekt-black/60 mb-4">
+                            Stáhni kompletní kopii všech svých dat z platformy v JSON formátu.
+                            Zahrnuje zprávy, projekty, aktivity a další.
+                          </p>
+                          <Button variant="outline" className="flex items-center gap-2">
+                            <Download className="w-4 h-4" />
+                            Exportovat všechna data
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* QR Code Section */}
+                  <div className="pt-6 border-t border-konekt-black/10">
+                    <h3 className="text-lg font-semibold text-konekt-black mb-4">
+                      QR kód profilu
+                    </h3>
+                    <div className="p-6 bg-gradient-to-br from-konekt-green/10 to-konekt-pink/10 border-2 border-konekt-black/10 rounded-xl">
+                      <div className="flex items-start gap-6">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-2">
+                            <QrCode className="w-5 h-5 text-konekt-green" />
+                            <h4 className="font-medium text-konekt-black">
+                              Sdílej profil přes QR kód
+                            </h4>
+                          </div>
+                          <p className="text-sm text-konekt-black/60 mb-4">
+                            Perfektní pro networking na eventtech IRL! Ostatní můžou naskenovat QR
+                            kód a okamžitě se dostat na tvůj profil.
+                          </p>
+                          <Button variant="outline" className="flex items-center gap-2">
+                            <QrCode className="w-4 h-4" />
+                            Zobrazit QR kód
+                          </Button>
+                        </div>
+                        {/* QR Code Mockup */}
+                        <div className="w-32 h-32 bg-konekt-white border-2 border-konekt-black/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                          <div className="text-center">
+                            <QrCode className="w-16 h-16 text-konekt-black/30 mx-auto mb-2" />
+                            <div className="text-xs text-konekt-black/40">QR Preview</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-4 p-3 bg-konekt-white/50 rounded-lg">
+                        <p className="text-xs text-konekt-black/60">
+                          💡 Tento QR kód povede na: <span className="font-mono">konekt.cz/profile/{user?.username}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info */}
+                  <div className="p-4 bg-konekt-cream border-2 border-konekt-black/10 rounded-xl">
+                    <p className="text-sm text-konekt-black/70">
+                      <strong>🔒 Tvoje data jsou v bezpečí</strong>
+                      <br />
+                      Všechna data jsou šifrována a můžeš je kdykoli exportovat nebo smazat podle
+                      GDPR. Máš plnou kontrolu nad svými informacemi.
                     </p>
                   </div>
                 </div>

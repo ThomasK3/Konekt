@@ -3,7 +3,7 @@
 import { use } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { mockUsers, mockProjects } from '@/lib/mock-data';
+import { mockUsers, mockProjects, mockBadges } from '@/lib/mock-data';
 import { Clock, DollarSign, MessageCircle, MapPin, Brain } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -14,6 +14,7 @@ import {
   SocialIntegrations,
   WorkPreferencesCard,
 } from '@/components/profile/PersonalityComponents';
+import { BadgeCollection } from '@/components/profile/BadgeCollection';
 
 export default function ProfilePage({ params }: { params: Promise<{ username: string }> }) {
   const router = useRouter();
@@ -68,19 +69,22 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 </div>
               </div>
 
-              {/* Badges */}
+              {/* Badges Preview (Quick icons) */}
               {user.badges.length > 0 && (
-                <div className="flex flex-wrap gap-2 mb-6 pb-6 border-b-2 border-konekt-black/10">
-                  {user.badges.map((badge) => (
+                <div className="flex items-center gap-2 mb-6 pb-6 border-b-2 border-konekt-black/10">
+                  <span className="text-sm text-konekt-black/60 mr-2">Odznaky:</span>
+                  {user.badges.slice(0, 5).map((badge) => (
                     <div
                       key={badge.id}
-                      className="inline-flex items-center gap-2 px-3 py-1.5 bg-konekt-cream rounded-lg text-sm"
-                      title={badge.description}
+                      className="text-2xl hover:scale-125 transition-transform cursor-pointer"
+                      title={badge.name}
                     >
-                      <span>{badge.icon}</span>
-                      <span className="font-medium">{badge.name}</span>
+                      {badge.icon}
                     </div>
                   ))}
+                  {user.badges.length > 5 && (
+                    <span className="text-sm text-konekt-black/40">+{user.badges.length - 5}</span>
+                  )}
                 </div>
               )}
 
@@ -155,6 +159,17 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 )}
               </div>
             </Card>
+
+            {/* Achievement Badges Collection */}
+            {user.badges.length > 0 && (
+              <Card>
+                <BadgeCollection
+                  badges={user.badges}
+                  allBadges={mockBadges}
+                  showProgress={true}
+                />
+              </Card>
+            )}
 
             {/* Integrace & Osobnost */}
             {(user.mbti || user.bigFive || user.strengthsFinder || user.socialIntegrations || user.workPreferences) && (
