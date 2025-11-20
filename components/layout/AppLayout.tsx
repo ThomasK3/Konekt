@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
 import { useUserStore } from '@/lib/store';
 import { mockEvents, mockConversations, mockUsers } from '@/lib/mock-data';
 import {
@@ -25,13 +24,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const pathname = usePathname();
   const { user, setUser } = useUserStore();
 
-  // DEV: Auto-login as user1 for testing
-  useEffect(() => {
-    if (!user && process.env.NODE_ENV === 'development') {
-      setUser(mockUsers[0]); // Auto-login as Jakub Procházka
-    }
-  }, [user, setUser]);
-
   const isActive = (path: string) => pathname === path;
 
   return (
@@ -45,6 +37,16 @@ export default function AppLayout({ children }: AppLayoutProps) {
             </Link>
 
             <div className="flex items-center gap-4">
+              {/* DEV: Quick Login when not authenticated */}
+              {!user && process.env.NODE_ENV === 'development' && (
+                <button
+                  onClick={() => setUser(mockUsers[0])}
+                  className="px-4 py-2 bg-gradient-to-r from-konekt-green to-konekt-pink text-konekt-white text-sm font-bold rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  🔓 DEV Login
+                </button>
+              )}
+
               <button className="p-2 hover:bg-konekt-cream rounded-lg transition-colors">
                 <Search className="w-5 h-5 text-konekt-black/60" />
               </button>
