@@ -61,6 +61,32 @@ export interface Mentor {
   bio: string;
   avatar?: string;
   connectionReason?: string;
+  isVerified?: boolean;
+  followers?: number;
+  location?: string;
+}
+
+export interface MentorPost {
+  id: string;
+  mentorId: string;
+  type: 'text' | 'article' | 'video' | 'ama' | 'job';
+  title?: string;
+  content: string;
+  media?: {
+    type: 'image' | 'video' | 'link';
+    url: string;
+    thumbnail?: string;
+    linkPreview?: {
+      title: string;
+      description: string;
+      image?: string;
+    };
+  };
+  createdAt: Date;
+  likes: number;
+  comments: number;
+  shares: number;
+  tags?: string[];
 }
 
 export interface ProjectRole {

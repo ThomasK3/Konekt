@@ -1,4 +1,4 @@
-import type { User, Channel, Post, Mentor, Project, Badge, Message, Conversation, Event, EventMaterial } from '@/types';
+import type { User, Channel, Post, Mentor, MentorPost, Project, Badge, Message, Conversation, Event, EventMaterial } from '@/types';
 
 // Badges
 export const mockBadges: Badge[] = [
@@ -379,27 +379,6 @@ export const mockProjects: Project[] = [
       'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=300&fit=crop',
       'https://images.unsplash.com/photo-1506617420156-8e4536971650?w=400&h=300&fit=crop',
     ],
-  },
-];
-
-export const mockMentors: Mentor[] = [
-  {
-    id: '1',
-    name: 'Jan Novák',
-    role: 'Lead Developer',
-    company: 'Rohlík.cz',
-    expertise: ['TypeScript', 'React', 'Next.js'],
-    bio: 'Pomáhám studentům rozjet kariéru v tech',
-    connectionReason: 'Sdílíte zájem o React',
-  },
-  {
-    id: '2',
-    name: 'Petra Svobodová',
-    role: 'Product Manager',
-    company: 'Mews Systems',
-    expertise: ['Product Management', 'SaaS', 'Agile'],
-    bio: 'Mentorka pro budoucí PM a produktové lidi',
-    connectionReason: 'Z akce BeNextOne',
   },
 ];
 
@@ -835,5 +814,299 @@ export const mockEvents: Event[] = [
     registrationDeadline: new Date('2024-11-27T23:59:59'),
     tags: ['founders', 'meetup', 'casual'],
     isPublic: false,
+  },
+];
+
+// Mock Mentors (verified professionals)
+export const mockMentors: Mentor[] = [
+  {
+    id: 'mentor1',
+    name: 'Jana Nováková',
+    role: 'Product Manager',
+    company: 'Avast',
+    expertise: ['Product Management', 'User Research', 'Agile', 'B2B SaaS'],
+    bio: 'Senior PM @ Avast. 8+ let ve vývoji produktů. Pomáhám začínajícím PM najít správný směr.',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 1234,
+    location: 'Praha',
+  },
+  {
+    id: 'mentor2',
+    name: 'Petr Kočka',
+    role: 'Tech Lead',
+    company: 'Productboard',
+    expertise: ['React', 'TypeScript', 'System Architecture', 'Team Leadership'],
+    bio: 'Stavím scalable webové aplikace 10+ let. Ex-Skype, ex-Google. Rád sdílím best practices.',
+    avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 2156,
+    location: 'Praha',
+  },
+  {
+    id: 'mentor3',
+    name: 'Karolína Vrbová',
+    role: 'Head of Marketing',
+    company: 'Rohlik.cz',
+    expertise: ['Growth Marketing', 'SEO', 'Content Strategy', 'Performance Marketing'],
+    bio: 'Vedla marketingové týmy v 3 unicornech. Specializuji se na early-stage growth.',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 987,
+    location: 'Praha',
+  },
+  {
+    id: 'mentor4',
+    name: 'Tomáš Bárta',
+    role: 'Founder & CEO',
+    company: 'Rossum',
+    expertise: ['Fundraising', 'AI/ML Products', 'B2B Sales', 'Company Building'],
+    bio: 'Zakladatel Rossum (Series B, $100M valuace). Rád pomáhám začínajícím founderům s fundraisingem.',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 3421,
+    location: 'Praha',
+  },
+  {
+    id: 'mentor5',
+    name: 'Lucie Maršálková',
+    role: 'Senior UX Designer',
+    company: 'Figma',
+    expertise: ['UX Design', 'Design Systems', 'User Research', 'Prototyping'],
+    bio: 'Design v Figma. Dříve Meta & Airbnb. Mentoring pro mladé designery.',
+    avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 1567,
+    location: 'Remote',
+  },
+  {
+    id: 'mentor6',
+    name: 'Martin Dvořák',
+    role: 'VC Partner',
+    company: 'Credo Ventures',
+    expertise: ['Venture Capital', 'Pitch Deck Review', 'Business Model', 'Market Analysis'],
+    bio: 'VC investor @ Credo. Pomáhám startupům připravit se na fundraising a pitch.',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop',
+    isVerified: true,
+    followers: 2890,
+    location: 'Praha',
+  },
+];
+
+// Mock Mentor Posts (LinkedIn-style)
+export const mockMentorPosts: MentorPost[] = [
+  {
+    id: 'post1',
+    mentorId: 'mentor1',
+    type: 'text',
+    title: '💡 Jak udělat lepší product roadmap?',
+    content: `Častý problém začínajících PM: roadmapa plná featuresů, ale bez jasné strategie.
+
+Moje 5 pravidel pro roadmapu:
+
+1️⃣ Začni "Proč", ne "Co" - každá feature musí mít jasný business důvod
+2️⃣ Prioritizuj nemilosrdně - méně je více, focus je klíčový
+3️⃣ Měř impact, ne output - zajímá nás hodnota, ne počet featuresů
+4️⃣ Komunikuj trade-offy - co NEBUDEME dělat je stejně důležité
+5️⃣ Nech prostor pro discovery - 20% času na exploraci
+
+Co vám funguje v product planningu? 👇`,
+    createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000), // 3 hours ago
+    likes: 234,
+    comments: 45,
+    shares: 12,
+    tags: ['product', 'roadmap', 'pm'],
+  },
+  {
+    id: 'post2',
+    mentorId: 'mentor2',
+    type: 'article',
+    title: '🏗️ System Design: Jak navrhnout scalable backend',
+    content: `Napsal jsem nový článek o tom, jak přemýšlet o architektuře backendu pro scale.
+
+Pokrývám:
+• Database sharding strategie
+• Caching layers (Redis, CDN)
+• Load balancing patterns
+• Asynchronní processing s queues
+• Monitoring a observability
+
+Článek obsahuje real-world příklady z Productboard, kde zpracováváme miliony requestů denně.`,
+    media: {
+      type: 'link',
+      url: 'https://example.com/system-design-guide',
+      linkPreview: {
+        title: 'System Design Guide: Building Scalable Backends',
+        description: 'A practical guide to designing systems that can handle millions of users',
+        image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=630&fit=crop',
+      },
+    },
+    createdAt: new Date(Date.now() - 8 * 60 * 60 * 1000), // 8 hours ago
+    likes: 567,
+    comments: 89,
+    shares: 143,
+    tags: ['engineering', 'architecture', 'backend'],
+  },
+  {
+    id: 'post3',
+    mentorId: 'mentor3',
+    type: 'text',
+    title: '📈 Early-stage marketing: Co dělat PŘED product-market fit',
+    content: `Častá chyba: startupuje spustí PPC kampaně dřív, než mají PMF.
+
+Co dělat MÍSTO toho:
+
+✅ Content marketing - vzdělávej svou target audience
+✅ Community building - najdi prvních 100 super fans
+✅ SEO foundation - investuj do organic od začátku
+✅ Product-led growth - ať produkt sám přivádí lidi
+✅ Partnerships - spolupracuj s komplementárními produkty
+
+❌ Paid ads před PMF = pálení peněz
+
+Marketing začíná produktem, ne kampaněmi. First things first! 🚀`,
+    createdAt: new Date(Date.now() - 12 * 60 * 60 * 1000), // 12 hours ago
+    likes: 421,
+    comments: 67,
+    shares: 34,
+    tags: ['marketing', 'growth', 'startup'],
+  },
+  {
+    id: 'post4',
+    mentorId: 'mentor4',
+    type: 'ama',
+    title: '🎤 AMA: Ask Me Anything o fundraisingu',
+    content: `Čauky! V sobotu 14. prosince dělám AMA session o fundraisingu.
+
+Můžete se ptát na cokoliv:
+• Jak připravit pitch deck
+• Due diligence process
+• Term sheet negotiations
+• Investor meetings best practices
+• Red flags ve fundraisingu
+
+📅 14.12. od 15:00
+📍 Online (link pošlu den před)
+🎟️ Free, ale registrace nutná
+
+Registrace: konekt.cz/events/ama-fundraising
+
+See you there! 🚀`,
+    createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
+    likes: 892,
+    comments: 234,
+    shares: 167,
+    tags: ['ama', 'fundraising', 'event'],
+  },
+  {
+    id: 'post5',
+    mentorId: 'mentor5',
+    type: 'video',
+    title: '🎨 Design System 101: Od nuly k shipping',
+    content: `Nahrála jsem nové video o tom, jak vytvořit design system od základů.
+
+Ukážu vám náš process ve Figma:
+• Atomic design principles
+• Component library organizace
+• Design tokens setup
+• Documentation best practices
+• Handoff pro developers
+
+Video je 23 min, ale stojí to za to! Link v komentářích 👇`,
+    media: {
+      type: 'video',
+      url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+      thumbnail: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1200&h=630&fit=crop',
+    },
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000), // 2 days ago
+    likes: 678,
+    comments: 123,
+    shares: 89,
+    tags: ['design', 'figma', 'tutorial'],
+  },
+  {
+    id: 'post6',
+    mentorId: 'mentor6',
+    type: 'job',
+    title: '💼 Hledáme junior PM do našeho portfolio startupu',
+    content: `Credo portfólio company hledá junior PM!
+
+📍 Praha (hybrid)
+💰 60-80k CZK/měsíc + equity
+🚀 Fast-growing SaaS startup (Series A)
+
+Co budeš dělat:
+• Ownership nad jednou product areou
+• User research & discovery
+• Roadmap planning
+• Cross-functional collaboration
+
+Co hledáme:
+• 1-2 roky experience (nebo super motivated junior)
+• Technical background je plus
+• Agile/Scrum experience
+• Dobrá angličtina
+
+Pošlete CV na careers@credoventures.com nebo mi napište!`,
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+    likes: 156,
+    comments: 34,
+    shares: 45,
+    tags: ['job', 'hiring', 'product'],
+  },
+  {
+    id: 'post7',
+    mentorId: 'mentor1',
+    type: 'text',
+    title: '🎯 User research tip: Přestaňte se ptát "Líbil by se vám..."',
+    content: `Nejčastější chyba v user interviews: Ptáte se na názory místo chování.
+
+❌ "Líbil by se vám feature X?"
+✅ "Kdy naposledy jste měli tento problém? Jak jste ho vyřešili?"
+
+❌ "Používali byste tuto funkci?"
+✅ "Popište mi váš typický workflow..."
+
+❌ "Co by vám pomohlo?"
+✅ "Jaký byl váš nejhorší zážitek s...?"
+
+Users neví, co chtějí. Ale vědí, co dělají a proč. Focus na chování, ne opinions!
+
+#productmanagement #userresearch #UX`,
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
+    likes: 891,
+    comments: 145,
+    shares: 234,
+    tags: ['research', 'ux', 'pm'],
+  },
+  {
+    id: 'post8',
+    mentorId: 'mentor3',
+    type: 'text',
+    title: '🔥 Growth hack: Jak jsme získali prvních 10k users za 3 měsíce',
+    content: `Case study z našeho startupu před 2 lety:
+
+Měli jsme produkt, $0 na marketing, a 3 měsíce na growth.
+
+Co fungovalo:
+1. Product Hunt launch (2.3k users první den)
+2. Reddit communities (organic, no spam)
+3. Free tier + viral referral program
+4. Content marketing on Medium (SEO gold)
+5. Cold email outreach s REAL value proposition
+
+Co NEFUNGOVALO:
+❌ Facebook ads (burnt $5k, 0 conversions)
+❌ Influencer marketing
+❌ Generic LinkedIn posts
+
+Klíč: Najít kde vaši early adopters jsou, a přinést jim hodnotu tam.
+
+Kde vy hledáte své first users? 👇`,
+    createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000), // 6 days ago
+    likes: 1234,
+    comments: 289,
+    shares: 456,
+    tags: ['growth', 'startup', 'marketing'],
   },
 ];
