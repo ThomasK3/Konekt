@@ -18,10 +18,11 @@ import {
   Save,
   Trash2,
   AlertTriangle,
+  Plug,
 } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 
-type TabType = 'profile' | 'account' | 'privacy' | 'notifications';
+type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integrations';
 
 export default function SettingsPage() {
   const { user, setUser } = useUserStore();
@@ -153,7 +154,7 @@ export default function SettingsPage() {
 
                 <button
                   onClick={() => setActiveTab('notifications')}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                     activeTab === 'notifications'
                       ? 'bg-konekt-green text-konekt-white'
                       : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
@@ -161,6 +162,18 @@ export default function SettingsPage() {
                 >
                   <Bell className="w-5 h-5" />
                   <span>Notifikace</span>
+                </button>
+
+                <button
+                  onClick={() => setActiveTab('integrations')}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
+                    activeTab === 'integrations'
+                      ? 'bg-konekt-green text-konekt-white'
+                      : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                  }`}
+                >
+                  <Plug className="w-5 h-5" />
+                  <span>Integrace</span>
                 </button>
               </nav>
             </div>
@@ -538,6 +551,146 @@ export default function SettingsPage() {
                         />
                       </label>
                     </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Integrations Tab */}
+              {activeTab === 'integrations' && (
+                <div className="space-y-6">
+                  <div>
+                    <h2 className="text-2xl font-bold text-konekt-black mb-1">Integrace</h2>
+                    <p className="text-sm text-konekt-black/60">
+                      Připoj své účty a sdílej více o sobě
+                    </p>
+                  </div>
+
+                  {/* Social Accounts */}
+                  <div>
+                    <h3 className="text-lg font-semibold text-konekt-black mb-3">Sociální sítě</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between p-4 bg-konekt-cream rounded-xl">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white">
+                            in
+                          </div>
+                          <div>
+                            <p className="font-medium text-konekt-black">LinkedIn</p>
+                            <p className="text-xs text-konekt-black/60">Propojit profesní profil</p>
+                          </div>
+                        </div>
+                        <Button size="sm" variant="outline">
+                          Připojit
+                        </Button>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-konekt-cream rounded-xl">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-white">
+                            GH
+                          </div>
+                          <div>
+                            <p className="font-medium text-konekt-black">GitHub</p>
+                            <p className="text-xs text-konekt-black/60">Zobraz své repositories</p>
+                          </div>
+                        </div>
+                        <Button size="sm" variant="outline">
+                          Připojit
+                        </Button>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-konekt-cream rounded-xl">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center text-white">
+                            X
+                          </div>
+                          <div>
+                            <p className="font-medium text-konekt-black">Twitter / X</p>
+                            <p className="text-xs text-konekt-black/60">Sdílej své tweety</p>
+                          </div>
+                        </div>
+                        <Button size="sm" variant="outline">
+                          Připojit
+                        </Button>
+                      </div>
+
+                      <div className="flex items-center justify-between p-4 bg-konekt-cream rounded-xl">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 bg-konekt-green rounded-lg flex items-center justify-center text-white">
+                            🌐
+                          </div>
+                          <div>
+                            <p className="font-medium text-konekt-black">Portfolio Website</p>
+                            <p className="text-xs text-konekt-black/60">Link na tvé portfolio</p>
+                          </div>
+                        </div>
+                        <Button size="sm" variant="outline">
+                          Přidat
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Personality Tests */}
+                  <div className="pt-6 border-t border-konekt-black/10">
+                    <h3 className="text-lg font-semibold text-konekt-black mb-3">Osobnostní testy</h3>
+                    <div className="space-y-3">
+                      <div className="p-4 bg-konekt-pink/10 border border-konekt-pink/20 rounded-xl">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <p className="font-medium text-konekt-black">16 Personalities (MBTI)</p>
+                            <p className="text-xs text-konekt-black/60 mt-0.5">
+                              Zjisti svůj personality type
+                            </p>
+                          </div>
+                          <Button size="sm" variant="outline">
+                            Přidat výsledek
+                          </Button>
+                        </div>
+                        <p className="text-xs text-konekt-black/50">
+                          💡 Můžeš uploadnout screenshot nebo vyplnit manuálně
+                        </p>
+                      </div>
+
+                      <div className="p-4 bg-konekt-green/10 border border-konekt-green/20 rounded-xl">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <p className="font-medium text-konekt-black">Big Five Personality</p>
+                            <p className="text-xs text-konekt-black/60 mt-0.5">
+                              OCEAN model personality traits
+                            </p>
+                          </div>
+                          <Button size="sm" variant="outline">
+                            Přidat výsledek
+                          </Button>
+                        </div>
+                      </div>
+
+                      <div className="p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl">
+                        <div className="flex items-start justify-between mb-2">
+                          <div>
+                            <p className="font-medium text-konekt-black">CliftonStrengths</p>
+                            <p className="text-xs text-konekt-black/60 mt-0.5">
+                              Zobraz své top 5 strengths
+                            </p>
+                          </div>
+                          <Button size="sm" variant="outline">
+                            Přidat výsledek
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Info Box */}
+                  <div className="p-4 bg-konekt-cream border-2 border-konekt-black/10 rounded-xl">
+                    <p className="text-sm text-konekt-black/70">
+                      <strong>💡 Proč přidat integrace?</strong>
+                      <br />
+                      Propojené účty a osobnostní testy pomáhají ostatním lépe tě poznat a najít
+                      spolupráci, která ti sedne. Všechny informace jsou volitelné a můžeš je kdykoli
+                      upravit.
+                    </p>
                   </div>
                 </div>
               )}

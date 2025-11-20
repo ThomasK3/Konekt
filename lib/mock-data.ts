@@ -49,6 +49,38 @@ export const mockUsers: User[] = [
     ],
     location: 'Praha',
     isOnline: true,
+    // Personality & Integrations
+    mbti: {
+      type: 'ENFP',
+      name: 'The Campaigner',
+      description: 'Enthusiastic, creative and sociable free spirits, who can always find a reason to smile.',
+    },
+    socialIntegrations: [
+      {
+        platform: 'linkedin',
+        username: 'jakub-prochazka',
+        url: 'https://linkedin.com/in/jakub-prochazka',
+        isConnected: true,
+        metadata: {
+          jobTitle: 'Full-stack Developer',
+        },
+      },
+      {
+        platform: 'github',
+        username: 'jakubpro',
+        url: 'https://github.com/jakubpro',
+        isConnected: true,
+        metadata: {
+          repositories: 24,
+        },
+      },
+    ],
+    workPreferences: {
+      timezone: 'CET (GMT+1)',
+      communicationPreferences: ['slack', 'email'],
+      workHours: 'flexible',
+      workStyle: 'remote',
+    },
   },
   {
     id: 'user2',
@@ -74,6 +106,36 @@ export const mockUsers: User[] = [
     ],
     location: 'Praha',
     isOnline: false,
+    // Personality & Integrations
+    bigFive: {
+      openness: 85,
+      conscientiousness: 72,
+      extraversion: 88,
+      agreeableness: 79,
+      neuroticism: 35,
+    },
+    socialIntegrations: [
+      {
+        platform: 'portfolio',
+        url: 'https://lucienovakova.cz',
+        isConnected: true,
+      },
+      {
+        platform: 'twitter',
+        username: 'lucie_marketing',
+        url: 'https://twitter.com/lucie_marketing',
+        isConnected: true,
+        metadata: {
+          followers: 1234,
+        },
+      },
+    ],
+    workPreferences: {
+      timezone: 'CET (GMT+1)',
+      communicationPreferences: ['email', 'slack', 'whatsapp'],
+      workHours: 'morning',
+      workStyle: 'hybrid',
+    },
   },
   {
     id: 'user3',
@@ -99,6 +161,41 @@ export const mockUsers: User[] = [
     ],
     location: 'Brno',
     isOnline: true,
+    // Personality & Integrations
+    strengthsFinder: {
+      strengths: ['Strategic', 'Learner', 'Analytical', 'Achiever', 'Input'],
+    },
+    mbti: {
+      type: 'INTJ',
+      name: 'The Architect',
+      description: 'Imaginative and strategic thinkers, with a plan for everything.',
+    },
+    socialIntegrations: [
+      {
+        platform: 'github',
+        username: 'martinsvoboda',
+        url: 'https://github.com/martinsvoboda',
+        isConnected: true,
+        metadata: {
+          repositories: 47,
+        },
+      },
+      {
+        platform: 'linkedin',
+        username: 'martin-svoboda',
+        url: 'https://linkedin.com/in/martin-svoboda',
+        isConnected: true,
+        metadata: {
+          jobTitle: 'ML Engineer',
+        },
+      },
+    ],
+    workPreferences: {
+      timezone: 'CET (GMT+1)',
+      communicationPreferences: ['slack', 'discord'],
+      workHours: 'night',
+      workStyle: 'remote',
+    },
   },
   {
     id: 'user4',

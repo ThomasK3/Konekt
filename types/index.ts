@@ -10,6 +10,43 @@ export interface Availability {
   isPaid: boolean;
 }
 
+export interface MBTIPersonality {
+  type: string; // e.g., "ENFP"
+  name: string; // e.g., "The Campaigner"
+  description: string;
+}
+
+export interface BigFivePersonality {
+  openness: number; // 0-100
+  conscientiousness: number;
+  extraversion: number;
+  agreeableness: number;
+  neuroticism: number;
+}
+
+export interface StrengthsFinder {
+  strengths: string[]; // Top 5 strengths
+}
+
+export interface SocialIntegration {
+  platform: 'linkedin' | 'github' | 'twitter' | 'portfolio';
+  username?: string;
+  url: string;
+  isConnected: boolean;
+  metadata?: {
+    repositories?: number;
+    followers?: number;
+    jobTitle?: string;
+  };
+}
+
+export interface WorkPreferences {
+  timezone: string;
+  communicationPreferences: ('slack' | 'email' | 'whatsapp' | 'discord')[];
+  workHours: 'morning' | 'night' | 'flexible';
+  workStyle: 'remote' | 'hybrid' | 'office';
+}
+
 export interface User {
   id: string;
   name: string;
@@ -29,6 +66,12 @@ export interface User {
   availability: Availability;
   badges: Badge[];
   projectIds: string[];
+  // Personality & Integrations
+  mbti?: MBTIPersonality;
+  bigFive?: BigFivePersonality;
+  strengthsFinder?: StrengthsFinder;
+  socialIntegrations?: SocialIntegration[];
+  workPreferences?: WorkPreferences;
 }
 
 export interface Channel {

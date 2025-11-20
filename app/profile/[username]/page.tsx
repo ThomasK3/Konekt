@@ -4,9 +4,16 @@ import { use } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { mockUsers, mockProjects } from '@/lib/mock-data';
-import { Clock, DollarSign, MessageCircle, MapPin } from 'lucide-react';
+import { Clock, DollarSign, MessageCircle, MapPin, Brain } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import {
+  MBTIBadge,
+  BigFiveBars,
+  StrengthsTags,
+  SocialIntegrations,
+  WorkPreferencesCard,
+} from '@/components/profile/PersonalityComponents';
 
 export default function ProfilePage({ params }: { params: Promise<{ username: string }> }) {
   const router = useRouter();
@@ -148,6 +155,35 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 )}
               </div>
             </Card>
+
+            {/* Integrace & Osobnost */}
+            {(user.mbti || user.bigFive || user.strengthsFinder || user.socialIntegrations || user.workPreferences) && (
+              <Card>
+                <div className="flex items-center gap-2 mb-6">
+                  <Brain className="w-6 h-6 text-konekt-green" />
+                  <h2 className="text-xl font-bold text-konekt-black">Integrace & Osobnost</h2>
+                </div>
+
+                <div className="space-y-4">
+                  {/* MBTI */}
+                  {user.mbti && <MBTIBadge mbti={user.mbti} />}
+
+                  {/* Big Five */}
+                  {user.bigFive && <BigFiveBars bigFive={user.bigFive} />}
+
+                  {/* StrengthsFinder */}
+                  {user.strengthsFinder && <StrengthsTags strengthsFinder={user.strengthsFinder} />}
+
+                  {/* Social Integrations */}
+                  {user.socialIntegrations && user.socialIntegrations.length > 0 && (
+                    <SocialIntegrations integrations={user.socialIntegrations} />
+                  )}
+
+                  {/* Work Preferences */}
+                  {user.workPreferences && <WorkPreferencesCard preferences={user.workPreferences} />}
+                </div>
+              </Card>
+            )}
           </div>
 
           {/* Right Column - Sidebar */}
