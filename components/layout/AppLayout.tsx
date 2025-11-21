@@ -85,13 +85,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <div className="max-w-[1800px] mx-auto px-6 py-8 pt-24">
         <div className="flex gap-8">
           {/* Left Sidebar Navigation */}
-          <aside className="w-64 flex-shrink-0 sticky top-24 self-start">
-            <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
-              <div className="p-4 border-b border-konekt-black/10">
+          <aside className="w-64 flex-shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)]">
+            <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden flex flex-col max-h-full">
+              <div className="p-4 border-b border-konekt-black/10 flex-shrink-0">
                 <h2 className="font-bold text-konekt-black">Navigace</h2>
               </div>
 
-              <nav className="p-2">
+              <div className="flex-1 overflow-y-auto">
+                <nav className="p-2">
                 {/* Discover / Feed */}
                 <Link href="/feed" data-tour="nav-feed">
                   <button
@@ -329,7 +330,8 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </Link>
               </div>
             </div>
-          </aside>
+          </div>
+        </aside>
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">{children}</main>
