@@ -41,11 +41,15 @@ import {
   generateSkillsRadar,
   generateEngagementScore,
 } from '@/lib/analytics-mock';
+import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
+import { ProgressChecklist } from '@/components/onboarding/ProgressChecklist';
+import { useOnboarding } from '@/hooks/useOnboarding';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
   const [greeting, setGreeting] = useState('');
   const [greetingEmoji, setGreetingEmoji] = useState('');
+  const { showTour, completeTour, skipTour } = useOnboarding();
 
   // Dynamic greeting based on time
   useEffect(() => {
@@ -132,6 +136,9 @@ export default function DashboardPage() {
 
   return (
     <AppLayout>
+      {/* Onboarding Tour */}
+      <OnboardingTour run={showTour} onComplete={completeTour} onSkip={skipTour} />
+
       {/* HERO SECTION */}
       <motion.div
         className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10"
@@ -184,6 +191,7 @@ export default function DashboardPage() {
 
       {/* QUICK STATS CARDS */}
       <motion.div
+        data-tour="stats-cards"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
         variants={staggerContainer}
         initial="initial"
@@ -462,7 +470,7 @@ export default function DashboardPage() {
           </div>
 
           {/* PERSONAL ANALYTICS */}
-          <div>
+          <div data-tour="analytics">
             <div className="flex items-center gap-2 mb-6">
               <BarChart3 className="w-6 h-6 text-konekt-pink" />
               <h2 className="text-2xl font-bold text-konekt-black">📊 Tvoje Statistiky</h2>
@@ -665,6 +673,9 @@ export default function DashboardPage() {
 
         {/* RIGHT SIDEBAR (30%) */}
         <div className="space-y-6">
+          {/* PROGRESS CHECKLIST */}
+          <ProgressChecklist />
+
           {/* UPCOMING CALENDAR */}
           <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
             <div className="flex items-center justify-between mb-4">
