@@ -93,7 +93,7 @@ export const VideoChallenge = ({ data, updateData, onNext, onSkip }: VideoChalle
             'Good lighting - face the light source',
             'Clear audio - minimize background noise',
             'Smile & be yourself!',
-            'Say: Who you are, what you do, what you're looking for',
+            'Say: Who you are, what you do, what you&apos;re looking for',
           ].map((tip, index) => (
             <div key={index} className="flex items-start gap-3">
               <CheckCircle className="w-5 h-5 text-konekt-green flex-shrink-0 mt-0.5" />
