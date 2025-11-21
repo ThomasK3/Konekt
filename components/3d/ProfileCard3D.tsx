@@ -82,7 +82,7 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
       }}
       whileHover={{ scale: 1.05, z: 50 }}
       transition={{ duration: 0.3 }}
-      className={`relative rounded-2xl p-6 overflow-hidden ${getVariantStyles()}`}
+      className={`relative rounded-2xl p-6 overflow-hidden shadow-lg ${getVariantStyles()}`}
     >
       {/* Holographic overlay (only for holographic variant) */}
       {variant === 'holographic' && (
@@ -126,7 +126,11 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
             whileHover={{ scale: 1.1, rotate: 5 }}
           >
             <div className="relative w-20 h-20 rounded-full overflow-hidden">
-              <img src={user.avatar} alt={user.name} className="w-full h-full object-cover" />
+              <img
+                src={user.mainImage || user.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'}
+                alt={user.name}
+                className="w-full h-full object-cover"
+              />
 
               {/* Holographic shimmer effect */}
               <div className="absolute inset-0 overflow-hidden">
@@ -195,14 +199,14 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
         {/* Name and bio with depth layers */}
         <motion.div
           style={{ transform: 'translateZ(70px)' }}
-          className="mb-3"
+          className="mb-3 overflow-hidden"
         >
           <Link href={`/profile/${user.username}`}>
-            <h3 className="text-xl font-bold text-konekt-black hover:text-konekt-pink transition-colors mb-1">
+            <h3 className="text-xl font-bold text-konekt-black hover:text-konekt-pink transition-colors mb-1 truncate">
               {user.name}
             </h3>
           </Link>
-          <p className="text-sm text-konekt-black/60 line-clamp-2">{user.bio}</p>
+          <p className="text-sm text-konekt-black/60 line-clamp-2 break-words">{user.bio}</p>
         </motion.div>
 
         {/* Skills with floating effect */}

@@ -45,7 +45,7 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
       />
 
       {/* Glass card */}
-      <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 overflow-hidden">
+      <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 overflow-hidden shadow-2xl">
         {/* Light reflection effect following mouse */}
         <motion.div
           className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -80,7 +80,7 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
             >
               <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 backdrop-blur-sm relative">
                 <img
-                  src={user.avatar}
+                  src={user.mainImage || user.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'}
                   alt={user.name}
                   className="w-full h-full object-cover"
                 />
@@ -125,16 +125,16 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
           </div>
 
           {/* Name and bio */}
-          <div className="mb-4">
+          <div className="mb-4 overflow-hidden">
             <Link href={`/profile/${user.username}`}>
               <motion.h3
-                className="text-xl font-bold text-white mb-1 hover:text-konekt-pink transition-colors"
+                className="text-xl font-bold text-white mb-1 hover:text-konekt-pink transition-colors truncate"
                 whileHover={{ x: 5 }}
               >
                 {user.name}
               </motion.h3>
             </Link>
-            <p className="text-sm text-white/70 line-clamp-2">{user.bio}</p>
+            <p className="text-sm text-white/70 line-clamp-2 break-words">{user.bio}</p>
           </div>
 
           {/* Skills with glass effect */}

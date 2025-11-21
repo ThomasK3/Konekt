@@ -56,13 +56,13 @@ export const FlipProfileCard = ({
       >
         {/* FRONT SIDE */}
         <div
-          className="absolute inset-0 w-full h-full backface-hidden"
+          className="absolute inset-0 w-full h-full backface-hidden overflow-hidden rounded-2xl"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
           }}
         >
-          <div className="h-full bg-gradient-to-br from-konekt-white to-konekt-cream rounded-2xl border-2 border-konekt-black/10 p-6 flex flex-col items-center justify-center text-center overflow-hidden relative">
+          <div className="h-full bg-gradient-to-br from-konekt-white to-konekt-cream rounded-2xl border-2 border-konekt-black/10 p-6 flex flex-col items-center justify-center text-center overflow-hidden relative shadow-lg">
             {/* Animated background pattern */}
             <motion.div
               className="absolute inset-0 opacity-5"
@@ -99,7 +99,7 @@ export const FlipProfileCard = ({
               />
               <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-2xl">
                 <img
-                  src={user.avatar}
+                  src={user.mainImage || user.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop'}
                   alt={user.name}
                   className="w-full h-full object-cover"
                 />
@@ -121,15 +121,15 @@ export const FlipProfileCard = ({
             </motion.div>
 
             {/* Name and role */}
-            <h3 className="text-2xl font-bold text-konekt-black mb-2 relative z-10">
+            <h3 className="text-2xl font-bold text-konekt-black mb-2 relative z-10 truncate px-4">
               {user.name}
             </h3>
-            <p className="text-lg text-konekt-pink font-semibold mb-3 relative z-10">
+            <p className="text-lg text-konekt-pink font-semibold mb-3 relative z-10 truncate px-4">
               {user.lookingFor[0] || 'Developer'}
             </p>
 
             {/* Bio */}
-            <p className="text-sm text-konekt-black/60 mb-6 line-clamp-2 max-w-xs relative z-10">
+            <p className="text-sm text-konekt-black/60 mb-6 line-clamp-2 max-w-xs relative z-10 break-words px-4">
               {user.bio}
             </p>
 
@@ -164,14 +164,14 @@ export const FlipProfileCard = ({
 
         {/* BACK SIDE */}
         <div
-          className="absolute inset-0 w-full h-full backface-hidden"
+          className="absolute inset-0 w-full h-full backface-hidden overflow-hidden rounded-2xl"
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
           }}
         >
-          <div className="h-full bg-gradient-to-br from-konekt-green to-konekt-pink rounded-2xl p-6 flex flex-col text-white relative overflow-hidden">
+          <div className="h-full bg-gradient-to-br from-konekt-green to-konekt-pink rounded-2xl p-6 flex flex-col text-white relative overflow-hidden shadow-lg">
             {/* Animated circles background */}
             <motion.div
               className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"
