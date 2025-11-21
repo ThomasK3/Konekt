@@ -14,6 +14,7 @@ import {
   TrendingUp,
   Plus,
   User,
+  Trophy,
 } from 'lucide-react';
 
 interface AppLayoutProps {
@@ -184,6 +185,19 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   >
                     <TrendingUp className="w-5 h-5" />
                     <span>Dashboard</span>
+                  </button>
+                </Link>
+
+                <Link href="/leaderboard">
+                  <button
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                      isActive('/leaderboard')
+                        ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-konekt-white'
+                        : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                    }`}
+                  >
+                    <Trophy className="w-5 h-5" />
+                    <span>Leaderboard</span>
                   </button>
                 </Link>
 

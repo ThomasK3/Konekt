@@ -1,4 +1,5 @@
 import type { User, Channel, Post, Mentor, MentorPost, Project, Badge, Message, Conversation, Event, EventMaterial } from '@/types';
+import { MOCK_USER_GAMIFICATION } from './gamification-mock';
 
 // Badges
 export const mockBadges: Badge[] = [
@@ -1273,3 +1274,12 @@ Kde vy hledáte své first users? 👇`,
     tags: ['growth', 'startup', 'marketing'],
   },
 ];
+
+
+// Add gamification data to mock users
+mockUsers.forEach((user) => {
+  const userKey = user.id as keyof typeof MOCK_USER_GAMIFICATION;
+  if (MOCK_USER_GAMIFICATION[userKey]) {
+    user.gamification = MOCK_USER_GAMIFICATION[userKey];
+  }
+});
