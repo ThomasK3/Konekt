@@ -117,4 +117,44 @@ body {
   .transform-style-3d {
     transform-style: preserve-3d;
   }
+
+  /* Collapsible animations */
+  .animate-slideDown {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Custom scrollbar for sidebar */
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 3px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+  }
+
+  /* Firefox */
+  .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-primary) transparent;
+  }
 }
