@@ -37,12 +37,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <div className="min-h-screen bg-theme-primary">
+    <div className="min-h-screen bg-konekt-cream dark:bg-[#0a0a0a]">
       {/* Header */}
-      <header className="bg-theme-surface border-b-2 border-theme fixed top-0 left-0 right-0 z-20">
+      <header className="bg-white dark:bg-[#151515] border-b-2 border-konekt-black/10 dark:border-white/10 fixed top-0 left-0 right-0 z-20">
         <div className="max-w-[1800px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-2xl font-bold text-theme-primary">
+            <Link href="/dashboard" className="text-2xl font-bold text-konekt-black dark:text-white">
               Konekt
             </Link>
 
@@ -57,12 +57,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </button>
               )}
 
-              <button className="p-2 hover:bg-theme-hover rounded-lg transition-colors">
-                <Search className="w-5 h-5 text-theme-secondary" />
+              <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors">
+                <Search className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
               </button>
               <Link href="/notifications">
-                <button className="p-2 hover:bg-theme-hover rounded-lg transition-colors relative">
-                  <Bell className="w-5 h-5 text-theme-secondary" />
+                <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors relative">
+                  <Bell className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
                   <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-konekt-pink rounded-full" />
                 </button>
               </Link>
@@ -86,9 +86,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <div className="flex gap-8">
           {/* Left Sidebar Navigation */}
           <aside className="w-64 flex-shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)]">
-            <div className="bg-theme-surface rounded-2xl border-2 border-theme overflow-hidden flex flex-col max-h-full">
-              <div className="p-4 border-b border-theme flex-shrink-0">
-                <h2 className="font-bold text-theme-primary">Navigace</h2>
+            <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-full">
+              <div className="p-4 border-b border-konekt-black/10 dark:border-white/10 flex-shrink-0">
+                <h2 className="font-bold text-konekt-black dark:text-white">Navigace</h2>
               </div>
 
               <div className="flex-1 overflow-y-auto">
@@ -99,7 +99,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/feed') || isActive('/discover')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Compass className="w-5 h-5" />
@@ -114,7 +114,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                         pathname?.startsWith(`/profile/${user.username}`)
                           ? 'bg-konekt-green text-konekt-white'
-                          : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <UserCircle className="w-5 h-5" />
@@ -129,7 +129,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/people')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Users className="w-5 h-5" />
@@ -143,7 +143,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       pathname?.startsWith('/projects')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Briefcase className="w-5 h-5" />
@@ -157,7 +157,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       pathname?.startsWith('/calendar')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <CalendarDays className="w-5 h-5" />
@@ -171,7 +171,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       pathname?.startsWith('/events')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Calendar className="w-5 h-5" />
@@ -188,7 +188,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/messages')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <MessageCircle className="w-5 h-5" />
@@ -205,7 +205,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/mentors')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <GraduationCap className="w-5 h-5" />
@@ -219,7 +219,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/jobs')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <BriefcaseBusiness className="w-5 h-5" />
@@ -233,7 +233,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/resources')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <BookOpen className="w-5 h-5" />
@@ -243,9 +243,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </nav>
 
               {/* Moje Eventy */}
-              <div className="p-2 border-t border-theme">
+              <div className="p-2 border-t border-konekt-black/10 dark:border-white/10">
                 <div className="px-4 py-2">
-                  <h3 className="text-xs font-bold text-theme-tertiary uppercase tracking-wider">
+                  <h3 className="text-xs font-bold text-konekt-black/50 dark:text-white/50 uppercase tracking-wider">
                     Moje Eventy
                   </h3>
                 </div>
@@ -270,7 +270,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                           className={`w-full flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all mb-1 text-sm ${
                             pathname?.startsWith(`/events/${event.id}/space`)
                               ? 'bg-konekt-green text-konekt-white'
-                              : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                              : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                           }`}
                         >
                           <span className="text-lg">{eventIcon}</span>
@@ -282,20 +282,20 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
                 {/* Připojit se k eventu */}
                 <Link href="/events">
-                  <button className="w-full flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all text-sm text-theme-tertiary hover:bg-theme-hover hover:text-theme-primary border-2 border-dashed border-theme hover:border-theme-hover mt-2">
+                  <button className="w-full flex items-center gap-3 px-4 py-2 rounded-xl font-medium transition-all text-sm text-konekt-black/50 dark:text-white/50 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white border-2 border-dashed border-konekt-black/10 dark:border-white/10 hover:border-konekt-black/20 dark:hover:border-white/20 mt-2">
                     <Plus className="w-4 h-4" />
                     <span>Připojit se</span>
                   </button>
                 </Link>
               </div>
 
-              <div className="p-2 border-t border-theme">
+              <div className="p-2 border-t border-konekt-black/10 dark:border-white/10">
                 <Link href="/dashboard">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/dashboard')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <TrendingUp className="w-5 h-5" />
@@ -308,7 +308,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
                       isActive('/leaderboard')
                         ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Trophy className="w-5 h-5" />
@@ -321,7 +321,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
                       isActive('/settings')
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'text-theme-secondary hover:bg-theme-hover hover:text-theme-primary'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Settings className="w-5 h-5" />

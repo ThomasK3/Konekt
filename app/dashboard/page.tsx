@@ -71,9 +71,9 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-theme-primary flex items-center justify-center">
+      <div className="min-h-screen bg-konekt-cream dark:bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-theme-primary mb-4">
+          <h2 className="text-2xl font-bold text-konekt-black dark:text-white mb-4">
             Pro zobrazení dashboardu se prosím přihlaste
           </h2>
           <Link href="/register">
@@ -148,17 +148,17 @@ export default function DashboardPage() {
 
       {/* HERO SECTION */}
       <motion.div
-        className="mb-8 p-8 bg-theme-surface rounded-3xl border-2 border-theme"
+        className="mb-8 p-8 bg-white dark:bg-[#1a1a1a] rounded-3xl border-2 border-konekt-black/10 dark:border-white/10"
         initial={fadeInUp.initial}
         animate={fadeInUp.animate}
         exit={fadeInUp.exit}
       >
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-theme-primary mb-2">
+            <h1 className="text-4xl font-bold text-konekt-black dark:text-white mb-2">
               {greetingEmoji} {greeting}, {user.name.split(' ')[0]}!
             </h1>
-            <p className="text-theme-secondary">
+            <p className="text-konekt-black/60 dark:text-white/70">
               {dateString.charAt(0).toUpperCase() + dateString.slice(1)} • {timeString}
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-theme-surface rounded-2xl border-2 border-theme hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
@@ -221,8 +221,8 @@ export default function DashboardPage() {
                 <span>+3</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-theme-primary mb-1">{totalConnections}</div>
-            <div className="text-sm text-theme-secondary">Spojení</div>
+            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalConnections}</div>
+            <div className="text-sm text-konekt-black/60 dark:text-white/70">Spojení</div>
           </motion.div>
         </Link>
 
@@ -232,7 +232,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-theme-surface rounded-2xl border-2 border-theme hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
@@ -244,8 +244,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-theme-primary mb-1">{totalMessages}</div>
-            <div className="text-sm text-theme-secondary">Zprávy</div>
+            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalMessages}</div>
+            <div className="text-sm text-konekt-black/60 dark:text-white/70">Zprávy</div>
           </motion.div>
         </Link>
 
@@ -255,7 +255,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-theme-surface rounded-2xl border-2 border-theme hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
@@ -267,8 +267,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-theme-primary mb-1">{totalProjects}</div>
-            <div className="text-sm text-theme-secondary">Projekty</div>
+            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalProjects}</div>
+            <div className="text-sm text-konekt-black/60 dark:text-white/70">Projekty</div>
           </motion.div>
         </Link>
 
@@ -278,7 +278,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-theme-surface rounded-2xl border-2 border-theme hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
@@ -291,8 +291,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-theme-primary mb-1">{totalEvents}</div>
-            <div className="text-sm text-theme-secondary">Eventy</div>
+            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalEvents}</div>
+            <div className="text-sm text-konekt-black/60 dark:text-white/70">Eventy</div>
           </motion.div>
         </Link>
       </motion.div>
@@ -546,7 +546,7 @@ export default function DashboardPage() {
                 userProjects.map((project) => (
                   <div
                     key={project.id}
-                    className="p-6 bg-theme-surface rounded-2xl border-2 border-theme hover:border-konekt-green hover:shadow-lg transition-all"
+                    className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
@@ -634,7 +634,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="text-left">
                     <div className="font-bold text-konekt-black">Najít spolupracovníky</div>
-                    <div className="text-sm text-theme-secondary">Procházej profily</div>
+                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Procházej profily</div>
                   </div>
                 </button>
               </Link>
@@ -646,7 +646,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="text-left">
                     <div className="font-bold text-konekt-black">Nová zpráva</div>
-                    <div className="text-sm text-theme-secondary">Začni konverzaci</div>
+                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Začni konverzaci</div>
                   </div>
                 </button>
               </Link>
@@ -658,7 +658,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="text-left">
                     <div className="font-bold text-konekt-black">Přidat projekt</div>
-                    <div className="text-sm text-theme-secondary">Sdílej svůj nápad</div>
+                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Sdílej svůj nápad</div>
                   </div>
                 </button>
               </Link>
@@ -670,7 +670,7 @@ export default function DashboardPage() {
                   </div>
                   <div className="text-left">
                     <div className="font-bold text-konekt-black">Připojit se k eventu</div>
-                    <div className="text-sm text-theme-secondary">Objevuj akce</div>
+                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Objevuj akce</div>
                   </div>
                 </button>
               </Link>

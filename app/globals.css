@@ -87,51 +87,6 @@ body {
 }
 
 @layer utilities {
-  /* Theme-aware utility classes */
-  .bg-theme-primary {
-    background-color: var(--bg-primary);
-  }
-
-  .bg-theme-surface {
-    background-color: var(--surface-primary);
-  }
-
-  .bg-theme-hover {
-    background-color: var(--surface-hover);
-  }
-
-  .text-theme-primary {
-    color: var(--text-primary);
-  }
-
-  .text-theme-secondary {
-    color: var(--text-secondary);
-  }
-
-  .text-theme-tertiary {
-    color: var(--text-tertiary);
-  }
-
-  .border-theme {
-    border-color: var(--border-primary);
-  }
-
-  .border-theme-secondary {
-    border-color: var(--border-secondary);
-  }
-
-  .hover\:bg-theme-hover:hover {
-    background-color: var(--surface-hover);
-  }
-
-  .hover\:text-theme-primary:hover {
-    color: var(--text-primary);
-  }
-
-  .hover\:border-theme-hover:hover {
-    border-color: var(--border-hover);
-  }
-
   .text-balance {
     text-wrap: balance;
   }
