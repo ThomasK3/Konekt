@@ -22,6 +22,7 @@ import {
   Rocket,
   GraduationCap,
   Bell,
+  BarChart3,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
@@ -30,6 +31,16 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, staggerContainer, staggerItem, hoverScale, tapScale } from '@/lib/animations';
 import toast from 'react-hot-toast';
+import { ActivityHeatmap } from '@/components/analytics/ActivityHeatmap';
+import { ConnectionGrowthChart } from '@/components/analytics/ConnectionGrowthChart';
+import { SkillsRadarChart } from '@/components/analytics/SkillsRadarChart';
+import { EngagementScore } from '@/components/analytics/EngagementScore';
+import {
+  generateActivityHeatmap,
+  generateConnectionGrowth,
+  generateSkillsRadar,
+  generateEngagementScore,
+} from '@/lib/analytics-mock';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
@@ -448,6 +459,62 @@ export default function DashboardPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* PERSONAL ANALYTICS */}
+          <div>
+            <div className="flex items-center gap-2 mb-6">
+              <BarChart3 className="w-6 h-6 text-konekt-pink" />
+              <h2 className="text-2xl font-bold text-konekt-black">📊 Tvoje Statistiky</h2>
+            </div>
+
+            {user?.gamification && (
+              <div className="space-y-6">
+                {/* Activity Heatmap */}
+                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                  <h3 className="text-lg font-bold text-konekt-black mb-4">Aktivita za poslední rok</h3>
+                  <ActivityHeatmap data={generateActivityHeatmap(user.id)} />
+                </div>
+
+                {/* Connection Growth & Skills Radar */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                    <h3 className="text-lg font-bold text-konekt-black mb-4">Růst spojení</h3>
+                    <ConnectionGrowthChart
+                      data={generateConnectionGrowth(user.gamification.stats.connectionsCount)}
+                      events={[
+                        {
+                          date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000)
+                            .toLocaleDateString('en-CA')
+                            .slice(5),
+                          name: 'Hackathon',
+                        },
+                        {
+                          date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000)
+                            .toLocaleDateString('en-CA')
+                            .slice(5),
+                          name: 'Networking',
+                        },
+                      ]}
+                    />
+                  </div>
+
+                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                    <h3 className="text-lg font-bold text-konekt-black mb-4">Skills Distribution</h3>
+                    <SkillsRadarChart data={generateSkillsRadar(user.skills)} />
+                  </div>
+                </div>
+
+                {/* Engagement Score */}
+                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                  <h3 className="text-lg font-bold text-konekt-black mb-4">Engagement Score</h3>
+                  <EngagementScore
+                    totalScore={generateEngagementScore(user.gamification.stats).totalScore}
+                    breakdown={generateEngagementScore(user.gamification.stats).breakdown}
+                  />
+                </div>
+              </div>
+            )}
           </div>
 
           {/* YOUR PROJECTS */}

@@ -5,14 +5,23 @@ import { motion } from 'framer-motion';
 import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { PersonCard } from '@/components/feed/PersonCard';
 import { mockUsers } from '@/lib/mock-data';
-import { Search, X } from 'lucide-react';
+import { Search, X, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
+import { GrowingSkillsChart } from '@/components/analytics/GrowingSkillsChart';
+import { SoughtRolesChart } from '@/components/analytics/SoughtRolesChart';
+import { IndustriesTreemap } from '@/components/analytics/IndustriesTreemap';
+import {
+  generateGrowingSkills,
+  generateSoughtRoles,
+  generateActiveIndustries,
+} from '@/lib/analytics-mock';
 
 export default function PeoplePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
+  const [showTrends, setShowTrends] = useState(true);
 
   const allSkills = Array.from(new Set(mockUsers.flatMap((u) => u.skills))).sort();
   const allLocations = Array.from(
@@ -218,6 +227,60 @@ export default function PeoplePage() {
                 )}
               </div>
             )}
+          </motion.div>
+
+          {/* Market Intelligence Trends */}
+          <motion.div
+            className="mb-8"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            exit={fadeInUp.exit}
+          >
+            <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
+              <button
+                onClick={() => setShowTrends(!showTrends)}
+                className="w-full p-6 flex items-center justify-between hover:bg-konekt-cream/30 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <TrendingUp className="w-6 h-6 text-konekt-pink" />
+                  <h2 className="text-2xl font-bold text-konekt-black">📈 Market Intelligence</h2>
+                </div>
+                {showTrends ? (
+                  <ChevronUp className="w-6 h-6 text-konekt-black/40" />
+                ) : (
+                  <ChevronDown className="w-6 h-6 text-konekt-black/40" />
+                )}
+              </button>
+
+              {showTrends && (
+                <div className="p-6 pt-0 space-y-6">
+                  {/* Growing Skills & Sought Roles */}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="p-6 bg-konekt-cream rounded-2xl">
+                      <h3 className="text-lg font-bold text-konekt-black mb-4">
+                        Top Growing Skills
+                      </h3>
+                      <GrowingSkillsChart data={generateGrowingSkills()} />
+                    </div>
+
+                    <div className="p-6 bg-konekt-cream rounded-2xl">
+                      <h3 className="text-lg font-bold text-konekt-black mb-4">
+                        Most Sought-After Roles
+                      </h3>
+                      <SoughtRolesChart data={generateSoughtRoles()} />
+                    </div>
+                  </div>
+
+                  {/* Active Industries */}
+                  <div className="p-6 bg-konekt-cream rounded-2xl">
+                    <h3 className="text-lg font-bold text-konekt-black mb-4">
+                      Active Industries
+                    </h3>
+                    <IndustriesTreemap data={generateActiveIndustries()} />
+                  </div>
+                </div>
+              )}
+            </div>
           </motion.div>
 
           {/* People Grid */}
