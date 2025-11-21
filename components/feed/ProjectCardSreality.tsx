@@ -12,12 +12,22 @@ interface ProjectCardProps {
 
 export const ProjectCardSreality: React.FC<ProjectCardProps> = ({ project }) => {
   const [activeImage, setActiveImage] = useState(0);
-  const images = [project.image, ...(project.gallery || [])].filter(Boolean) as string[];
+
+  // Handle both old and new project structure
+  const galleryUrls = project.gallery
+    ? project.gallery.map(item => typeof item === 'string' ? item : item.url)
+    : [];
+  const coverImage = (project as any).coverImage || (project as any).image;
+  const images = [coverImage, ...galleryUrls].filter(Boolean) as string[];
+  const oneLiner = (project as any).oneLiner || project.description.slice(0, 80);
 
   const stageLabels = {
-    idea: { label: '💡 Idea', color: 'bg-konekt-pink' },
+    idea: { label: '💡 Idea', color: 'bg-purple-500' },
+    development: { label: '🔨 Development', color: 'bg-blue-500' },
+    beta: { label: '🚀 Beta', color: 'bg-konekt-green' },
+    launched: { label: '✨ Launched', color: 'bg-konekt-pink' },
+    // Legacy support
     mvp: { label: '🚀 MVP', color: 'bg-konekt-green' },
-    launched: { label: '✨ Launched', color: 'bg-konekt-black' },
   };
 
   return (
@@ -80,10 +90,11 @@ export const ProjectCardSreality: React.FC<ProjectCardProps> = ({ project }) => 
           <Link href={`/projects/${project.id}`} className="hover:text-konekt-green transition-colors">
             <h3 className="text-xl font-bold text-konekt-black mb-2">{project.name}</h3>
           </Link>
+          {oneLiner && <p className="text-sm text-konekt-black/60">{oneLiner}</p>}
         </div>
 
         {/* Looking For - highlighted */}
-        {project.lookingFor.length > 0 && (
+        {((project as any).lookingForHelp || project.lookingFor.length > 0) && (
           <div className="p-3 bg-konekt-pink/10 rounded-xl">
             <div className="flex items-center gap-2 mb-2">
               <Sparkles className="w-4 h-4 text-konekt-pink" />

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
-import { mockProjects } from '@/lib/mock-data';
+import { mockProjects } from '@/lib/projects-data';
 import { Search, X, Sparkles } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 
@@ -64,9 +64,12 @@ export default function ProjectsPage() {
     searchQuery || selectedTechnologies.length > 0 || selectedStages.length > 0 || showLookingForOnly;
 
   const stageLabels = {
-    idea: { label: '💡 Idea', color: 'bg-konekt-pink' },
+    idea: { label: '💡 Idea', color: 'bg-purple-500' },
+    development: { label: '🔨 Development', color: 'bg-blue-500' },
+    beta: { label: '🚀 Beta', color: 'bg-konekt-green' },
+    launched: { label: '✨ Launched', color: 'bg-konekt-pink' },
+    // Legacy support
     mvp: { label: '🚀 MVP', color: 'bg-konekt-green' },
-    launched: { label: '✨ Launched', color: 'bg-konekt-black' },
   };
 
   return (

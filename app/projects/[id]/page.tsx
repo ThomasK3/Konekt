@@ -12,6 +12,9 @@ import {
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import { ReactionsBar } from '@/components/projects/ReactionsBar';
+import { ProjectUpdates } from '@/components/projects/ProjectUpdates';
+import { CommentsSection } from '@/components/projects/CommentsSection';
 
 export default function ProjectDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -334,6 +337,32 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                   </Link>
                 ))}
               </div>
+            </motion.div>
+
+            {/* Project Updates */}
+            {project.updates && project.updates.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <ProjectUpdates projectId={project.id} />
+              </motion.div>
+            )}
+
+            {/* Reactions */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <ReactionsBar projectId={project.id} />
+            </motion.div>
+
+            {/* Comments */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <CommentsSection projectId={project.id} allowComments={project.allowComments} />
             </motion.div>
           </div>
 
