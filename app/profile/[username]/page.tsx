@@ -4,7 +4,7 @@ import { use } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { mockUsers, mockProjects, mockBadges } from '@/lib/mock-data';
-import { Clock, DollarSign, MessageCircle, MapPin, Brain } from 'lucide-react';
+import { Clock, DollarSign, MessageCircle, MapPin, Brain, Zap, Calendar, Users } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
@@ -15,6 +15,7 @@ import {
   WorkPreferencesCard,
 } from '@/components/profile/PersonalityComponents';
 import { BadgeCollection } from '@/components/profile/BadgeCollection';
+import { calculateResponseStats, calculateActiveDays, calculateCollaborationSuccess } from '@/lib/analytics-mock';
 
 export default function ProfilePage({ params }: { params: Promise<{ username: string }> }) {
   const router = useRouter();
@@ -221,6 +222,93 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                 <p className="text-konekt-black/40 text-sm">Nic konkrétního</p>
               )}
             </Card>
+
+            {/* Public Stats */}
+            {user.gamification && (
+              <Card>
+                <h3 className="text-lg font-bold text-konekt-black mb-4">Activity Stats</h3>
+                <div className="space-y-4">
+                  {/* Response Rate */}
+                  {(() => {
+                    const stats = calculateResponseStats(user.gamification.stats.messagesSent);
+                    return (
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Zap className="w-4 h-4 text-konekt-green" />
+                            <span className="text-sm font-medium text-konekt-black">Response Rate</span>
+                          </div>
+                          <span className="text-sm text-konekt-black/60">
+                            {stats.responseRate}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-konekt-black/5 rounded-full h-2">
+                          <div
+                            className="bg-gradient-to-r from-konekt-green to-konekt-pink h-2 rounded-full transition-all"
+                            style={{ width: `${stats.responseRate}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-konekt-black/50 mt-1">
+                          Responds in {stats.avgResponseTime.toFixed(1)} hours typically
+                        </p>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Active Days */}
+                  {(() => {
+                    const activeDays = calculateActiveDays(user.gamification.streak);
+                    return (
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-konekt-pink" />
+                            <span className="text-sm font-medium text-konekt-black">Active Days</span>
+                          </div>
+                          <span className="text-sm text-konekt-black/60">
+                            {activeDays}/30
+                          </span>
+                        </div>
+                        <div className="w-full bg-konekt-black/5 rounded-full h-2">
+                          <div
+                            className="bg-gradient-to-r from-konekt-pink to-konekt-green h-2 rounded-full transition-all"
+                            style={{ width: `${(activeDays / 30) * 100}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-konekt-black/50 mt-1">Active {activeDays} of last 30 days</p>
+                      </div>
+                    );
+                  })()}
+
+                  {/* Collaboration Success */}
+                  {(() => {
+                    const collab = calculateCollaborationSuccess(user.gamification.stats.projectsCreated);
+                    return (
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-konekt-green" />
+                            <span className="text-sm font-medium text-konekt-black">Collaboration</span>
+                          </div>
+                          <span className="text-sm text-konekt-black/60">
+                            {collab.successRate}%
+                          </span>
+                        </div>
+                        <div className="w-full bg-konekt-black/5 rounded-full h-2">
+                          <div
+                            className="bg-gradient-to-r from-blue-500 to-konekt-green h-2 rounded-full transition-all"
+                            style={{ width: `${collab.successRate}%` }}
+                          />
+                        </div>
+                        <p className="text-xs text-konekt-black/50 mt-1">
+                          Started {collab.collaborativeProjects} projects with others
+                        </p>
+                      </div>
+                    );
+                  })()}
+                </div>
+              </Card>
+            )}
 
             {/* Dostupnost */}
             <Card>

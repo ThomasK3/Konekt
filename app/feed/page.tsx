@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem, hoverScale, tapScale } from '@/lib/animations';
 import { PersonCard } from '@/components/feed/PersonCard';
 import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
 import { MentorPostCard } from '@/components/feed/MentorPost';
@@ -184,15 +186,25 @@ export default function FeedPage() {
   return (
     <AppLayout>
       {/* Page Title */}
-      <div className="mb-6">
+      <motion.div
+        className="mb-6"
+        initial={fadeInUp.initial}
+        animate={fadeInUp.animate}
+        exit={fadeInUp.exit}
+      >
         <h1 className="text-3xl font-bold text-konekt-black mb-2">Feed</h1>
         <p className="text-konekt-black/60">
           Objevuj lidi, sleduj mentory a najdi zajímavé projekty
         </p>
-      </div>
+      </motion.div>
 
       {/* Search Bar */}
-      <div className="mb-6">
+      <motion.div
+        className="mb-6"
+        initial={fadeIn.initial}
+        animate={fadeIn.animate}
+        exit={fadeIn.exit}
+      >
         <div className="relative">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-konekt-black/40" />
           <input
@@ -211,7 +223,7 @@ export default function FeedPage() {
             </button>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {/* Main Tabs - Lidé / Mentoři / Projekty */}
       <div className="mb-6 flex gap-3">
@@ -314,11 +326,18 @@ export default function FeedPage() {
           </div>
 
           {filteredPeople.length > 0 ? (
-            <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
-              {filteredPeople.map((person) => (
-                <PersonCard key={person.id} person={person} />
+            <motion.div
+              className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6"
+              variants={fastStaggerContainer}
+              initial="initial"
+              animate="animate"
+            >
+              {filteredPeople.map((person, index) => (
+                <motion.div key={person.id} variants={fastStaggerItem}>
+                  <PersonCard person={person} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           ) : (
             <div className="text-center py-16">
               <Users className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
@@ -394,18 +413,24 @@ export default function FeedPage() {
 
           {/* Mentor Posts */}
           {filteredMentorPosts.length > 0 ? (
-            <div className="max-w-3xl mx-auto space-y-6">
+            <motion.div
+              className="max-w-3xl mx-auto space-y-6"
+              variants={fastStaggerContainer}
+              initial="initial"
+              animate="animate"
+            >
               {filteredMentorPosts.map(({ post, mentor }) => (
-                <MentorPostCard
-                  key={post.id}
-                  post={post}
-                  mentor={mentor}
-                  isFollowing={followingMentors.includes(mentor.id)}
-                  onFollow={handleFollow}
-                  onMessage={handleMessage}
-                />
+                <motion.div key={post.id} variants={fastStaggerItem}>
+                  <MentorPostCard
+                    post={post}
+                    mentor={mentor}
+                    isFollowing={followingMentors.includes(mentor.id)}
+                    onFollow={handleFollow}
+                    onMessage={handleMessage}
+                  />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           ) : (
             // Empty State - Following tab with no mentors
             <div className="max-w-2xl mx-auto text-center py-16">
@@ -493,11 +518,18 @@ export default function FeedPage() {
           </div>
 
           {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6">
+            <motion.div
+              className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6"
+              variants={fastStaggerContainer}
+              initial="initial"
+              animate="animate"
+            >
               {filteredProjects.map((project) => (
-                <ProjectCardSreality key={project.id} project={project} />
+                <motion.div key={project.id} variants={fastStaggerItem}>
+                  <ProjectCardSreality project={project} />
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           ) : (
             <div className="text-center py-16">
               <Rocket className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />

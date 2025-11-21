@@ -72,6 +72,8 @@ export interface User {
   strengthsFinder?: StrengthsFinder;
   socialIntegrations?: SocialIntegration[];
   workPreferences?: WorkPreferences;
+  // Gamification
+  gamification?: UserGamification;
 }
 
 export interface Channel {
@@ -242,4 +244,70 @@ export interface Conversation {
   };
   createdAt: Date;
   updatedAt: Date;
+}
+
+// ============================================
+// GAMIFICATION SYSTEM
+// ============================================
+
+export type AchievementRarity = 'common' | 'rare' | 'epic' | 'legendary';
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  rarity: AchievementRarity;
+  unlocked: boolean;
+  unlockedAt?: Date;
+  progress?: number;
+  target?: number;
+  xpReward: number;
+}
+
+export interface Level {
+  level: number;
+  xp: number;
+  xpToNextLevel: number;
+  title: string; // "Newbie", "Rising Star", "Pro Networker", etc.
+}
+
+export interface Streak {
+  current: number;
+  longest: number;
+  lastLoginDate: string; // YYYY-MM-DD
+  loginHistory: string[]; // Array of YYYY-MM-DD dates
+}
+
+export interface DailyChallenge {
+  id: string;
+  task: string;
+  description: string;
+  progress: number;
+  target: number;
+  xpReward: number;
+  completed: boolean;
+  expiresAt: Date;
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  user: User;
+  score: number;
+  change?: number; // +/- position change from yesterday
+}
+
+export interface UserGamification {
+  xp: number;
+  level: Level;
+  achievements: Achievement[];
+  streak: Streak;
+  dailyChallenges: DailyChallenge[];
+  stats: {
+    connectionsCount: number;
+    messagesSent: number;
+    projectsCreated: number;
+    eventsAttended: number;
+    profileViews: number;
+  };
 }

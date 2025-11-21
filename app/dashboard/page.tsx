@@ -22,16 +22,34 @@ import {
   Rocket,
   GraduationCap,
   Bell,
+  BarChart3,
 } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import AppLayout from '@/components/layout/AppLayout';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, staggerItem, hoverScale, tapScale } from '@/lib/animations';
+import toast from 'react-hot-toast';
+import { ActivityHeatmap } from '@/components/analytics/ActivityHeatmap';
+import { ConnectionGrowthChart } from '@/components/analytics/ConnectionGrowthChart';
+import { SkillsRadarChart } from '@/components/analytics/SkillsRadarChart';
+import { EngagementScore } from '@/components/analytics/EngagementScore';
+import {
+  generateActivityHeatmap,
+  generateConnectionGrowth,
+  generateSkillsRadar,
+  generateEngagementScore,
+} from '@/lib/analytics-mock';
+import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
+import { ProgressChecklist } from '@/components/onboarding/ProgressChecklist';
+import { useOnboarding } from '@/hooks/useOnboarding';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
   const [greeting, setGreeting] = useState('');
   const [greetingEmoji, setGreetingEmoji] = useState('');
+  const { showTour, completeTour, skipTour } = useOnboarding();
 
   // Dynamic greeting based on time
   useEffect(() => {
@@ -118,8 +136,16 @@ export default function DashboardPage() {
 
   return (
     <AppLayout>
+      {/* Onboarding Tour */}
+      <OnboardingTour run={showTour} onComplete={completeTour} onSkip={skipTour} />
+
       {/* HERO SECTION */}
-      <div className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10">
+      <motion.div
+        className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10"
+        initial={fadeInUp.initial}
+        animate={fadeInUp.animate}
+        exit={fadeInUp.exit}
+      >
         <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="text-4xl font-bold text-konekt-black mb-2">
@@ -161,13 +187,24 @@ export default function DashboardPage() {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {/* QUICK STATS CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <motion.div
+        data-tour="stats-cards"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
         {/* Connections */}
         <Link href="/people">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                 <Users2 className="w-6 h-6 text-konekt-green" />
@@ -179,12 +216,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalConnections}</div>
             <div className="text-sm text-konekt-black/60">Spojení</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Messages */}
         <Link href="/messages">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                 <MessageCircle className="w-6 h-6 text-konekt-pink" />
@@ -197,12 +239,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalMessages}</div>
             <div className="text-sm text-konekt-black/60">Zprávy</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Projects */}
         <Link href="/projects">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                 <Briefcase className="w-6 h-6 text-konekt-green" />
@@ -215,12 +262,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalProjects}</div>
             <div className="text-sm text-konekt-black/60">Projekty</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Events */}
         <Link href="/events">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                 <Calendar className="w-6 h-6 text-konekt-pink" />
@@ -234,12 +286,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalEvents}</div>
             <div className="text-sm text-konekt-black/60">Eventy</div>
-          </div>
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
 
       {/* TWO COLUMN LAYOUT */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+      >
         {/* LEFT COLUMN (70%) */}
         <div className="lg:col-span-2 space-y-8">
           {/* FOR YOU TODAY */}
@@ -412,6 +469,62 @@ export default function DashboardPage() {
             </div>
           </div>
 
+          {/* PERSONAL ANALYTICS */}
+          <div data-tour="analytics">
+            <div className="flex items-center gap-2 mb-6">
+              <BarChart3 className="w-6 h-6 text-konekt-pink" />
+              <h2 className="text-2xl font-bold text-konekt-black">📊 Tvoje Statistiky</h2>
+            </div>
+
+            {user?.gamification && (
+              <div className="space-y-6">
+                {/* Activity Heatmap */}
+                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                  <h3 className="text-lg font-bold text-konekt-black mb-4">Aktivita za poslední rok</h3>
+                  <ActivityHeatmap data={generateActivityHeatmap(user.id)} />
+                </div>
+
+                {/* Connection Growth & Skills Radar */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                    <h3 className="text-lg font-bold text-konekt-black mb-4">Růst spojení</h3>
+                    <ConnectionGrowthChart
+                      data={generateConnectionGrowth(user.gamification.stats.connectionsCount)}
+                      events={[
+                        {
+                          date: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000)
+                            .toLocaleDateString('en-CA')
+                            .slice(5),
+                          name: 'Hackathon',
+                        },
+                        {
+                          date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000)
+                            .toLocaleDateString('en-CA')
+                            .slice(5),
+                          name: 'Networking',
+                        },
+                      ]}
+                    />
+                  </div>
+
+                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                    <h3 className="text-lg font-bold text-konekt-black mb-4">Skills Distribution</h3>
+                    <SkillsRadarChart data={generateSkillsRadar(user.skills)} />
+                  </div>
+                </div>
+
+                {/* Engagement Score */}
+                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+                  <h3 className="text-lg font-bold text-konekt-black mb-4">Engagement Score</h3>
+                  <EngagementScore
+                    totalScore={generateEngagementScore(user.gamification.stats).totalScore}
+                    breakdown={generateEngagementScore(user.gamification.stats).breakdown}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* YOUR PROJECTS */}
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -560,6 +673,9 @@ export default function DashboardPage() {
 
         {/* RIGHT SIDEBAR (30%) */}
         <div className="space-y-6">
+          {/* PROGRESS CHECKLIST */}
+          <ProgressChecklist />
+
           {/* UPCOMING CALENDAR */}
           <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
             <div className="flex items-center justify-between mb-4">
@@ -810,7 +926,7 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </AppLayout>
   );
 }

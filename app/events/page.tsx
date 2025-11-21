@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem, hoverScaleBig, tapScale } from '@/lib/animations';
 import { mockEvents } from '@/lib/mock-data';
 import { Calendar, MapPin, Users, Clock, ArrowRight, ExternalLink, UserPlus } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -79,15 +81,25 @@ export default function EventsPage() {
   return (
     <AppLayout>
       {/* Header */}
-      <div className="mb-6">
+      <motion.div
+        className="mb-6"
+        initial={fadeInUp.initial}
+        animate={fadeInUp.animate}
+        exit={fadeInUp.exit}
+      >
         <h1 className="text-3xl font-bold text-konekt-black mb-2">Event Hub</h1>
         <p className="text-konekt-black/60">
           Objevuj události, workshopy a hackathony v české startup komunitě
         </p>
-      </div>
+      </motion.div>
 
       {/* Filters */}
-      <div className="mb-6 flex flex-wrap gap-3">
+      <motion.div
+        className="mb-6 flex flex-wrap gap-3"
+        initial={fadeIn.initial}
+        animate={fadeIn.animate}
+        exit={fadeIn.exit}
+      >
         <button
           onClick={() => setActiveFilter('all')}
           className={`px-5 py-2.5 rounded-full font-medium transition-all ${
@@ -128,16 +140,24 @@ export default function EventsPage() {
         >
           Ukončené ({mockEvents.filter((e) => e.status === 'completed').length})
         </button>
-      </div>
+      </motion.div>
 
       {/* Events Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+        variants={fastStaggerContainer}
+        initial="initial"
+        animate="animate"
+      >
         {filteredEvents.map((event) => (
-          <div
+          <motion.div
             key={event.id}
-            className="bg-konekt-white rounded-2xl overflow-hidden border-2 border-konekt-black/10 hover:shadow-2xl hover:border-konekt-black/20 transition-all duration-300 group"
+            variants={fastStaggerItem}
+            whileHover={hoverScaleBig}
+            whileTap={tapScale}
           >
-            {/* Hero Image */}
+            <div className="bg-konekt-white rounded-2xl overflow-hidden border-2 border-konekt-black/10 hover:shadow-2xl hover:border-konekt-black/20 transition-all duration-300 group h-full">
+              {/* Hero Image */}
             <div className="relative h-64 overflow-hidden">
               <img
                 src={event.image}
@@ -245,9 +265,10 @@ export default function EventsPage() {
                 )}
               </div>
             </div>
-          </div>
+            </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Empty State */}
       {filteredEvents.length === 0 && (
