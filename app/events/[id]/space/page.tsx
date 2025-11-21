@@ -35,7 +35,7 @@ export default function EventSpacePage({ params }: { params: Promise<{ id: strin
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] flex">
+    <div className="min-h-screen flex" style={{ backgroundColor: 'var(--bg-primary)' }}>
       {/* Left Sidebar */}
       <EventSpaceLeftSidebar
         selectedView={selectedView}
@@ -55,34 +55,44 @@ export default function EventSpacePage({ params }: { params: Promise<{ id: strin
         )}
         {selectedView === 'workshops' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">🎓 Workshops</h2>
-            <p className="text-white/60">Workshop view coming soon...</p>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              🎓 Workshops
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }}>Workshop view coming soon...</p>
           </div>
         )}
         {selectedView === 'resources' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">📚 Resources</h2>
-            <p className="text-white/60">Resources view coming soon...</p>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              📚 Resources
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }}>Resources view coming soon...</p>
           </div>
         )}
         {selectedView === 'people' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">👥 People</h2>
-            <p className="text-white/60">People view coming soon...</p>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              👥 People
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }}>People view coming soon...</p>
           </div>
         )}
         {selectedView === 'about' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">About Event</h2>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              About Event
+            </h2>
             <div className="prose prose-invert max-w-none">
-              <p className="text-white/80">{event.description}</p>
+              <p style={{ color: 'var(--text-secondary)' }}>{event.description}</p>
             </div>
           </div>
         )}
         {selectedView === 'agenda' && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-white mb-4">📅 Agenda</h2>
-            <p className="text-white/60">Agenda view coming soon...</p>
+            <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
+              📅 Agenda
+            </h2>
+            <p style={{ color: 'var(--text-secondary)' }}>Agenda view coming soon...</p>
           </div>
         )}
       </main>

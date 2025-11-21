@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useUserStore } from '@/lib/store';
+import { useTheme } from '@/components/providers/ThemeProvider';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -36,6 +37,7 @@ type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integratio
 
 export default function SettingsPage() {
   const { user, setUser } = useUserStore();
+  const { theme, setTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<TabType>('profile');
 
   // Profile state
@@ -73,9 +75,6 @@ export default function SettingsPage() {
   const referralLink = `https://konekt.cz/invite/${user?.username || 'user'}`;
   const [copied, setCopied] = useState(false);
   const [referredUsers, setReferredUsers] = useState(7); // Mock data
-
-  // Preferences state
-  const [darkMode, setDarkMode] = useState(false);
 
   // Notifications state
   const [emailNotifications, setEmailNotifications] = useState(true);
@@ -925,65 +924,72 @@ export default function SettingsPage() {
                     </p>
                   </div>
 
-                  {/* Dark Mode Section */}
+                  {/* Theme Selection */}
                   <div>
                     <h3 className="text-lg font-semibold text-konekt-black mb-4">Vzhled aplikace</h3>
-                    <div className="p-6 bg-konekt-cream rounded-xl">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-3">
-                          {darkMode ? (
-                            <Moon className="w-6 h-6 text-konekt-black" />
-                          ) : (
-                            <Sun className="w-6 h-6 text-konekt-black" />
+
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      {/* Light Mode Card */}
+                      <button
+                        onClick={() => setTheme('light')}
+                        className={`p-6 rounded-xl border-2 transition-all ${
+                          theme === 'light'
+                            ? 'border-konekt-green bg-konekt-green/5'
+                            : 'border-konekt-black/10 bg-konekt-cream hover:border-konekt-green/50'
+                        }`}
+                      >
+                        <div className="flex flex-col items-center gap-3">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-400 flex items-center justify-center">
+                            <Sun className="w-8 h-8 text-white" />
+                          </div>
+                          <div className="text-center">
+                            <div className="font-bold text-konekt-black mb-1">Light Mode</div>
+                            <div className="text-xs text-konekt-black/60">
+                              Světlé pozadí, lepší čitelnost ve dne
+                            </div>
+                          </div>
+                          {theme === 'light' && (
+                            <div className="mt-2 px-3 py-1 bg-konekt-green text-white rounded-full text-xs font-medium">
+                              ✓ Aktivní
+                            </div>
                           )}
-                          <div>
-                            <div className="font-medium text-konekt-black">Dark Mode</div>
-                            <div className="text-sm text-konekt-black/60">
-                              Přepni mezi světlým a tmavým režimem
-                            </div>
-                          </div>
                         </div>
-                        <button
-                          onClick={() => setDarkMode(!darkMode)}
-                          className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors ${
-                            darkMode ? 'bg-konekt-green' : 'bg-konekt-black/20'
-                          }`}
-                        >
-                          <span
-                            className={`inline-block h-6 w-6 transform rounded-full bg-konekt-white transition-transform ${
-                              darkMode ? 'translate-x-7' : 'translate-x-1'
-                            }`}
-                          />
-                        </button>
-                      </div>
+                      </button>
 
-                      {/* Dark Mode Preview */}
-                      {darkMode && (
-                        <div className="mt-4 p-4 bg-gray-900 rounded-xl border-2 border-gray-700">
-                          <div className="text-gray-100 font-medium mb-2">
-                            Náhled Dark Mode 🌙
+                      {/* Dark Mode Card */}
+                      <button
+                        onClick={() => setTheme('dark')}
+                        className={`p-6 rounded-xl border-2 transition-all ${
+                          theme === 'dark'
+                            ? 'border-indigo-600 bg-indigo-600/5'
+                            : 'border-konekt-black/10 bg-konekt-cream hover:border-indigo-600/50'
+                        }`}
+                      >
+                        <div className="flex flex-col items-center gap-3">
+                          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center">
+                            <Moon className="w-8 h-8 text-white" />
                           </div>
-                          <div className="text-sm text-gray-400">
-                            Dark mode přizpůsobuje barvy pro pohodlnější práci v noci. Tmavé pozadí
-                            snižuje únavu očí a šetří baterii na OLED displejích.
-                          </div>
-                          <div className="mt-3 flex gap-2">
-                            <div className="px-3 py-2 bg-emerald-600 text-white rounded-lg text-sm font-medium">
-                              Primární tlačítko
+                          <div className="text-center">
+                            <div className="font-bold text-konekt-black mb-1">Dark Mode</div>
+                            <div className="text-xs text-konekt-black/60">
+                              Tmavé pozadí, šetří oči v noci
                             </div>
-                            <div className="px-3 py-2 bg-gray-800 border border-gray-600 text-gray-300 rounded-lg text-sm font-medium">
-                              Sekundární
-                            </div>
                           </div>
+                          {theme === 'dark' && (
+                            <div className="mt-2 px-3 py-1 bg-indigo-600 text-white rounded-full text-xs font-medium">
+                              ✓ Aktivní
+                            </div>
+                          )}
                         </div>
-                      )}
+                      </button>
+                    </div>
 
-                      <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
-                        <p className="text-sm text-yellow-800">
-                          💡 <strong>Tip:</strong> Dark mode bude brzy dostupný! Momentálně se
-                          jedná o mockup náhled.
-                        </p>
-                      </div>
+                    {/* Info Box */}
+                    <div className="p-4 bg-konekt-cream border-2 border-konekt-black/10 rounded-xl">
+                      <p className="text-sm text-konekt-black/70">
+                        <strong>💡 Tip:</strong> Theme se automaticky ukládá a aplikuje při každé návštěvě.
+                        Změna se projeví okamžitě na celé platformě.
+                      </p>
                     </div>
                   </div>
 

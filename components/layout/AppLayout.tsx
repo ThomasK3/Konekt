@@ -16,6 +16,12 @@ import {
   User,
   Trophy,
   Briefcase,
+  Compass,
+  Users,
+  GraduationCap,
+  BriefcaseBusiness,
+  BookOpen,
+  UserCircle,
 } from 'lucide-react';
 import { RealtimeStatsPopup } from '@/components/social-proof/RealtimeStatsPopup';
 
@@ -85,20 +91,37 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </div>
 
               <nav className="p-2">
-                {/* Feed */}
+                {/* Discover / Feed */}
                 <Link href="/feed" data-tour="nav-feed">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
-                      isActive('/feed')
+                      isActive('/feed') || isActive('/discover')
                         ? 'bg-konekt-green text-konekt-white'
                         : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
                     }`}
                   >
-                    <Home className="w-5 h-5" />
-                    <span>Feed</span>
+                    <Compass className="w-5 h-5" />
+                    <span>Discover</span>
                   </button>
                 </Link>
 
+                {/* My Profile */}
+                {user && (
+                  <Link href={`/profile/${user.username}`}>
+                    <button
+                      className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                        pathname?.startsWith(`/profile/${user.username}`)
+                          ? 'bg-konekt-green text-konekt-white'
+                          : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                      }`}
+                    >
+                      <UserCircle className="w-5 h-5" />
+                      <span>Můj Profil</span>
+                    </button>
+                  </Link>
+                )}
+
+                {/* People */}
                 <Link href="/people" data-tour="nav-people">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
@@ -107,11 +130,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
                     }`}
                   >
-                    <User className="w-5 h-5" />
+                    <Users className="w-5 h-5" />
                     <span>Lidé</span>
                   </button>
                 </Link>
 
+                {/* Projects */}
                 <Link href="/projects" data-tour="nav-projects">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
@@ -125,6 +149,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </button>
                 </Link>
 
+                {/* Events */}
                 <Link href="/events" data-tour="nav-events">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
@@ -141,6 +166,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </button>
                 </Link>
 
+                {/* Messages */}
                 <Link href="/messages" data-tour="nav-messages">
                   <button
                     className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
@@ -154,6 +180,48 @@ export default function AppLayout({ children }: AppLayoutProps) {
                     <span className="ml-auto text-xs bg-konekt-pink px-2 py-1 rounded-full text-konekt-white">
                       {mockConversations.filter((c) => c.unreadCount > 0).length}
                     </span>
+                  </button>
+                </Link>
+
+                {/* Mentors */}
+                <Link href="/mentors">
+                  <button
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                      isActive('/mentors')
+                        ? 'bg-konekt-green text-konekt-white'
+                        : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                    }`}
+                  >
+                    <GraduationCap className="w-5 h-5" />
+                    <span>Mentoři</span>
+                  </button>
+                </Link>
+
+                {/* Jobs */}
+                <Link href="/jobs">
+                  <button
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                      isActive('/jobs')
+                        ? 'bg-konekt-green text-konekt-white'
+                        : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                    }`}
+                  >
+                    <BriefcaseBusiness className="w-5 h-5" />
+                    <span>Příležitosti</span>
+                  </button>
+                </Link>
+
+                {/* Resources */}
+                <Link href="/resources">
+                  <button
+                    className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all mb-1 ${
+                      isActive('/resources')
+                        ? 'bg-konekt-green text-konekt-white'
+                        : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
+                    }`}
+                  >
+                    <BookOpen className="w-5 h-5" />
+                    <span>Knihovna</span>
                   </button>
                 </Link>
               </nav>
