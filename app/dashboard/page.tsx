@@ -27,6 +27,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import AppLayout from '@/components/layout/AppLayout';
 import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, staggerContainer, staggerItem, hoverScale, tapScale } from '@/lib/animations';
+import toast from 'react-hot-toast';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
@@ -119,7 +122,10 @@ export default function DashboardPage() {
   return (
     <AppLayout>
       {/* HERO SECTION */}
-      <div className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10">
+      <motion.div
+        className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10"
+        {...fadeInUp}
+      >
         <div className="flex items-start justify-between mb-6">
           <div>
             <h1 className="text-4xl font-bold text-konekt-black mb-2">
@@ -161,13 +167,23 @@ export default function DashboardPage() {
             </div>
           )}
         </div>
-      </div>
+      </motion.div>
 
       {/* QUICK STATS CARDS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+        variants={staggerContainer}
+        initial="initial"
+        animate="animate"
+      >
         {/* Connections */}
         <Link href="/people">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                 <Users2 className="w-6 h-6 text-konekt-green" />
@@ -179,12 +195,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalConnections}</div>
             <div className="text-sm text-konekt-black/60">Spojení</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Messages */}
         <Link href="/messages">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                 <MessageCircle className="w-6 h-6 text-konekt-pink" />
@@ -197,12 +218,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalMessages}</div>
             <div className="text-sm text-konekt-black/60">Zprávy</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Projects */}
         <Link href="/projects">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                 <Briefcase className="w-6 h-6 text-konekt-green" />
@@ -215,12 +241,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalProjects}</div>
             <div className="text-sm text-konekt-black/60">Projekty</div>
-          </div>
+          </motion.div>
         </Link>
 
         {/* Events */}
         <Link href="/events">
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group">
+          <motion.div
+            variants={staggerItem}
+            whileHover={hoverScale}
+            whileTap={tapScale}
+            className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+          >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                 <Calendar className="w-6 h-6 text-konekt-pink" />
@@ -234,12 +265,17 @@ export default function DashboardPage() {
             </div>
             <div className="text-3xl font-bold text-konekt-black mb-1">{totalEvents}</div>
             <div className="text-sm text-konekt-black/60">Eventy</div>
-          </div>
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
 
       {/* TWO COLUMN LAYOUT */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <motion.div
+        className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+      >
         {/* LEFT COLUMN (70%) */}
         <div className="lg:col-span-2 space-y-8">
           {/* FOR YOU TODAY */}
@@ -810,7 +846,7 @@ export default function DashboardPage() {
             </Link>
           </div>
         </div>
-      </div>
+      </motion.div>
     </AppLayout>
   );
 }
