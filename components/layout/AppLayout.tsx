@@ -16,6 +16,8 @@ import {
   User,
   Trophy,
 } from 'lucide-react';
+import { LiveActivityTicker } from '@/components/social-proof/LiveActivityTicker';
+import { RealtimeStatsPopup } from '@/components/social-proof/RealtimeStatsPopup';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -67,7 +69,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
             </div>
           </div>
         </div>
+
+        {/* Live Activity Ticker */}
+        <LiveActivityTicker />
       </header>
+
+      {/* Real-time Stats Popup */}
+      <RealtimeStatsPopup />
 
       {/* Main Layout with Sidebar */}
       <div className="max-w-[1800px] mx-auto px-6 py-8 pt-24">
