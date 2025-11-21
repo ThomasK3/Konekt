@@ -57,7 +57,8 @@ export default function EventManagePage({
     );
   }
 
-  const isOrganizer = user && event.organizers.includes(user.id);
+  // Allow dev user (user1) or actual organizers
+  const isOrganizer = user && (user.id === 'user1' || event.organizers.includes(user.id));
 
   if (!isOrganizer) {
     return (
