@@ -140,20 +140,72 @@ export interface ProjectRole {
   count: number;
 }
 
+export interface ProjectMedia {
+  id: string;
+  type: 'image' | 'video';
+  url: string;
+  caption?: string;
+  thumbnail?: string;
+}
+
+export interface ProjectUpdate {
+  id: string;
+  projectId: string;
+  authorId: string;
+  content: string;
+  media?: ProjectMedia[];
+  createdAt: Date;
+  reactions: number;
+  comments: number;
+}
+
+export interface ProjectComment {
+  id: string;
+  projectId: string;
+  authorId: string;
+  author: User;
+  content: string;
+  createdAt: Date;
+  reactions: number;
+  replies?: ProjectComment[];
+}
+
 export interface Project {
   id: string;
   name: string;
-  description: string;
+  description: string; // Rich text/markdown
+  oneLiner: string; // Short pitch (80 chars max)
   stack: string[];
-  stage: 'idea' | 'mvp' | 'launched';
+  stage: 'idea' | 'development' | 'beta' | 'launched';
+  category: 'ai-ml' | 'web-app' | 'mobile-app' | 'design-tool' | 'hardware' | 'service' | 'other';
   lookingFor: ProjectRole[];
+  lookingForHelp: boolean;
+  collaborationMessage?: string;
   teamMembers: User[];
   ownerId: string;
   createdAt: Date;
-  image?: string;
-  gallery?: string[];
-  category?: string;
-  videoUrl?: string;
+  updatedAt: Date;
+  coverImage?: string;
+  coverVideo?: string;
+  gallery?: ProjectMedia[];
+  links?: {
+    demo?: string;
+    github?: string;
+    figma?: string;
+    website?: string;
+    video?: string;
+    custom?: { label: string; url: string }[];
+  };
+  visibility: 'public' | 'private' | 'unlisted';
+  allowComments: boolean;
+  stats?: {
+    views: number;
+    saves: number;
+    reactions: number;
+    comments: number;
+  };
+  tags?: string[];
+  updates?: ProjectUpdate[];
 }
 
 export interface RegistrationData {
