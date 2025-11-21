@@ -7,15 +7,18 @@ import { PersonCard } from '@/components/feed/PersonCard';
 import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
 import { MentorPostCard } from '@/components/feed/MentorPost';
 import { ComposeMessageModal } from '@/components/ui/ComposeMessageModal';
+import { PersonalizedFeedBanner } from '@/components/ai/PersonalizedFeedBanner';
 import { mockUsers, mockProjects, mockMentors, mockMentorPosts } from '@/lib/mock-data';
 import { Home, GraduationCap, Rocket, Search, Users, Filter, X } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
+import { useUserStore } from '@/lib/store';
 import type { Mentor } from '@/types';
 
 type MainTab = 'people' | 'mentors' | 'projects';
 type MentorTab = 'following' | 'foryou';
 
 export default function FeedPage() {
+  const { user: currentUser } = useUserStore();
   const [mainTab, setMainTab] = useState<MainTab>('people');
   const [mentorTab, setMentorTab] = useState<MentorTab>('foryou');
   const [followingMentors, setFollowingMentors] = useState<string[]>([]);
@@ -325,6 +328,18 @@ export default function FeedPage() {
             )}
           </div>
 
+          {/* AI-Powered Personalized Banner */}
+          {currentUser && (
+            <PersonalizedFeedBanner
+              currentUser={currentUser}
+              selectedSkills={selectedSkills}
+              selectedLookingFor={selectedLookingFor}
+              hasActiveFilters={selectedSkills.length > 0 || selectedLookingFor.length > 0}
+              contentType="people"
+              resultCount={filteredPeople.length}
+            />
+          )}
+
           {filteredPeople.length > 0 ? (
             <motion.div
               className="grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-6"
@@ -410,6 +425,17 @@ export default function FeedPage() {
               </button>
             )}
           </div>
+
+          {/* AI-Powered Personalized Banner */}
+          {currentUser && (
+            <PersonalizedFeedBanner
+              currentUser={currentUser}
+              selectedSkills={selectedExpertise}
+              hasActiveFilters={selectedExpertise.length > 0}
+              contentType="mentors"
+              resultCount={filteredMentorPosts.length}
+            />
+          )}
 
           {/* Mentor Posts */}
           {filteredMentorPosts.length > 0 ? (
@@ -516,6 +542,17 @@ export default function FeedPage() {
               </button>
             )}
           </div>
+
+          {/* AI-Powered Personalized Banner */}
+          {currentUser && (
+            <PersonalizedFeedBanner
+              currentUser={currentUser}
+              selectedSkills={selectedStack}
+              hasActiveFilters={selectedProjectStage.length > 0 || selectedStack.length > 0}
+              contentType="projects"
+              resultCount={filteredProjects.length}
+            />
+          )}
 
           {filteredProjects.length > 0 ? (
             <motion.div

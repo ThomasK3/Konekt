@@ -4,9 +4,12 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { PersonCard } from '@/components/feed/PersonCard';
+import { MatchCard } from '@/components/ai/MatchCard';
 import { mockUsers } from '@/lib/mock-data';
 import { Search, X, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
+import { useUserStore } from '@/lib/store';
+import { calculateMatch } from '@/lib/ai-matching';
 import { GrowingSkillsChart } from '@/components/analytics/GrowingSkillsChart';
 import { SoughtRolesChart } from '@/components/analytics/SoughtRolesChart';
 import { IndustriesTreemap } from '@/components/analytics/IndustriesTreemap';
@@ -17,6 +20,7 @@ import {
 } from '@/lib/analytics-mock';
 
 export default function PeoplePage() {
+  const { user: currentUser } = useUserStore();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
@@ -29,6 +33,8 @@ export default function PeoplePage() {
   ).sort();
 
   const filteredUsers = mockUsers.filter((user) => {
+    if (currentUser && user.id === currentUser.id) return false; // Exclude current user
+
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
       const matchesSearch =
@@ -51,6 +57,14 @@ export default function PeoplePage() {
 
     return true;
   });
+
+  // Calculate match scores for AI-powered matching
+  const usersWithMatches = currentUser
+    ? filteredUsers.map((user) => ({
+        user,
+        matchResult: calculateMatch(currentUser, user),
+      }))
+    : filteredUsers.map((user) => ({ user, matchResult: null }));
 
   const toggleSkill = (skill: string) => {
     setSelectedSkills((prev) =>
@@ -290,9 +304,13 @@ export default function PeoplePage() {
             initial="initial"
             animate="animate"
           >
-            {filteredUsers.map((person) => (
+            {usersWithMatches.map(({ user: person, matchResult }) => (
               <motion.div key={person.id} variants={fastStaggerItem}>
-                <PersonCard person={person} />
+                {matchResult ? (
+                  <MatchCard user={person} matchResult={matchResult} />
+                ) : (
+                  <PersonCard person={person} />
+                )}
               </motion.div>
             ))}
           </motion.div>

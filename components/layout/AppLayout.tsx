@@ -33,7 +33,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <header className="bg-konekt-white border-b-2 border-konekt-black/10 fixed top-0 left-0 right-0 z-20">
         <div className="max-w-[1800px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/feed" className="text-2xl font-bold text-konekt-black">
+            <Link href="/dashboard" className="text-2xl font-bold text-konekt-black">
               Konekt
             </Link>
 

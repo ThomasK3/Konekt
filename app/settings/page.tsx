@@ -1,10 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useUserStore } from '@/lib/store';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { SkillSuggestions } from '@/components/ai/SkillSuggestions';
+import { getSkillSuggestions } from '@/lib/ai-matching';
 import {
   User,
   Mail,
@@ -43,6 +45,17 @@ export default function SettingsPage() {
   const [newSkill, setNewSkill] = useState('');
   const [lookingFor, setLookingFor] = useState<string[]>(user?.lookingFor || []);
   const [newRole, setNewRole] = useState('');
+  const [skillSuggestions, setSkillSuggestions] = useState<string[]>([]);
+
+  // Update skill suggestions when skills change
+  useEffect(() => {
+    if (skills.length > 0) {
+      const suggestions = getSkillSuggestions(skills);
+      setSkillSuggestions(suggestions);
+    } else {
+      setSkillSuggestions([]);
+    }
+  }, [skills]);
 
   // Account state
   const [email, setEmail] = useState(user?.email || '');
@@ -288,7 +301,14 @@ export default function SettingsPage() {
                         <Plus className="w-5 h-5" />
                       </Button>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+
+                    {/* AI Skill Suggestions */}
+                    <SkillSuggestions
+                      suggestions={skillSuggestions}
+                      onAdd={addSkill}
+                    />
+
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {skills.map((skill) => (
                         <div
                           key={skill}

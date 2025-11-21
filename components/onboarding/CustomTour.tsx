@@ -76,15 +76,25 @@ export const CustomTour = ({ steps, run = true, onComplete, onSkip }: CustomTour
 
           // Scroll element into view
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Element not found, fallback to center
+          console.warn(`Tour target not found: ${step.target}`);
+          setTooltipPosition({
+            top: window.innerHeight / 2,
+            left: window.innerWidth / 2,
+          });
         }
       }
     };
 
-    updatePosition();
+    // Add small delay to allow DOM to render
+    const timer = setTimeout(updatePosition, 100);
+
     window.addEventListener('resize', updatePosition);
     window.addEventListener('scroll', updatePosition);
 
     return () => {
+      clearTimeout(timer);
       window.removeEventListener('resize', updatePosition);
       window.removeEventListener('scroll', updatePosition);
     };
@@ -117,7 +127,8 @@ export const CustomTour = ({ steps, run = true, onComplete, onSkip }: CustomTour
   if (!isVisible || !steps[currentStep]) return null;
 
   const step = steps[currentStep];
-  const isCenter = step.target === 'body' || step.placement === 'center';
+  const element = step.target !== 'body' ? document.querySelector(`[data-tour="${step.target}"]`) : null;
+  const isCenter = step.target === 'body' || step.placement === 'center' || !element;
 
   return (
     <>

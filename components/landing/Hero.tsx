@@ -17,7 +17,7 @@ export const Hero = () => {
 
   const handleDevLogin = () => {
     setUser(mockUsers[0]); // Login as Jakub Procházka (user1)
-    router.push('/feed');
+    router.push('/dashboard');
   };
 
   return (

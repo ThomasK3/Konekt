@@ -44,6 +44,9 @@ import {
 import { OnboardingTour } from '@/components/onboarding/OnboardingTour';
 import { ProgressChecklist } from '@/components/onboarding/ProgressChecklist';
 import { useOnboarding } from '@/hooks/useOnboarding';
+import { RecommendedActions } from '@/components/ai/RecommendedActions';
+import { ProfileOptimization } from '@/components/ai/ProfileOptimization';
+import { generateRecommendedActions, calculateProfileCompletion } from '@/lib/ai-matching';
 
 export default function DashboardPage() {
   const { user } = useUserStore();
@@ -133,6 +136,10 @@ export default function DashboardPage() {
   const totalMessages = 156 + unreadMessages;
   const totalProjects = userProjects.length;
   const totalEvents = mockEvents.filter((e) => e.attendees.includes(user.id)).length;
+
+  // AI-powered features
+  const recommendedActions = generateRecommendedActions(user, mockUsers);
+  const profileCompletion = calculateProfileCompletion(user);
 
   return (
     <AppLayout>
@@ -675,6 +682,15 @@ export default function DashboardPage() {
         <div className="space-y-6">
           {/* PROGRESS CHECKLIST */}
           <ProgressChecklist />
+
+          {/* AI RECOMMENDED ACTIONS */}
+          <RecommendedActions actions={recommendedActions} />
+
+          {/* PROFILE OPTIMIZATION */}
+          <ProfileOptimization
+            percentage={profileCompletion.percentage}
+            suggestions={profileCompletion.suggestions}
+          />
 
           {/* UPCOMING CALENDAR */}
           <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
