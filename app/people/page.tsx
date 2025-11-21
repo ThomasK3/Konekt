@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { PersonCard } from '@/components/feed/PersonCard';
 import { mockUsers } from '@/lib/mock-data';
 import { Search, X } from 'lucide-react';
@@ -168,7 +170,12 @@ export default function PeoplePage() {
         {/* Main Content */}
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="mb-6 flex items-end justify-between">
+          <motion.div
+            className="mb-6 flex items-end justify-between"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            exit={fadeInUp.exit}
+          >
             <div>
               <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
               <p className="text-konekt-black/60">
@@ -211,14 +218,21 @@ export default function PeoplePage() {
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
 
           {/* People Grid */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <motion.div
+            className="grid grid-cols-1 xl:grid-cols-2 gap-6"
+            variants={fastStaggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {filteredUsers.map((person) => (
-              <PersonCard key={person.id} person={person} />
+              <motion.div key={person.id} variants={fastStaggerItem}>
+                <PersonCard person={person} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Empty State */}
           {filteredUsers.length === 0 && (

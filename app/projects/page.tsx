@@ -1,6 +1,8 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { ProjectCardSreality } from '@/components/feed/ProjectCardSreality';
 import { mockProjects } from '@/lib/mock-data';
 import { Search, X, Sparkles } from 'lucide-react';
@@ -178,7 +180,12 @@ export default function ProjectsPage() {
         {/* Main Content */}
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="mb-6 flex items-end justify-between">
+          <motion.div
+            className="mb-6 flex items-end justify-between"
+            initial={fadeInUp.initial}
+            animate={fadeInUp.animate}
+            exit={fadeInUp.exit}
+          >
             <div>
               <h1 className="text-3xl font-bold text-konekt-black mb-2">Projekty</h1>
               <p className="text-konekt-black/60">
@@ -222,14 +229,21 @@ export default function ProjectsPage() {
                 )}
               </div>
             )}
-          </div>
+          </motion.div>
 
           {/* Projects Grid */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+          <motion.div
+            className="grid grid-cols-1 xl:grid-cols-2 gap-6"
+            variants={fastStaggerContainer}
+            initial="initial"
+            animate="animate"
+          >
             {filteredProjects.map((project) => (
-              <ProjectCardSreality key={project.id} project={project} />
+              <motion.div key={project.id} variants={fastStaggerItem}>
+                <ProjectCardSreality project={project} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
 
           {/* Empty State */}
           {filteredProjects.length === 0 && (

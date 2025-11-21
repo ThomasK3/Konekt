@@ -124,7 +124,9 @@ export default function DashboardPage() {
       {/* HERO SECTION */}
       <motion.div
         className="mb-8 p-8 bg-gradient-to-br from-konekt-white to-konekt-cream rounded-3xl border-2 border-konekt-black/10"
-        {...fadeInUp}
+        initial={fadeInUp.initial}
+        animate={fadeInUp.animate}
+        exit={fadeInUp.exit}
       >
         <div className="flex items-start justify-between mb-6">
           <div>
