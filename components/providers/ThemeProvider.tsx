@@ -37,11 +37,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
   };
 
-  // Prevent flash of unstyled content
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
+  // Always provide context, even during initial mount
   return (
     <ThemeContext.Provider value={{ theme, setTheme, toggleTheme }}>
       {children}
