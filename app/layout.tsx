@@ -14,15 +14,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="cs">
+    <html lang="cs" data-theme="dark" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              (function() {
+              try {
                 const theme = localStorage.getItem('konekt-theme') || 'dark';
                 document.documentElement.setAttribute('data-theme', theme);
-              })();
+              } catch (e) {}
             `,
           }}
         />
