@@ -5,8 +5,11 @@ import { motion } from 'framer-motion';
 import { fadeInUp, fadeIn, fastStaggerContainer, fastStaggerItem } from '@/lib/animations';
 import { PersonCard } from '@/components/feed/PersonCard';
 import { MatchCard } from '@/components/ai/MatchCard';
+import { ProfileCard3D } from '@/components/3d/ProfileCard3D';
+import { FlipProfileCard } from '@/components/3d/FlipProfileCard';
+import { GlassProfileCard } from '@/components/3d/GlassProfileCard';
 import { mockUsers } from '@/lib/mock-data';
-import { Search, X, TrendingUp, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, X, TrendingUp, ChevronDown, ChevronUp, Layers, Box, Glasses, Sparkles } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 import { useUserStore } from '@/lib/store';
 import { calculateMatch } from '@/lib/ai-matching';
@@ -19,6 +22,8 @@ import {
   generateActiveIndustries,
 } from '@/lib/analytics-mock';
 
+type CardStyle = 'ai-match' | '3d-tilt' | 'flip' | 'glass';
+
 export default function PeoplePage() {
   const { user: currentUser } = useUserStore();
   const [searchQuery, setSearchQuery] = useState('');
@@ -26,6 +31,7 @@ export default function PeoplePage() {
   const [selectedLocations, setSelectedLocations] = useState<string[]>([]);
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
   const [showTrends, setShowTrends] = useState(true);
+  const [cardStyle, setCardStyle] = useState<CardStyle>('3d-tilt');
 
   const allSkills = Array.from(new Set(mockUsers.flatMap((u) => u.skills))).sort();
   const allLocations = Array.from(
@@ -194,16 +200,70 @@ export default function PeoplePage() {
         <div className="flex-1 min-w-0">
           {/* Header */}
           <motion.div
-            className="mb-6 flex items-end justify-between"
+            className="mb-6"
             initial={fadeInUp.initial}
             animate={fadeInUp.animate}
             exit={fadeInUp.exit}
           >
-            <div>
-              <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
-              <p className="text-konekt-black/60">
-                {filteredUsers.length} {filteredUsers.length === 1 ? 'člověk' : 'lidí'} nalezeno
-              </p>
+            <div className="flex items-end justify-between mb-4">
+              <div>
+                <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
+                <p className="text-konekt-black/60">
+                  {filteredUsers.length} {filteredUsers.length === 1 ? 'člověk' : 'lidí'} nalezeno
+                </p>
+              </div>
+
+              {/* Card Style Selector */}
+              <div className="flex items-center gap-2 bg-konekt-white p-1 rounded-xl border-2 border-konekt-black/10">
+                <button
+                  onClick={() => setCardStyle('ai-match')}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
+                    cardStyle === 'ai-match'
+                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
+                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                  }`}
+                  title="AI Match Cards"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  AI
+                </button>
+                <button
+                  onClick={() => setCardStyle('3d-tilt')}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
+                    cardStyle === '3d-tilt'
+                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
+                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                  }`}
+                  title="3D Tilt Effect"
+                >
+                  <Box className="w-4 h-4" />
+                  3D
+                </button>
+                <button
+                  onClick={() => setCardStyle('flip')}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
+                    cardStyle === 'flip'
+                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
+                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                  }`}
+                  title="Flip Cards"
+                >
+                  <Layers className="w-4 h-4" />
+                  Flip
+                </button>
+                <button
+                  onClick={() => setCardStyle('glass')}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
+                    cardStyle === 'glass'
+                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
+                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                  }`}
+                  title="Glassmorphism"
+                >
+                  <Glasses className="w-4 h-4" />
+                  Glass
+                </button>
+              </div>
             </div>
 
             {/* Active Filters Summary */}
@@ -299,15 +359,29 @@ export default function PeoplePage() {
 
           {/* People Grid */}
           <motion.div
-            className="grid grid-cols-1 xl:grid-cols-2 gap-6"
+            className={`grid gap-6 ${
+              cardStyle === 'glass'
+                ? 'grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 bg-gradient-to-br from-konekt-green via-konekt-pink to-konekt-green p-6 rounded-2xl'
+                : 'grid-cols-1 xl:grid-cols-2'
+            }`}
             variants={fastStaggerContainer}
             initial="initial"
             animate="animate"
           >
             {usersWithMatches.map(({ user: person, matchResult }) => (
               <motion.div key={person.id} variants={fastStaggerItem}>
-                {matchResult ? (
+                {cardStyle === 'ai-match' && matchResult ? (
                   <MatchCard user={person} matchResult={matchResult} />
+                ) : cardStyle === '3d-tilt' ? (
+                  <ProfileCard3D
+                    user={person}
+                    matchScore={matchResult?.matchScore}
+                    variant={matchResult && matchResult.matchScore >= 85 ? 'premium' : 'holographic'}
+                  />
+                ) : cardStyle === 'flip' ? (
+                  <FlipProfileCard user={person} />
+                ) : cardStyle === 'glass' ? (
+                  <GlassProfileCard user={person} matchScore={matchResult?.matchScore} />
                 ) : (
                   <PersonCard person={person} />
                 )}

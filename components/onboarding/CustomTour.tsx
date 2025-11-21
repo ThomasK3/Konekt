@@ -29,7 +29,16 @@ export const CustomTour = ({ steps, run = true, onComplete, onSkip }: CustomTour
     setIsVisible(run);
     if (run) {
       setCurrentStep(0);
+      // Disable body scroll during tour
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Re-enable body scroll when tour ends
+      document.body.style.overflow = '';
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [run]);
 
   useEffect(() => {
@@ -47,35 +56,46 @@ export const CustomTour = ({ steps, run = true, onComplete, onSkip }: CustomTour
       } else {
         const element = document.querySelector(`[data-tour="${step.target}"]`);
         if (element) {
-          const rect = element.getBoundingClientRect();
-          const placement = step.placement || 'bottom';
-
-          let top = 0;
-          let left = 0;
-
-          switch (placement) {
-            case 'bottom':
-              top = rect.bottom + window.scrollY + 20;
-              left = rect.left + window.scrollX + rect.width / 2;
-              break;
-            case 'top':
-              top = rect.top + window.scrollY - 20;
-              left = rect.left + window.scrollX + rect.width / 2;
-              break;
-            case 'right':
-              top = rect.top + window.scrollY + rect.height / 2;
-              left = rect.right + window.scrollX + 20;
-              break;
-            case 'left':
-              top = rect.top + window.scrollY + rect.height / 2;
-              left = rect.left + window.scrollX - 20;
-              break;
-          }
-
-          setTooltipPosition({ top, left });
-
-          // Scroll element into view
+          // First scroll element into view
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Wait for scroll to complete before calculating position
+          setTimeout(() => {
+            const rect = element.getBoundingClientRect();
+            const placement = step.placement || 'bottom';
+
+            let top = 0;
+            let left = 0;
+
+            // Use viewport-relative positioning (no scrollY/scrollX needed with fixed positioning)
+            switch (placement) {
+              case 'bottom':
+                top = rect.bottom + 20;
+                left = rect.left + rect.width / 2;
+                break;
+              case 'top':
+                top = rect.top - 20;
+                left = rect.left + rect.width / 2;
+                break;
+              case 'right':
+                top = rect.top + rect.height / 2;
+                left = rect.right + 20;
+                break;
+              case 'left':
+                top = rect.top + rect.height / 2;
+                left = rect.left - 20;
+                break;
+            }
+
+            // Clamp position to viewport bounds
+            const tooltipHeight = 300; // approximate
+            const tooltipWidth = 400; // approximate
+
+            top = Math.max(20, Math.min(top, window.innerHeight - tooltipHeight - 20));
+            left = Math.max(20, Math.min(left, window.innerWidth - tooltipWidth / 2 - 20));
+
+            setTooltipPosition({ top, left });
+          }, 300); // Wait for smooth scroll
         } else {
           // Element not found, fallback to center
           console.warn(`Tour target not found: ${step.target}`);
