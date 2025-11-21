@@ -14,6 +14,9 @@ interface GlassProfileCardProps {
 export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  // Static connections count (not random!)
+  const connectionsCount = user.id ? parseInt(user.id.replace(/\D/g, '') || '0') % 50 + 10 : 23;
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setMousePosition({
@@ -26,7 +29,7 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
     <motion.div
       onMouseMove={handleMouseMove}
       whileHover={{ scale: 1.02, y: -5 }}
-      className="relative group"
+      className="relative group min-h-[420px] max-h-[420px]"
     >
       {/* Animated gradient border */}
       <motion.div
@@ -45,7 +48,7 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
       />
 
       {/* Glass card */}
-      <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 overflow-hidden shadow-2xl">
+      <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-6 overflow-hidden shadow-2xl h-full flex flex-col">
         {/* Light reflection effect following mouse */}
         <motion.div
           className="absolute pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
@@ -138,8 +141,8 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
           </div>
 
           {/* Skills with glass effect */}
-          <div className="flex flex-wrap gap-2 mb-4">
-            {user.skills.slice(0, 4).map((skill, index) => (
+          <div className="flex flex-wrap gap-2 mb-4 overflow-hidden">
+            {user.skills.slice(0, 3).map((skill, index) => (
               <motion.span
                 key={skill}
                 className="px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-full text-xs font-semibold"
@@ -160,9 +163,9 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
                 {skill}
               </motion.span>
             ))}
-            {user.skills.length > 4 && (
-              <span className="px-3 py-1.5 bg-white/5 backdrop-blur-md border border-white/10 text-white/70 rounded-full text-xs">
-                +{user.skills.length - 4}
+            {user.skills.length > 3 && (
+              <span className="px-3 py-1.5 bg-white/5 backdrop-blur-md border border-white/10 text-white/70 rounded-full text-xs shrink-0">
+                +{user.skills.length - 3}
               </span>
             )}
           </div>
@@ -177,7 +180,7 @@ export const GlassProfileCard = ({ user, matchScore }: GlassProfileCardProps) =>
             <div className="flex items-center gap-2 text-white/80">
               <TrendingUp className="w-4 h-4 text-konekt-green" />
               <span className="text-sm font-semibold">
-                {Math.floor(Math.random() * 50 + 10)} connections
+                {connectionsCount} connections
               </span>
             </div>
           </div>

@@ -82,7 +82,7 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
       }}
       whileHover={{ scale: 1.05, z: 50 }}
       transition={{ duration: 0.3 }}
-      className={`relative rounded-2xl p-6 overflow-hidden shadow-lg ${getVariantStyles()}`}
+      className={`relative rounded-2xl p-6 overflow-hidden shadow-lg min-h-[420px] max-h-[420px] flex flex-col ${getVariantStyles()}`}
     >
       {/* Holographic overlay (only for holographic variant) */}
       {variant === 'holographic' && (
@@ -212,9 +212,9 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
         {/* Skills with floating effect */}
         <motion.div
           style={{ transform: 'translateZ(40px)' }}
-          className="flex flex-wrap gap-2 mb-4"
+          className="flex flex-wrap gap-2 mb-4 overflow-hidden"
         >
-          {user.skills.slice(0, 4).map((skill, index) => (
+          {user.skills.slice(0, 3).map((skill, index) => (
             <motion.span
               key={skill}
               className="px-3 py-1 bg-konekt-green/20 text-konekt-green rounded-full text-xs font-semibold"
@@ -235,17 +235,20 @@ export const ProfileCard3D = ({ user, matchScore, variant = 'default' }: Profile
               {skill}
             </motion.span>
           ))}
-          {user.skills.length > 4 && (
-            <span className="px-3 py-1 bg-konekt-black/5 text-konekt-black/70 rounded-full text-xs">
-              +{user.skills.length - 4}
+          {user.skills.length > 3 && (
+            <span className="px-3 py-1 bg-konekt-black/5 text-konekt-black/70 rounded-full text-xs shrink-0">
+              +{user.skills.length - 3}
             </span>
           )}
         </motion.div>
 
+        {/* Spacer to push buttons to bottom */}
+        <div className="flex-1 min-h-[20px]" style={{ transform: 'translateZ(20px)' }} />
+
         {/* Action buttons */}
         <motion.div
           style={{ transform: 'translateZ(30px)' }}
-          className="flex gap-3"
+          className="flex gap-3 mt-auto"
         >
           <Link href={`/profile/${user.username}`} className="flex-1">
             <motion.button

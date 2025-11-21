@@ -205,65 +205,11 @@ export default function PeoplePage() {
             animate={fadeInUp.animate}
             exit={fadeInUp.exit}
           >
-            <div className="flex items-end justify-between mb-4">
-              <div>
-                <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
-                <p className="text-konekt-black/60">
-                  {filteredUsers.length} {filteredUsers.length === 1 ? 'člověk' : 'lidí'} nalezeno
-                </p>
-              </div>
-
-              {/* Card Style Selector */}
-              <div className="flex items-center gap-2 bg-konekt-white p-1 rounded-xl border-2 border-konekt-black/10">
-                <button
-                  onClick={() => setCardStyle('ai-match')}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                    cardStyle === 'ai-match'
-                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
-                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
-                  }`}
-                  title="AI Match Cards"
-                >
-                  <Sparkles className="w-4 h-4" />
-                  AI
-                </button>
-                <button
-                  onClick={() => setCardStyle('3d-tilt')}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                    cardStyle === '3d-tilt'
-                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
-                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
-                  }`}
-                  title="3D Tilt Effect"
-                >
-                  <Box className="w-4 h-4" />
-                  3D
-                </button>
-                <button
-                  onClick={() => setCardStyle('flip')}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                    cardStyle === 'flip'
-                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
-                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
-                  }`}
-                  title="Flip Cards"
-                >
-                  <Layers className="w-4 h-4" />
-                  Flip
-                </button>
-                <button
-                  onClick={() => setCardStyle('glass')}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                    cardStyle === 'glass'
-                      ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg'
-                      : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
-                  }`}
-                  title="Glassmorphism"
-                >
-                  <Glasses className="w-4 h-4" />
-                  Glass
-                </button>
-              </div>
+            <div>
+              <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
+              <p className="text-konekt-black/60">
+                {filteredUsers.length} {filteredUsers.length === 1 ? 'člověk' : 'lidí'} nalezeno
+              </p>
             </div>
 
             {/* Active Filters Summary */}
@@ -356,6 +302,60 @@ export default function PeoplePage() {
               )}
             </div>
           </motion.div>
+
+          {/* Card Style Selector - Above Grid */}
+          <div className="mb-6 flex items-center justify-center">
+            <div className="inline-flex items-center gap-2 bg-konekt-white p-1.5 rounded-2xl border-2 border-konekt-black/10 shadow-lg">
+              <button
+                onClick={() => setCardStyle('ai-match')}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  cardStyle === 'ai-match'
+                    ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
+                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                }`}
+                title="AI Match Cards"
+              >
+                <Sparkles className="w-4 h-4" />
+                AI Match
+              </button>
+              <button
+                onClick={() => setCardStyle('3d-tilt')}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  cardStyle === '3d-tilt'
+                    ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
+                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                }`}
+                title="3D Tilt Effect"
+              >
+                <Box className="w-4 h-4" />
+                3D Tilt
+              </button>
+              <button
+                onClick={() => setCardStyle('flip')}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  cardStyle === 'flip'
+                    ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
+                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                }`}
+                title="Flip Cards"
+              >
+                <Layers className="w-4 h-4" />
+                Flip
+              </button>
+              <button
+                onClick={() => setCardStyle('glass')}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                  cardStyle === 'glass'
+                    ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
+                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                }`}
+                title="Glassmorphism"
+              >
+                <Glasses className="w-4 h-4" />
+                Glass
+              </button>
+            </div>
+          </div>
 
           {/* People Grid */}
           <motion.div

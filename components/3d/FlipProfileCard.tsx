@@ -37,7 +37,7 @@ export const FlipProfileCard = ({
 
   return (
     <div
-      className="relative w-full h-[400px] perspective-1000"
+      className="relative w-full min-h-[420px] max-h-[420px] perspective-1000"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
     >
