@@ -27,10 +27,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-konekt-cream flex items-center justify-center p-6">
+      <div className="min-h-screen bg-[#151515] flex items-center justify-center p-6">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-konekt-black mb-4">404</h1>
-          <p className="text-konekt-black/60 mb-6">Project not found</p>
+          <h1 className="text-4xl font-bold text-white mb-4">404</h1>
+          <p className="text-white/60 mb-6">Project not found</p>
           <Button onClick={() => router.push('/projects')}>Back to Projects</Button>
         </div>
       </div>
@@ -42,22 +42,22 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   const renderMarkdown = (text: string) => {
     return text.split('\n').map((line, i) => {
       if (line.startsWith('# ')) {
-        return <h1 key={i} className="text-3xl font-bold text-konekt-black mt-8 mb-4">{line.slice(2)}</h1>;
+        return <h1 key={i} className="text-3xl font-bold text-white mt-8 mb-4">{line.slice(2)}</h1>;
       } else if (line.startsWith('## ')) {
-        return <h2 key={i} className="text-2xl font-bold text-konekt-black mt-6 mb-3">{line.slice(3)}</h2>;
+        return <h2 key={i} className="text-2xl font-bold text-white mt-6 mb-3">{line.slice(3)}</h2>;
       } else if (line.startsWith('• ') || line.startsWith('- ')) {
-        return <li key={i} className="ml-6 text-konekt-black/80 mb-1">{line.slice(2)}</li>;
+        return <li key={i} className="ml-6 text-white/80 mb-1">{line.slice(2)}</li>;
       } else if (line.includes('**')) {
         const parts = line.split('**');
         return (
-          <p key={i} className="mb-3 text-konekt-black/80">
+          <p key={i} className="mb-3 text-white/80">
             {parts.map((part, j) => (
-              j % 2 === 0 ? part : <strong key={j} className="font-bold text-konekt-black">{part}</strong>
+              j % 2 === 0 ? part : <strong key={j} className="font-bold text-white">{part}</strong>
             ))}
           </p>
         );
       } else {
-        return line ? <p key={i} className="mb-3 text-konekt-black/80">{line}</p> : <br key={i} />;
+        return line ? <p key={i} className="mb-3 text-white/80">{line}</p> : <br key={i} />;
       }
     });
   };
@@ -70,17 +70,17 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
   };
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
+    <div className="min-h-screen bg-[#151515]">
       {/* Header */}
-      <header className="bg-konekt-white border-b-2 border-konekt-black/10 sticky top-0 z-20">
+      <header className="bg-[#1a1a1a] border-b-2 border-white/10 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <button
             onClick={() => router.push('/projects')}
-            className="text-konekt-black/60 hover:text-konekt-black transition-colors"
+            className="text-white/60 hover:text-white transition-colors"
           >
             ← Back to Projects
           </button>
-          <Link href="/" className="text-2xl font-bold text-konekt-black hover:text-konekt-green transition-colors">
+          <Link href="/" className="text-2xl font-bold text-white hover:text-konekt-green transition-colors">
             Konekt
           </Link>
           <div className="w-24" /> {/* Spacer for centering */}
@@ -96,7 +96,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="relative aspect-video rounded-2xl overflow-hidden border-2 border-konekt-black/10"
+                className="relative aspect-video rounded-2xl overflow-hidden border-2 border-white/10"
               >
                 {project.coverImage && (
                   <img
@@ -112,14 +112,14 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+              className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
-                  <h1 className="text-4xl font-bold text-konekt-black mb-3">{project.name}</h1>
-                  <p className="text-xl text-konekt-black/70 mb-4">{project.oneLiner}</p>
+                  <h1 className="text-4xl font-bold text-white mb-3">{project.name}</h1>
+                  <p className="text-xl text-white/70 mb-4">{project.oneLiner}</p>
 
-                  <div className="flex flex-wrap items-center gap-4 text-sm text-konekt-black/60">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-white/60">
                     <div className="flex items-center gap-1.5">
                       <Calendar className="w-4 h-4" />
                       <span>
@@ -188,7 +188,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+              className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
             >
               <div className="prose prose-lg max-w-none">
                 {renderMarkdown(project.description)}
@@ -200,9 +200,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
               >
-                <h2 className="text-2xl font-bold text-konekt-black mb-4">Gallery</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">Gallery</h2>
                 <div className="grid grid-cols-2 gap-4">
                   {project.gallery.map((item) => (
                     <div key={item.id} className="relative aspect-video rounded-xl overflow-hidden border-2 border-konekt-black/5 hover:border-konekt-green/50 transition-colors cursor-pointer group">
@@ -210,7 +210,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                         <img src={item.url} alt={item.caption || ''} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
                       ) : (
                         <div className="w-full h-full bg-konekt-black/5 flex items-center justify-center">
-                          <Video className="w-12 h-12 text-konekt-black/30" />
+                          <Video className="w-12 h-12 text-white/30" />
                         </div>
                       )}
                       {item.caption && (
@@ -228,9 +228,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+              className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
             >
-              <h2 className="text-2xl font-bold text-konekt-black mb-4">Tech Stack</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">Tech Stack</h2>
               <div className="flex flex-wrap gap-2">
                 {project.stack.map((tech) => (
                   <span
@@ -248,19 +248,19 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
               >
-                <h2 className="text-2xl font-bold text-konekt-black mb-4">Links</h2>
+                <h2 className="text-2xl font-bold text-white mb-4">Links</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {project.links.demo && (
                     <a
                       href={project.links.demo}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 bg-konekt-cream rounded-xl hover:bg-konekt-green/10 transition-colors"
+                      className="flex items-center gap-3 p-3 bg-[#151515] rounded-xl hover:bg-konekt-green/10 transition-colors"
                     >
                       <ExternalLink className="w-5 h-5 text-konekt-green" />
-                      <span className="font-medium text-konekt-black">Live Demo</span>
+                      <span className="font-medium text-white">Live Demo</span>
                     </a>
                   )}
                   {project.links.github && (
@@ -268,10 +268,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 bg-konekt-cream rounded-xl hover:bg-konekt-green/10 transition-colors"
+                      className="flex items-center gap-3 p-3 bg-[#151515] rounded-xl hover:bg-konekt-green/10 transition-colors"
                     >
-                      <Github className="w-5 h-5 text-konekt-black" />
-                      <span className="font-medium text-konekt-black">GitHub</span>
+                      <Github className="w-5 h-5 text-white" />
+                      <span className="font-medium text-white">GitHub</span>
                     </a>
                   )}
                   {project.links.figma && (
@@ -279,10 +279,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                       href={project.links.figma}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 bg-konekt-cream rounded-xl hover:bg-konekt-green/10 transition-colors"
+                      className="flex items-center gap-3 p-3 bg-[#151515] rounded-xl hover:bg-konekt-green/10 transition-colors"
                     >
                       <Figma className="w-5 h-5 text-pink-500" />
-                      <span className="font-medium text-konekt-black">Figma</span>
+                      <span className="font-medium text-white">Figma</span>
                     </a>
                   )}
                   {project.links.website && (
@@ -290,10 +290,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                       href={project.links.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 bg-konekt-cream rounded-xl hover:bg-konekt-green/10 transition-colors"
+                      className="flex items-center gap-3 p-3 bg-[#151515] rounded-xl hover:bg-konekt-green/10 transition-colors"
                     >
                       <Globe className="w-5 h-5 text-blue-500" />
-                      <span className="font-medium text-konekt-black">Website</span>
+                      <span className="font-medium text-white">Website</span>
                     </a>
                   )}
                 </div>
@@ -304,31 +304,31 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+              className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
             >
-              <h2 className="text-2xl font-bold text-konekt-black mb-4">Team ({project.teamMembers.length})</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">Team ({project.teamMembers.length})</h2>
               <div className="grid gap-3">
                 {project.teamMembers.map((member) => (
                   <Link
                     key={member.id}
                     href={`/profile/${member.username}`}
-                    className="flex items-center gap-3 p-3 bg-konekt-cream rounded-lg hover:bg-konekt-cream/70 transition-colors group"
+                    className="flex items-center gap-3 p-3 bg-[#151515] rounded-lg hover:bg-[#151515]/70 transition-colors group"
                   >
                     <div className="w-12 h-12 rounded-full bg-konekt-green flex items-center justify-center text-konekt-white font-semibold">
                       {member.name.charAt(0)}
                     </div>
                     <div className="flex-1">
-                      <div className="font-semibold text-konekt-black group-hover:text-konekt-green transition-colors">
+                      <div className="font-semibold text-white group-hover:text-konekt-green transition-colors">
                         {member.name}
                         {member.id === project.ownerId && <span className="ml-2 text-xs">👑 Founder</span>}
                       </div>
-                      <div className="text-sm text-konekt-black/60">{member.school}</div>
+                      <div className="text-sm text-white/60">{member.school}</div>
                     </div>
                     <div className="flex flex-wrap gap-1">
                       {member.skills.slice(0, 3).map((skill) => (
                         <span
                           key={skill}
-                          className="px-2 py-1 bg-white text-xs text-konekt-black/60 rounded"
+                          className="px-2 py-1 bg-white text-xs text-white/60 rounded"
                         >
                           {skill}
                         </span>
@@ -373,37 +373,37 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6 sticky top-24"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6 sticky top-24"
               >
-                <h3 className="text-lg font-bold text-konekt-black mb-4">Stats</h3>
+                <h3 className="text-lg font-bold text-white mb-4">Stats</h3>
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-konekt-black/60">
+                    <div className="flex items-center gap-2 text-white/60">
                       <Eye className="w-4 h-4" />
                       <span className="text-sm">Views</span>
                     </div>
-                    <span className="font-bold text-konekt-black">{project.stats.views}</span>
+                    <span className="font-bold text-white">{project.stats.views}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-konekt-black/60">
+                    <div className="flex items-center gap-2 text-white/60">
                       <Bookmark className="w-4 h-4" />
                       <span className="text-sm">Saves</span>
                     </div>
-                    <span className="font-bold text-konekt-black">{project.stats.saves}</span>
+                    <span className="font-bold text-white">{project.stats.saves}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-konekt-black/60">
+                    <div className="flex items-center gap-2 text-white/60">
                       <Heart className="w-4 h-4" />
                       <span className="text-sm">Reactions</span>
                     </div>
-                    <span className="font-bold text-konekt-black">{project.stats.reactions}</span>
+                    <span className="font-bold text-white">{project.stats.reactions}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-konekt-black/60">
+                    <div className="flex items-center gap-2 text-white/60">
                       <MessageCircle className="w-4 h-4" />
                       <span className="text-sm">Comments</span>
                     </div>
-                    <span className="font-bold text-konekt-black">{project.stats.comments}</span>
+                    <span className="font-bold text-white">{project.stats.comments}</span>
                   </div>
                 </div>
               </motion.div>
@@ -415,9 +415,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.1 }}
-                className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
               >
-                <h3 className="text-lg font-bold text-konekt-black mb-3">Founder</h3>
+                <h3 className="text-lg font-bold text-white mb-3">Founder</h3>
                 <Link
                   href={`/profile/${owner.username}`}
                   className="flex items-center gap-3 hover:opacity-80 transition-opacity"
@@ -426,8 +426,8 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                     {owner.name.charAt(0)}
                   </div>
                   <div className="flex-1">
-                    <div className="font-semibold text-konekt-black">{owner.name}</div>
-                    <div className="text-sm text-konekt-black/60">{owner.school}</div>
+                    <div className="font-semibold text-white">{owner.name}</div>
+                    <div className="text-sm text-white/60">{owner.school}</div>
                   </div>
                 </Link>
               </motion.div>
@@ -443,10 +443,10 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
               >
                 <div className="flex items-center gap-2 mb-3">
                   <Sparkles className="w-5 h-5 text-konekt-green" />
-                  <h3 className="text-lg font-bold text-konekt-black">Looking for Team</h3>
+                  <h3 className="text-lg font-bold text-white">Looking for Team</h3>
                 </div>
                 {project.collaborationMessage && (
-                  <p className="text-sm text-konekt-black/70 mb-4">{project.collaborationMessage}</p>
+                  <p className="text-sm text-white/70 mb-4">{project.collaborationMessage}</p>
                 )}
                 <div className="space-y-2">
                   {project.lookingFor.map((role, idx) => (
@@ -459,7 +459,7 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                           {role.skills.map((skill) => (
                             <span
                               key={skill}
-                              className="px-2 py-0.5 bg-konekt-cream text-xs text-konekt-black/60 rounded"
+                              className="px-2 py-0.5 bg-[#151515] text-xs text-white/60 rounded"
                             >
                               {skill}
                             </span>
@@ -481,9 +481,9 @@ export default function ProjectDetailPage({ params }: { params: Promise<{ id: st
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.3 }}
-                className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-6"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-6"
               >
-                <h3 className="text-lg font-bold text-konekt-black mb-3">Tags</h3>
+                <h3 className="text-lg font-bold text-white mb-3">Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span

@@ -195,8 +195,8 @@ export default function FeedPage() {
         animate={fadeInUp.animate}
         exit={fadeInUp.exit}
       >
-        <h1 className="text-3xl font-bold text-konekt-black mb-2">Feed</h1>
-        <p className="text-konekt-black/60">
+        <h1 className="text-3xl font-bold text-white mb-2">Feed</h1>
+        <p className="text-white/60">
           Objevuj lidi, sleduj mentory a najdi zajímavé projekty
         </p>
       </motion.div>
@@ -209,18 +209,18 @@ export default function FeedPage() {
         exit={fadeIn.exit}
       >
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-konekt-black/40" />
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/40" />
           <input
             type="text"
             placeholder="Hledej lidi, projekty, mentory, skills..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-konekt-white border-2 border-konekt-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent transition-all"
+            className="w-full pl-12 pr-4 py-3 bg-[#1a1a1a] border-2 border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent transition-all"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-konekt-black/40 hover:text-konekt-black"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white/40 hover:text-white"
             >
               ✕
             </button>
@@ -235,7 +235,7 @@ export default function FeedPage() {
           className={`flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all ${
             mainTab === 'people'
               ? 'bg-konekt-green text-konekt-white'
-              : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+              : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
           }`}
         >
           <Users className="w-5 h-5" />
@@ -246,7 +246,7 @@ export default function FeedPage() {
           className={`flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all ${
             mainTab === 'mentors'
               ? 'bg-konekt-green text-konekt-white'
-              : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+              : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
           }`}
         >
           <GraduationCap className="w-5 h-5" />
@@ -257,7 +257,7 @@ export default function FeedPage() {
           className={`flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all ${
             mainTab === 'projects'
               ? 'bg-konekt-green text-konekt-white'
-              : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+              : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
           }`}
         >
           <Rocket className="w-5 h-5" />
@@ -273,8 +273,8 @@ export default function FeedPage() {
             {/* Skills Filter */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Filter className="w-4 h-4 text-konekt-black/60" />
-                <span className="text-sm font-medium text-konekt-black/70">Skills:</span>
+                <Filter className="w-4 h-4 text-white/60" />
+                <span className="text-sm font-medium text-white/70">Skills:</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {popularSkills.map((skill) => (
@@ -284,7 +284,7 @@ export default function FeedPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedSkills.includes(skill)
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                        : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-green'
                     }`}
                   >
                     {skill}
@@ -296,8 +296,8 @@ export default function FeedPage() {
             {/* Looking For Filter */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Filter className="w-4 h-4 text-konekt-black/60" />
-                <span className="text-sm font-medium text-konekt-black/70">Hledá:</span>
+                <Filter className="w-4 h-4 text-white/60" />
+                <span className="text-sm font-medium text-white/70">Hledá:</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {popularLookingFor.map((lf) => (
@@ -307,7 +307,7 @@ export default function FeedPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedLookingFor.includes(lf)
                         ? 'bg-konekt-pink text-konekt-white'
-                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-pink'
+                        : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-pink'
                     }`}
                   >
                     {lf}
@@ -320,7 +320,7 @@ export default function FeedPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />
                 Vymazat všechny filtry
@@ -355,11 +355,11 @@ export default function FeedPage() {
             </motion.div>
           ) : (
             <div className="text-center py-16">
-              <Users className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
-              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+              <Users className="w-16 h-16 mx-auto mb-4 text-white/20" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Žádní lidé nenalezeni
               </h3>
-              <p className="text-konekt-black/60">
+              <p className="text-white/60">
                 Zkus změnit vyhledávací dotaz nebo filtry
               </p>
             </div>
@@ -377,7 +377,7 @@ export default function FeedPage() {
               className={`px-5 py-2.5 rounded-full font-medium transition-all ${
                 mentorTab === 'foryou'
                   ? 'bg-konekt-black text-konekt-white'
-                  : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+                  : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
               }`}
             >
               Pro vás
@@ -387,7 +387,7 @@ export default function FeedPage() {
               className={`px-5 py-2.5 rounded-full font-medium transition-all ${
                 mentorTab === 'following'
                   ? 'bg-konekt-black text-konekt-white'
-                  : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+                  : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
               }`}
             >
               Sleduji {followingMentors.length > 0 && `(${followingMentors.length})`}
@@ -397,8 +397,8 @@ export default function FeedPage() {
           {/* Filters for Mentors */}
           <div className="mb-6">
             <div className="flex items-center gap-2 mb-2">
-              <Filter className="w-4 h-4 text-konekt-black/60" />
-              <span className="text-sm font-medium text-konekt-black/70">Expertise:</span>
+              <Filter className="w-4 h-4 text-white/60" />
+              <span className="text-sm font-medium text-white/70">Expertise:</span>
             </div>
             <div className="flex flex-wrap gap-2">
               {popularExpertise.map((exp) => (
@@ -408,7 +408,7 @@ export default function FeedPage() {
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     selectedExpertise.includes(exp)
                       ? 'bg-konekt-green text-konekt-white'
-                      : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                      : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-green'
                   }`}
                 >
                   {exp}
@@ -418,7 +418,7 @@ export default function FeedPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 px-4 py-2 mt-3 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+                className="flex items-center gap-2 px-4 py-2 mt-3 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />
                 Vymazat všechny filtry
@@ -463,10 +463,10 @@ export default function FeedPage() {
               <div className="w-20 h-20 mx-auto mb-6 bg-konekt-green/10 rounded-full flex items-center justify-center">
                 <GraduationCap className="w-10 h-10 text-konekt-green" />
               </div>
-              <h3 className="text-2xl font-bold text-konekt-black mb-3">
+              <h3 className="text-2xl font-bold text-white mb-3">
                 Zatím nesleduješ žádné mentory
               </h3>
-              <p className="text-konekt-black/60 mb-6">
+              <p className="text-white/60 mb-6">
                 Projdi doporučení v &quot;Pro vás&quot; a začni sledovat mentory, kteří tě zaujmou!
               </p>
               <button
@@ -488,8 +488,8 @@ export default function FeedPage() {
             {/* Stage Filter */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Filter className="w-4 h-4 text-konekt-black/60" />
-                <span className="text-sm font-medium text-konekt-black/70">Stádium:</span>
+                <Filter className="w-4 h-4 text-white/60" />
+                <span className="text-sm font-medium text-white/70">Stádium:</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {projectStages.map((stage) => (
@@ -499,7 +499,7 @@ export default function FeedPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all capitalize ${
                       selectedProjectStage.includes(stage)
                         ? 'bg-konekt-green text-konekt-white'
-                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-green'
+                        : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-green'
                     }`}
                   >
                     {stage === 'idea' ? 'Nápad' : stage === 'mvp' ? 'MVP' : 'Launched'}
@@ -511,8 +511,8 @@ export default function FeedPage() {
             {/* Stack Filter */}
             <div>
               <div className="flex items-center gap-2 mb-2">
-                <Filter className="w-4 h-4 text-konekt-black/60" />
-                <span className="text-sm font-medium text-konekt-black/70">Tech Stack:</span>
+                <Filter className="w-4 h-4 text-white/60" />
+                <span className="text-sm font-medium text-white/70">Tech Stack:</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {popularStack.map((tech) => (
@@ -522,7 +522,7 @@ export default function FeedPage() {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                       selectedStack.includes(tech)
                         ? 'bg-konekt-pink text-konekt-white'
-                        : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-pink'
+                        : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-pink'
                     }`}
                   >
                     {tech}
@@ -535,7 +535,7 @@ export default function FeedPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="flex items-center gap-2 px-4 py-2 text-sm text-konekt-black/60 hover:text-konekt-black transition-colors"
+                className="flex items-center gap-2 px-4 py-2 text-sm text-white/60 hover:text-white transition-colors"
               >
                 <X className="w-4 h-4" />
                 Vymazat všechny filtry
@@ -569,11 +569,11 @@ export default function FeedPage() {
             </motion.div>
           ) : (
             <div className="text-center py-16">
-              <Rocket className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
-              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+              <Rocket className="w-16 h-16 mx-auto mb-4 text-white/20" />
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Žádné projekty nenalezeny
               </h3>
-              <p className="text-konekt-black/60">
+              <p className="text-white/60">
                 Zkus změnit vyhledávací dotaz nebo filtry
               </p>
             </div>

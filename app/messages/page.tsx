@@ -39,13 +39,13 @@ export default function MessagesPage() {
 
   return (
     <AppLayout>
-      <div className="h-[calc(100vh-160px)] flex gap-0 -mx-6 rounded-2xl overflow-hidden border-2 border-konekt-black/10">
+      <div className="h-[calc(100vh-160px)] flex gap-0 -mx-6 rounded-2xl overflow-hidden border-2 border-white/10">
         {/* Left Panel - Conversations List */}
-        <div className="w-full md:w-96 bg-konekt-white border-r border-konekt-black/10 flex flex-col">
+        <div className="w-full md:w-96 bg-[#1a1a1a] border-r border-white/10 flex flex-col">
           {/* Header */}
-          <div className="p-5 border-b border-konekt-black/10">
-            <h2 className="text-xl font-bold text-konekt-black mb-1">Zprávy</h2>
-            <p className="text-sm text-konekt-black/60">
+          <div className="p-5 border-b border-white/10">
+            <h2 className="text-xl font-bold text-white mb-1">Zprávy</h2>
+            <p className="text-sm text-white/60">
               {mockConversations.filter((c) => c.unreadCount > 0).length} nepřečtené konverzace
             </p>
           </div>
@@ -54,8 +54,8 @@ export default function MessagesPage() {
           <div className="flex-1 overflow-y-auto">
             {mockConversations.length === 0 ? (
               <div className="p-8 text-center">
-                <MessageCircle className="w-12 h-12 mx-auto mb-3 text-konekt-black/20" />
-                <p className="text-konekt-black/60">Zatím nemáte žádné zprávy</p>
+                <MessageCircle className="w-12 h-12 mx-auto mb-3 text-white/20" />
+                <p className="text-white/60">Zatím nemáte žádné zprávy</p>
               </div>
             ) : (
               <div className="divide-y divide-konekt-black/5">
@@ -67,7 +67,7 @@ export default function MessagesPage() {
                     <button
                       key={conversation.id}
                       onClick={() => setActiveConversationId(conversation.id)}
-                      className={`w-full p-4 text-left hover:bg-konekt-cream/50 transition-colors ${
+                      className={`w-full p-4 text-left hover:bg-[#151515]/50 transition-colors ${
                         isActive ? 'bg-konekt-green/5 border-l-4 border-konekt-green' : ''
                       }`}
                     >
@@ -87,11 +87,11 @@ export default function MessagesPage() {
                         {/* Content */}
                         <div className="flex-1 min-w-0">
                           <div className="flex items-baseline justify-between mb-1">
-                            <h3 className="font-semibold text-konekt-black truncate">
+                            <h3 className="font-semibold text-white truncate">
                               {participant.name}
                             </h3>
                             {conversation.lastMessage && (
-                              <span className="text-xs text-konekt-black/50 ml-2 flex-shrink-0">
+                              <span className="text-xs text-white/50 ml-2 flex-shrink-0">
                                 {formatTime(conversation.lastMessage.createdAt)}
                               </span>
                             )}
@@ -114,8 +114,8 @@ export default function MessagesPage() {
                             <p
                               className={`text-sm truncate ${
                                 conversation.unreadCount > 0
-                                  ? 'text-konekt-black font-medium'
-                                  : 'text-konekt-black/60'
+                                  ? 'text-white font-medium'
+                                  : 'text-white/60'
                               }`}
                             >
                               {conversation.lastMessage.content}
@@ -139,11 +139,11 @@ export default function MessagesPage() {
         </div>
 
         {/* Right Panel - Chat Window */}
-        <div className="flex-1 bg-konekt-white flex flex-col">
+        <div className="flex-1 bg-[#1a1a1a] flex flex-col">
           {activeConversation ? (
             <>
               {/* Chat Header */}
-              <div className="p-5 border-b border-konekt-black/10 flex items-center justify-between">
+              <div className="p-5 border-b border-white/10 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <img
                     src={
@@ -154,10 +154,10 @@ export default function MessagesPage() {
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <h2 className="font-bold text-konekt-black">
+                    <h2 className="font-bold text-white">
                       {activeConversation.participants[0].name}
                     </h2>
-                    <div className="flex items-center gap-2 text-xs text-konekt-black/60">
+                    <div className="flex items-center gap-2 text-xs text-white/60">
                       {activeConversation.participants[0].isOnline ? (
                         <>
                           <div className="w-2 h-2 bg-konekt-green rounded-full" />
@@ -172,14 +172,14 @@ export default function MessagesPage() {
 
                 {/* Action Buttons */}
                 <div className="flex items-center gap-2">
-                  <button className="w-10 h-10 hover:bg-konekt-cream rounded-full flex items-center justify-center transition-colors">
-                    <Phone className="w-5 h-5 text-konekt-black/60" />
+                  <button className="w-10 h-10 hover:bg-[#151515] rounded-full flex items-center justify-center transition-colors">
+                    <Phone className="w-5 h-5 text-white/60" />
                   </button>
-                  <button className="w-10 h-10 hover:bg-konekt-cream rounded-full flex items-center justify-center transition-colors">
-                    <Video className="w-5 h-5 text-konekt-black/60" />
+                  <button className="w-10 h-10 hover:bg-[#151515] rounded-full flex items-center justify-center transition-colors">
+                    <Video className="w-5 h-5 text-white/60" />
                   </button>
-                  <button className="w-10 h-10 hover:bg-konekt-cream rounded-full flex items-center justify-center transition-colors">
-                    <MoreVertical className="w-5 h-5 text-konekt-black/60" />
+                  <button className="w-10 h-10 hover:bg-[#151515] rounded-full flex items-center justify-center transition-colors">
+                    <MoreVertical className="w-5 h-5 text-white/60" />
                   </button>
                 </div>
               </div>
@@ -188,7 +188,7 @@ export default function MessagesPage() {
               {activeConversation.context && (
                 <div className="px-5 py-3 bg-konekt-pink/5 border-b border-konekt-black/5">
                   <div className="flex items-center gap-2 text-sm">
-                    <span className="text-konekt-black/60">Odkud se znáte:</span>
+                    <span className="text-white/60">Odkud se znáte:</span>
                     <span className="font-medium text-konekt-pink">
                       {activeConversation.context.type === 'event' && '🎉 Akce'}
                       {activeConversation.context.type === 'project' && '💼 Projekt'}
@@ -201,7 +201,7 @@ export default function MessagesPage() {
               )}
 
               {/* Messages Area */}
-              <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-konekt-cream/30">
+              <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-[#151515]/30">
                 {conversationMessages.map((message) => {
                   const isSentByUser = message.senderId === user?.id;
                   const sender = isSentByUser
@@ -228,7 +228,7 @@ export default function MessagesPage() {
                           className={`px-4 py-3 rounded-2xl ${
                             isSentByUser
                               ? 'bg-konekt-green text-konekt-white rounded-tr-sm'
-                              : 'bg-konekt-white text-konekt-black rounded-tl-sm border border-konekt-black/10'
+                              : 'bg-[#1a1a1a] text-white rounded-tl-sm border border-white/10'
                           }`}
                         >
                           <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.content}</p>
@@ -244,8 +244,8 @@ export default function MessagesPage() {
                                   rel="noopener noreferrer"
                                   className={`flex items-center gap-2 p-2 rounded-lg border ${
                                     isSentByUser
-                                      ? 'bg-konekt-white/10 border-konekt-white/20'
-                                      : 'bg-konekt-cream border-konekt-black/10'
+                                      ? 'bg-[#1a1a1a]/10 border-konekt-white/20'
+                                      : 'bg-[#151515] border-white/10'
                                   } hover:opacity-80 transition-opacity`}
                                 >
                                   <Paperclip className="w-4 h-4" />
@@ -257,7 +257,7 @@ export default function MessagesPage() {
                         </div>
 
                         {/* Timestamp */}
-                        <span className="text-xs text-konekt-black/40 mt-1 px-1">
+                        <span className="text-xs text-white/40 mt-1 px-1">
                           {message.createdAt.toLocaleTimeString('cs-CZ', {
                             hour: '2-digit',
                             minute: '2-digit',
@@ -270,10 +270,10 @@ export default function MessagesPage() {
               </div>
 
               {/* Message Input */}
-              <div className="p-4 border-t border-konekt-black/10 bg-konekt-white">
+              <div className="p-4 border-t border-white/10 bg-[#1a1a1a]">
                 <div className="flex gap-3 items-end">
-                  <button className="w-10 h-10 hover:bg-konekt-cream rounded-full flex items-center justify-center transition-colors flex-shrink-0">
-                    <Paperclip className="w-5 h-5 text-konekt-black/60" />
+                  <button className="w-10 h-10 hover:bg-[#151515] rounded-full flex items-center justify-center transition-colors flex-shrink-0">
+                    <Paperclip className="w-5 h-5 text-white/60" />
                   </button>
 
                   <div className="flex-1 relative">
@@ -288,7 +288,7 @@ export default function MessagesPage() {
                       }}
                       placeholder="Napište zprávu..."
                       rows={1}
-                      className="w-full px-4 py-3 bg-konekt-cream border border-konekt-black/10 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
+                      className="w-full px-4 py-3 bg-[#151515] border border-white/10 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
                       style={{ minHeight: '48px', maxHeight: '120px' }}
                     />
                   </div>
@@ -302,7 +302,7 @@ export default function MessagesPage() {
                     <Send className="w-5 h-5" />
                   </Button>
                 </div>
-                <p className="text-xs text-konekt-black/40 mt-2 px-1">
+                <p className="text-xs text-white/40 mt-2 px-1">
                   Stiskněte Enter pro odeslání, Shift+Enter pro nový řádek
                 </p>
               </div>
@@ -311,11 +311,11 @@ export default function MessagesPage() {
             // Empty State
             <div className="flex-1 flex items-center justify-center p-8">
               <div className="text-center">
-                <MessageCircle className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
-                <h3 className="text-lg font-semibold text-konekt-black mb-2">
+                <MessageCircle className="w-16 h-16 mx-auto mb-4 text-white/20" />
+                <h3 className="text-lg font-semibold text-white mb-2">
                   Vyberte konverzaci
                 </h3>
-                <p className="text-konekt-black/60">
+                <p className="text-white/60">
                   Klikněte na konverzaci vlevo pro zobrazení zpráv
                 </p>
               </div>

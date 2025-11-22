@@ -50,12 +50,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const unreadCount = mockConversations.filter((c) => c.unreadCount > 0).length;
 
   return (
-    <div className="min-h-screen bg-konekt-cream dark:bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#0a0a0a]">
       {/* Header */}
-      <header className="bg-white dark:bg-[#151515] border-b-2 border-konekt-black/10 dark:border-white/10 fixed top-0 left-0 right-0 z-20">
+      <header className="bg-[#151515] border-b-2 border-white/10 fixed top-0 left-0 right-0 z-20">
         <div className="max-w-[1800px] mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <Link href="/dashboard" className="text-2xl font-bold text-konekt-black dark:text-white">
+            <Link href="/dashboard" className="text-2xl font-bold text-white">
               Konekt
             </Link>
 
@@ -70,12 +70,12 @@ export default function AppLayout({ children }: AppLayoutProps) {
                 </button>
               )}
 
-              <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors">
-                <Search className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
+              <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                <Search className="w-5 h-5 text-white/70" />
               </button>
               <Link href="/notifications">
-                <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors relative">
-                  <Bell className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
+                <button className="p-2 hover:bg-white/10 rounded-lg transition-colors relative">
+                  <Bell className="w-5 h-5 text-white/70" />
                   <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-konekt-pink rounded-full" />
                 </button>
               </Link>
@@ -99,10 +99,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <div className="flex gap-8">
           {/* Left Sidebar Navigation - 3 ZONES */}
           <aside className="w-64 flex-shrink-0 sticky top-24 self-start max-h-[calc(100vh-7rem)]">
-            <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 overflow-hidden flex flex-col max-h-full">
+            <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden flex flex-col max-h-full">
 
               {/* ═══ ZONE 1: STICKY TOP (Always visible) ═══ */}
-              <div className="p-3 border-b border-konekt-black/10 dark:border-white/10 flex-shrink-0">
+              <div className="p-3 border-b border-white/10 flex-shrink-0">
                 {/* PRIMARY NAVIGATION */}
                 <nav className="space-y-1">
                   <Link href="/feed" data-tour="nav-feed">
@@ -110,7 +110,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
                         isActive('/feed')
                           ? 'bg-konekt-green text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <Compass className="w-5 h-5 flex-shrink-0" />
@@ -123,7 +123,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
                         isActive('/messages')
                           ? 'bg-konekt-green text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <MessageCircle className="w-5 h-5 flex-shrink-0" />
@@ -141,7 +141,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
                         pathname?.startsWith('/calendar')
                           ? 'bg-konekt-green text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <CalendarDays className="w-5 h-5 flex-shrink-0" />
@@ -175,7 +175,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                             className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                               pathname?.startsWith(`/events/${event.id}/space`)
                                 ? 'bg-konekt-green text-white'
-                                : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                                : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                             }`}
                           >
                             <span className="text-base flex-shrink-0">{eventIcon}</span>
@@ -187,7 +187,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
 
                     {/* Join Event Button */}
                     <Link href="/events">
-                      <button className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-konekt-black/50 dark:text-white/50 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white transition-all border border-dashed border-konekt-black/10 dark:border-white/10 mt-1">
+                      <button className="w-full flex items-center gap-2 px-4 py-2 rounded-lg text-sm text-konekt-black/50 dark:text-white/50 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white transition-all border border-dashed border-white/10 mt-1">
                         <Plus className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>Join Event</span>
                       </button>
@@ -207,7 +207,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           isActive('/mentors')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Users className="w-4 h-4 flex-shrink-0" />
@@ -220,7 +220,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith('/mentorship')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Calendar className="w-4 h-4 flex-shrink-0" />
@@ -233,7 +233,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith('/mentors/dashboard')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
@@ -255,7 +255,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname === '/library'
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <BookOpen className="w-4 h-4 flex-shrink-0" />
@@ -268,7 +268,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith('/library/collections')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <FolderOpen className="w-4 h-4 flex-shrink-0" />
@@ -281,7 +281,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith('/library/contribute')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Plus className="w-4 h-4 flex-shrink-0" />
@@ -303,7 +303,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           isActive('/people')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Users className="w-4 h-4 flex-shrink-0" />
@@ -316,7 +316,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith('/projects')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Briefcase className="w-4 h-4 flex-shrink-0" />
@@ -329,7 +329,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           isActive('/jobs')
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <BriefcaseBusiness className="w-4 h-4 flex-shrink-0" />
@@ -342,7 +342,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname === '/events'
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <Calendar className="w-4 h-4 flex-shrink-0" />
@@ -363,7 +363,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                           pathname?.startsWith(`/profile/${user.username}`)
                             ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                         }`}
                       >
                         <UserCircle className="w-4 h-4 flex-shrink-0" />
@@ -377,7 +377,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                         isActive('/dashboard')
                           ? 'bg-konekt-green text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <TrendingUp className="w-4 h-4 flex-shrink-0" />
@@ -390,7 +390,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
                         isActive('/leaderboard')
                           ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
                       <Trophy className="w-4 h-4 flex-shrink-0" />
@@ -401,13 +401,13 @@ export default function AppLayout({ children }: AppLayoutProps) {
               </div>
 
               {/* ═══ ZONE 3: STICKY BOTTOM (Always visible) ═══ */}
-              <div className="p-3 border-t border-konekt-black/10 dark:border-white/10 flex-shrink-0">
+              <div className="p-3 border-t border-white/10 flex-shrink-0">
                 <Link href="/settings">
                   <button
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
                       isActive('/settings')
                         ? 'bg-konekt-green text-white'
-                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                        : 'text-konekt-black/70 dark:text-white/60 hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                     }`}
                   >
                     <Settings className="w-5 h-5 flex-shrink-0" />
@@ -423,7 +423,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
                         {user.name.charAt(0)}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-sm font-medium text-konekt-black dark:text-white truncate">
+                        <div className="text-sm font-medium text-white truncate">
                           {user.name}
                         </div>
                         <div className="text-xs text-konekt-black/60 dark:text-white/60 truncate">

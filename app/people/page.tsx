@@ -100,21 +100,21 @@ export default function PeoplePage() {
         {/* Filters Sidebar */}
         <aside className="w-72 flex-shrink-0 space-y-4">
           {/* Search */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-4">
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-konekt-black/40" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
               <input
                 type="text"
                 placeholder="Hledat lidi..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-konekt-cream border-2 border-konekt-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 bg-[#151515] border-2 border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
               />
             </div>
           </div>
 
           {/* Online Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-4">
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-4">
             <label className="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -122,14 +122,14 @@ export default function PeoplePage() {
                 onChange={(e) => setShowOnlineOnly(e.target.checked)}
                 className="w-5 h-5 rounded accent-konekt-green"
               />
-              <span className="font-medium text-konekt-black">Pouze online</span>
+              <span className="font-medium text-white">Pouze online</span>
             </label>
           </div>
 
           {/* Skills Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
-            <div className="p-4 border-b border-konekt-black/10 flex items-center justify-between">
-              <h3 className="font-bold text-konekt-black">Skills</h3>
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden">
+            <div className="p-4 border-b border-white/10 flex items-center justify-between">
+              <h3 className="font-bold text-white">Skills</h3>
               {selectedSkills.length > 0 && (
                 <span className="text-xs bg-konekt-green text-konekt-white px-2 py-1 rounded-full">
                   {selectedSkills.length}
@@ -145,7 +145,7 @@ export default function PeoplePage() {
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                       selectedSkills.includes(skill)
                         ? 'bg-konekt-green text-konekt-white font-medium'
-                        : 'hover:bg-konekt-cream text-konekt-black/70'
+                        : 'hover:bg-[#151515] text-white/70'
                     }`}
                   >
                     {skill}
@@ -156,9 +156,9 @@ export default function PeoplePage() {
           </div>
 
           {/* Location Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
-            <div className="p-4 border-b border-konekt-black/10 flex items-center justify-between">
-              <h3 className="font-bold text-konekt-black">Lokace</h3>
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden">
+            <div className="p-4 border-b border-white/10 flex items-center justify-between">
+              <h3 className="font-bold text-white">Lokace</h3>
               {selectedLocations.length > 0 && (
                 <span className="text-xs bg-konekt-green text-konekt-white px-2 py-1 rounded-full">
                   {selectedLocations.length}
@@ -174,7 +174,7 @@ export default function PeoplePage() {
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                       selectedLocations.includes(location)
                         ? 'bg-konekt-green text-konekt-white font-medium'
-                        : 'hover:bg-konekt-cream text-konekt-black/70'
+                        : 'hover:bg-[#151515] text-white/70'
                     }`}
                   >
                     {location}
@@ -188,7 +188,7 @@ export default function PeoplePage() {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="w-full bg-konekt-white border-2 border-konekt-black/10 rounded-2xl p-4 font-medium text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#1a1a1a] border-2 border-white/10 rounded-2xl p-4 font-medium text-white/70 hover:bg-[#151515] hover:text-white transition-colors flex items-center justify-center gap-2"
             >
               <X className="w-5 h-5" />
               Vymazat filtry
@@ -206,8 +206,8 @@ export default function PeoplePage() {
             exit={fadeInUp.exit}
           >
             <div>
-              <h1 className="text-3xl font-bold text-konekt-black mb-2">Lidé</h1>
-              <p className="text-konekt-black/60">
+              <h1 className="text-3xl font-bold text-white mb-2">Lidé</h1>
+              <p className="text-white/60">
                 {filteredUsers.length} {filteredUsers.length === 1 ? 'člověk' : 'lidí'} nalezeno
               </p>
             </div>
@@ -256,19 +256,19 @@ export default function PeoplePage() {
             animate={fadeInUp.animate}
             exit={fadeInUp.exit}
           >
-            <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
+            <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden">
               <button
                 onClick={() => setShowTrends(!showTrends)}
-                className="w-full p-6 flex items-center justify-between hover:bg-konekt-cream/30 transition-colors"
+                className="w-full p-6 flex items-center justify-between hover:bg-[#151515]/30 transition-colors"
               >
                 <div className="flex items-center gap-3">
                   <TrendingUp className="w-6 h-6 text-konekt-pink" />
-                  <h2 className="text-2xl font-bold text-konekt-black">📈 Market Intelligence</h2>
+                  <h2 className="text-2xl font-bold text-white">📈 Market Intelligence</h2>
                 </div>
                 {showTrends ? (
-                  <ChevronUp className="w-6 h-6 text-konekt-black/40" />
+                  <ChevronUp className="w-6 h-6 text-white/40" />
                 ) : (
-                  <ChevronDown className="w-6 h-6 text-konekt-black/40" />
+                  <ChevronDown className="w-6 h-6 text-white/40" />
                 )}
               </button>
 
@@ -276,15 +276,15 @@ export default function PeoplePage() {
                 <div className="p-6 pt-0 space-y-6">
                   {/* Growing Skills & Sought Roles */}
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div className="p-6 bg-konekt-cream rounded-2xl">
-                      <h3 className="text-lg font-bold text-konekt-black mb-4">
+                    <div className="p-6 bg-[#151515] rounded-2xl">
+                      <h3 className="text-lg font-bold text-white mb-4">
                         Top Growing Skills
                       </h3>
                       <GrowingSkillsChart data={generateGrowingSkills()} />
                     </div>
 
-                    <div className="p-6 bg-konekt-cream rounded-2xl">
-                      <h3 className="text-lg font-bold text-konekt-black mb-4">
+                    <div className="p-6 bg-[#151515] rounded-2xl">
+                      <h3 className="text-lg font-bold text-white mb-4">
                         Most Sought-After Roles
                       </h3>
                       <SoughtRolesChart data={generateSoughtRoles()} />
@@ -292,8 +292,8 @@ export default function PeoplePage() {
                   </div>
 
                   {/* Active Industries */}
-                  <div className="p-6 bg-konekt-cream rounded-2xl">
-                    <h3 className="text-lg font-bold text-konekt-black mb-4">
+                  <div className="p-6 bg-[#151515] rounded-2xl">
+                    <h3 className="text-lg font-bold text-white mb-4">
                       Active Industries
                     </h3>
                     <IndustriesTreemap data={generateActiveIndustries()} />
@@ -305,13 +305,13 @@ export default function PeoplePage() {
 
           {/* Card Style Selector - Above Grid */}
           <div className="mb-6 flex items-center justify-center">
-            <div className="inline-flex items-center gap-2 bg-konekt-white p-1.5 rounded-2xl border-2 border-konekt-black/10 shadow-lg">
+            <div className="inline-flex items-center gap-2 bg-[#1a1a1a] p-1.5 rounded-2xl border-2 border-white/10 shadow-lg">
               <button
                 onClick={() => setCardStyle('ai-match')}
                 className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
                   cardStyle === 'ai-match'
                     ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
-                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                    : 'text-white/60 hover:text-white hover:bg-[#151515]'
                 }`}
                 title="AI Match Cards"
               >
@@ -323,7 +323,7 @@ export default function PeoplePage() {
                 className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
                   cardStyle === '3d-tilt'
                     ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
-                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                    : 'text-white/60 hover:text-white hover:bg-[#151515]'
                 }`}
                 title="3D Tilt Effect"
               >
@@ -335,7 +335,7 @@ export default function PeoplePage() {
                 className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
                   cardStyle === 'flip'
                     ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
-                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                    : 'text-white/60 hover:text-white hover:bg-[#151515]'
                 }`}
                 title="Flip Cards"
               >
@@ -347,7 +347,7 @@ export default function PeoplePage() {
                 className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
                   cardStyle === 'glass'
                     ? 'bg-gradient-to-r from-konekt-green to-konekt-pink text-white shadow-lg scale-105'
-                    : 'text-konekt-black/60 hover:text-konekt-black hover:bg-konekt-cream'
+                    : 'text-white/60 hover:text-white hover:bg-[#151515]'
                 }`}
                 title="Glassmorphism"
               >
@@ -393,12 +393,12 @@ export default function PeoplePage() {
           {filteredUsers.length === 0 && (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto mb-4 bg-konekt-black/5 rounded-full flex items-center justify-center">
-                <Search className="w-8 h-8 text-konekt-black/20" />
+                <Search className="w-8 h-8 text-white/20" />
               </div>
-              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Žádní lidé nenalezeni
               </h3>
-              <p className="text-konekt-black/60 mb-4">
+              <p className="text-white/60 mb-4">
                 Zkuste upravit své filtry nebo vyhledávací dotaz
               </p>
               {hasActiveFilters && (

@@ -166,8 +166,8 @@ export default function NotificationsPage() {
       {/* Page Header */}
         <div className="mb-6 flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-konekt-black mb-2">🔔 Notifikace</h1>
-            <p className="text-konekt-black/60">
+            <h1 className="text-3xl font-bold text-white mb-2">🔔 Notifikace</h1>
+            <p className="text-white/60">
               {unreadCount > 0
                 ? `${unreadCount} nepřečten${unreadCount === 1 ? 'á' : 'ých'}`
                 : 'Vše přečteno'}
@@ -191,7 +191,7 @@ export default function NotificationsPage() {
             className={`px-5 py-2.5 rounded-full font-medium transition-all ${
               filter === 'all'
                 ? 'bg-konekt-black text-konekt-white'
-                : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+                : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
             }`}
           >
             Vše ({notifications.length})
@@ -201,7 +201,7 @@ export default function NotificationsPage() {
             className={`px-5 py-2.5 rounded-full font-medium transition-all ${
               filter === 'unread'
                 ? 'bg-konekt-black text-konekt-white'
-                : 'bg-konekt-white text-konekt-black border-2 border-konekt-black/10 hover:border-konekt-black/30'
+                : 'bg-[#1a1a1a] text-white border-2 border-white/10 hover:border-konekt-black/30'
             }`}
           >
             Nepřečtené
@@ -217,16 +217,16 @@ export default function NotificationsPage() {
         <div className="space-y-6">
           {Object.entries(groupedNotifications).map(([group, groupNotifications]) => (
             <div key={group}>
-              <h2 className="text-sm font-semibold text-konekt-black/60 mb-3">{group}</h2>
+              <h2 className="text-sm font-semibold text-white/60 mb-3">{group}</h2>
               <div className="space-y-2">
                 {groupNotifications.map((notification) => {
                   const Icon = notificationIcons[notification.type];
                   return (
                     <div
                       key={notification.id}
-                      className={`bg-konekt-white rounded-2xl border-2 transition-all ${
+                      className={`bg-[#1a1a1a] rounded-2xl border-2 transition-all ${
                         notification.isRead
-                          ? 'border-konekt-black/10'
+                          ? 'border-white/10'
                           : 'border-konekt-green/30 bg-konekt-green/5'
                       }`}
                     >
@@ -256,17 +256,17 @@ export default function NotificationsPage() {
                         {/* Content */}
                         <div className="flex-1 min-w-0">
                           <h3
-                            className={`font-semibold text-konekt-black mb-1 ${
+                            className={`font-semibold text-white mb-1 ${
                               !notification.isRead ? 'font-bold' : ''
                             }`}
                           >
                             {notification.title}
                           </h3>
-                          <p className="text-sm text-konekt-black/70 mb-2">
+                          <p className="text-sm text-white/70 mb-2">
                             {notification.description}
                           </p>
                           <div className="flex items-center gap-4">
-                            <span className="text-xs text-konekt-black/50">
+                            <span className="text-xs text-white/50">
                               {formatTime(notification.time)}
                             </span>
                             {notification.actionUrl && (
@@ -286,10 +286,10 @@ export default function NotificationsPage() {
                           {!notification.isRead && (
                             <button
                               onClick={() => markAsRead(notification.id)}
-                              className="p-2 hover:bg-konekt-cream rounded-lg transition-colors"
+                              className="p-2 hover:bg-[#151515] rounded-lg transition-colors"
                               title="Označit jako přečtené"
                             >
-                              <CheckCheck className="w-4 h-4 text-konekt-black/40" />
+                              <CheckCheck className="w-4 h-4 text-white/40" />
                             </button>
                           )}
                           <button
@@ -313,12 +313,12 @@ export default function NotificationsPage() {
         {filteredNotifications.length === 0 && (
           <div className="text-center py-16">
             <div className="w-16 h-16 mx-auto mb-4 bg-konekt-black/5 rounded-full flex items-center justify-center">
-              <CheckCheck className="w-8 h-8 text-konekt-black/20" />
+              <CheckCheck className="w-8 h-8 text-white/20" />
             </div>
-            <h3 className="text-xl font-semibold text-konekt-black mb-2">
+            <h3 className="text-xl font-semibold text-white mb-2">
               {filter === 'unread' ? 'Vše přečteno!' : 'Žádné notifikace'}
             </h3>
-            <p className="text-konekt-black/60">
+            <p className="text-white/60">
               {filter === 'unread'
                 ? 'Jsi up to date s vším důležitým'
                 : 'Zatím nemáš žádné notifikace'}

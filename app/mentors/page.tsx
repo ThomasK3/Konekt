@@ -77,32 +77,32 @@ export default function MentorsPage() {
     <AppLayout>
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-konekt-black dark:text-white mb-3 flex items-center gap-3">
+        <h1 className="text-4xl font-bold text-white mb-3 flex items-center gap-3">
           <GraduationCap className="w-10 h-10 text-konekt-green" />
           Find a Mentor
         </h1>
-        <p className="text-konekt-black/60 dark:text-white/70 text-lg max-w-3xl">
+        <p className="text-white/70 text-lg max-w-3xl">
           Learn from experienced professionals in the Czech startup ecosystem. Book 1:1 sessions for personalized guidance.
         </p>
       </div>
 
       {/* Filters & Search */}
-      <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 p-6 mb-8">
+      <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 dark:border-white/10 p-6 mb-8">
         {/* Search */}
         <div className="relative mb-6">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-konekt-black/40 dark:text-white/40" />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 dark:text-white/40" />
           <input
             type="text"
             placeholder="Search by name, expertise, company..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-konekt-cream dark:bg-[#0a0a0a] border-2 border-konekt-black/10 dark:border-white/10 rounded-xl text-konekt-black dark:text-white placeholder:text-konekt-black/40 dark:placeholder:text-white/40 focus:outline-none focus:border-konekt-green"
+            className="w-full pl-12 pr-4 py-3 bg-[#0a0a0a] border-2 border-white/10 dark:border-white/10 rounded-xl text-white placeholder:text-white/40 dark:placeholder:text-white/40 focus:outline-none focus:border-konekt-green"
           />
         </div>
 
         {/* Expertise */}
         <div className="mb-4">
-          <label className="block text-sm font-bold text-konekt-black dark:text-white mb-2 uppercase tracking-wider">
+          <label className="block text-sm font-bold text-white mb-2 uppercase tracking-wider">
             Expertise
           </label>
           <div className="flex flex-wrap gap-2">
@@ -113,7 +113,7 @@ export default function MentorsPage() {
                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                   selectedExpertise === option.value
                     ? 'bg-konekt-green text-white'
-                    : 'bg-konekt-cream dark:bg-[#0a0a0a] text-konekt-black dark:text-white border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green'
+                    : 'bg-[#0a0a0a] text-white border-2 border-white/10 dark:border-white/10 hover:border-konekt-green'
                 }`}
               >
                 {option.label}
@@ -125,7 +125,7 @@ export default function MentorsPage() {
         {/* Availability & Sort */}
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-bold text-konekt-black dark:text-white mb-2 uppercase tracking-wider">
+            <label className="block text-sm font-bold text-white mb-2 uppercase tracking-wider">
               Availability
             </label>
             <div className="flex gap-2">
@@ -136,7 +136,7 @@ export default function MentorsPage() {
                   className={`px-4 py-2 rounded-lg font-medium transition-all ${
                     selectedAvailability === option.value
                       ? 'bg-konekt-green text-white'
-                      : 'bg-konekt-cream dark:bg-[#0a0a0a] text-konekt-black dark:text-white border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green'
+                      : 'bg-[#0a0a0a] text-white border-2 border-white/10 dark:border-white/10 hover:border-konekt-green'
                   }`}
                 >
                   {option.label}
@@ -146,13 +146,13 @@ export default function MentorsPage() {
           </div>
 
           <div className="flex-1 min-w-[200px]">
-            <label className="block text-sm font-bold text-konekt-black dark:text-white mb-2 uppercase tracking-wider">
+            <label className="block text-sm font-bold text-white mb-2 uppercase tracking-wider">
               Sort By
             </label>
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as SortBy)}
-              className="w-full px-4 py-2 bg-konekt-cream dark:bg-[#0a0a0a] border-2 border-konekt-black/10 dark:border-white/10 rounded-lg text-konekt-black dark:text-white focus:outline-none focus:border-konekt-green"
+              className="w-full px-4 py-2 bg-[#0a0a0a] border-2 border-white/10 dark:border-white/10 rounded-lg text-white focus:outline-none focus:border-konekt-green"
             >
               <option value="relevance">Relevance</option>
               <option value="rating">Highest Rating</option>
@@ -167,7 +167,7 @@ export default function MentorsPage() {
         <div className="mb-12">
           <div className="flex items-center gap-2 mb-6">
             <Star className="w-6 h-6 text-amber-500 fill-amber-500" />
-            <h2 className="text-2xl font-bold text-konekt-black dark:text-white">Featured Mentors</h2>
+            <h2 className="text-2xl font-bold text-white">Featured Mentors</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -175,7 +175,7 @@ export default function MentorsPage() {
               <motion.div
                 key={mentor.id}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 overflow-hidden hover:border-konekt-green hover:shadow-xl transition-all"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 dark:border-white/10 overflow-hidden hover:border-konekt-green hover:shadow-xl transition-all"
               >
                 <Link href={`/mentors/${mentor.id}`}>
                   <div className="aspect-square overflow-hidden">
@@ -187,13 +187,13 @@ export default function MentorsPage() {
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-konekt-black dark:text-white mb-1">
+                    <h3 className="text-xl font-bold text-white mb-1">
                       {mentor.name}
                     </h3>
-                    <p className="text-konekt-black/60 dark:text-white/60 mb-1">
+                    <p className="text-white/60 dark:text-white/60 mb-1">
                       {mentor.title}
                     </p>
-                    <p className="text-sm text-konekt-black/50 dark:text-white/50 mb-4">
+                    <p className="text-sm text-white/50 dark:text-white/50 mb-4">
                       @ {mentor.company}
                     </p>
 
@@ -202,7 +202,7 @@ export default function MentorsPage() {
                         <Star className="w-4 h-4 fill-amber-500" />
                         <span className="font-bold">{mentor.rating}</span>
                       </div>
-                      <span className="text-konekt-black/50 dark:text-white/50 text-sm">
+                      <span className="text-white/50 dark:text-white/50 text-sm">
                         ({mentor.reviewCount})
                       </span>
                     </div>
@@ -215,7 +215,7 @@ export default function MentorsPage() {
                             : 'fill-red-500 text-red-500'
                         }`}
                       />
-                      <span className="text-sm font-medium text-konekt-black dark:text-white">
+                      <span className="text-sm font-medium text-white">
                         {mentor.isAvailable ? 'Available' : 'Booked'}
                       </span>
                     </div>
@@ -233,19 +233,19 @@ export default function MentorsPage() {
 
       {/* All Mentors Grid */}
       <div className="mb-6">
-        <h2 className="text-2xl font-bold text-konekt-black dark:text-white mb-6">
+        <h2 className="text-2xl font-bold text-white mb-6">
           {searchQuery || selectedExpertise !== 'all' || selectedAvailability !== 'all'
             ? `${filteredMentors.length} Mentors Found`
             : 'All Mentors'}
         </h2>
 
         {filteredMentors.length === 0 ? (
-          <div className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 p-12 text-center">
-            <GraduationCap className="w-16 h-16 text-konekt-black/20 dark:text-white/20 mx-auto mb-4" />
-            <h3 className="text-xl font-bold text-konekt-black dark:text-white mb-2">
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 dark:border-white/10 p-12 text-center">
+            <GraduationCap className="w-16 h-16 text-white/20 dark:text-white/20 mx-auto mb-4" />
+            <h3 className="text-xl font-bold text-white mb-2">
               No mentors found
             </h3>
-            <p className="text-konekt-black/60 dark:text-white/60">
+            <p className="text-white/60 dark:text-white/60">
               Try adjusting your filters or search query
             </p>
           </div>
@@ -255,7 +255,7 @@ export default function MentorsPage() {
               <motion.div
                 key={mentor.id}
                 whileHover={{ y: -4 }}
-                className="bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 p-6 hover:border-konekt-green hover:shadow-xl transition-all"
+                className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 dark:border-white/10 p-6 hover:border-konekt-green hover:shadow-xl transition-all"
               >
                 <Link href={`/mentors/${mentor.id}`}>
                   <div className="flex gap-4 mb-4">
@@ -265,25 +265,25 @@ export default function MentorsPage() {
                       className="w-20 h-20 rounded-xl object-cover"
                     />
                     <div className="flex-1">
-                      <h3 className="text-xl font-bold text-konekt-black dark:text-white mb-1">
+                      <h3 className="text-xl font-bold text-white mb-1">
                         {mentor.name}
                       </h3>
-                      <p className="text-konekt-black/60 dark:text-white/60 text-sm mb-1">
+                      <p className="text-white/60 dark:text-white/60 text-sm mb-1">
                         {mentor.title}
                       </p>
-                      <p className="text-konekt-black/50 dark:text-white/50 text-sm">
+                      <p className="text-white/50 dark:text-white/50 text-sm">
                         @ {mentor.company}
                       </p>
                     </div>
                   </div>
 
                   <div className="mb-4">
-                    <p className="text-xs font-bold text-konekt-black/50 dark:text-white/50 uppercase tracking-wider mb-2">
+                    <p className="text-xs font-bold text-white/50 dark:text-white/50 uppercase tracking-wider mb-2">
                       Expertise
                     </p>
                     <ul className="space-y-1">
                       {mentor.canHelpWith.slice(0, 3).map((skill, idx) => (
-                        <li key={idx} className="text-sm text-konekt-black dark:text-white flex items-center gap-2">
+                        <li key={idx} className="text-sm text-white flex items-center gap-2">
                           <span className="text-konekt-green">•</span>
                           {skill}
                         </li>
@@ -291,12 +291,12 @@ export default function MentorsPage() {
                     </ul>
                   </div>
 
-                  <div className="flex items-center gap-3 mb-4 pb-4 border-b border-konekt-black/10 dark:border-white/10">
+                  <div className="flex items-center gap-3 mb-4 pb-4 border-b border-white/10 dark:border-white/10">
                     <div className="flex items-center gap-1 text-amber-500">
                       <Star className="w-4 h-4 fill-amber-500" />
                       <span className="font-bold">{mentor.rating}</span>
                     </div>
-                    <span className="text-konekt-black/50 dark:text-white/50 text-sm">
+                    <span className="text-white/50 dark:text-white/50 text-sm">
                       ({mentor.reviewCount} sessions)
                     </span>
                   </div>
@@ -310,7 +310,7 @@ export default function MentorsPage() {
                             : 'fill-red-500 text-red-500'
                         }`}
                       />
-                      <span className="text-sm text-konekt-black dark:text-white">
+                      <span className="text-sm text-white">
                         {mentor.isAvailable ? (
                           <>Next available: <span className="font-medium">{mentor.nextAvailable}</span></>
                         ) : (

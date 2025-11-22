@@ -16,12 +16,12 @@ export default function JobsPage() {
           <div className="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-konekt-green to-konekt-pink rounded-2xl flex items-center justify-center">
             <BriefcaseBusiness className="w-10 h-10 text-white" />
           </div>
-          <h1 className="text-4xl font-bold text-konekt-black mb-4">Příležitosti</h1>
-          <p className="text-lg text-konekt-black/60 mb-8 max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-white mb-4">Příležitosti</h1>
+          <p className="text-lg text-white/60 mb-8 max-w-2xl mx-auto">
             Prozkoumej pracovní nabídky, stáže a příležitosti ke spolupráci
             na zajímavých projektech. Najdi svou další velkou výzvu!
           </p>
-          <div className="inline-flex items-center gap-2 px-6 py-3 bg-konekt-cream rounded-xl text-konekt-black/60">
+          <div className="inline-flex items-center gap-2 px-6 py-3 bg-[#151515] rounded-xl text-white/60">
             <Sparkles className="w-5 h-5" />
             <span className="font-medium">Coming Soon...</span>
           </div>

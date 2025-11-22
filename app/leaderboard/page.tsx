@@ -129,7 +129,7 @@ export default function LeaderboardPage() {
     if (rank === 1) return 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200';
     if (rank === 2) return 'bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200';
     if (rank === 3) return 'bg-gradient-to-r from-amber-50 to-yellow-50 border-amber-300';
-    return 'bg-konekt-white border-konekt-black/10';
+    return 'bg-[#1a1a1a] border-white/10';
   };
 
   return (
@@ -146,8 +146,8 @@ export default function LeaderboardPage() {
             <Trophy className="w-6 h-6 text-konekt-white" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-konekt-black">Leaderboard</h1>
-            <p className="text-konekt-black/60">Nejlepší členové komunity</p>
+            <h1 className="text-3xl font-bold text-white">Leaderboard</h1>
+            <p className="text-white/60">Nejlepší členové komunity</p>
           </div>
         </div>
 
@@ -156,10 +156,10 @@ export default function LeaderboardPage() {
           <div className="mt-4 p-4 bg-gradient-to-r from-konekt-green/10 to-konekt-pink/10 rounded-xl border-2 border-konekt-green/20">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="text-2xl font-bold text-konekt-black">#{currentUserRank}</div>
+                <div className="text-2xl font-bold text-white">#{currentUserRank}</div>
                 <div>
-                  <div className="font-bold text-konekt-black">Tvoje pozice</div>
-                  <div className="text-sm text-konekt-black/60">
+                  <div className="font-bold text-white">Tvoje pozice</div>
+                  <div className="text-sm text-white/60">
                     {getScore(currentUser).toLocaleString()}{' '}
                     {activeCategory === 'xp' ? 'XP' : categories.find((c) => c.id === activeCategory)?.label}
                   </div>
@@ -184,7 +184,7 @@ export default function LeaderboardPage() {
               className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all ${
                 activeCategory === category.id
                   ? `${category.bg} ${category.color} border-2 border-current`
-                  : 'bg-konekt-white text-konekt-black/60 border-2 border-konekt-black/10 hover:border-konekt-black/20'
+                  : 'bg-[#1a1a1a] text-white/60 border-2 border-white/10 hover:border-konekt-black/20'
               }`}
             >
               <Icon className="w-5 h-5" />
@@ -220,7 +220,7 @@ export default function LeaderboardPage() {
                     {/* Rank */}
                     <div className="w-12 text-center">
                       {getRankIcon(rank) || (
-                        <div className="text-2xl font-bold text-konekt-black/60">
+                        <div className="text-2xl font-bold text-white/60">
                           {rank}
                         </div>
                       )}
@@ -241,7 +241,7 @@ export default function LeaderboardPage() {
                     {/* User Info */}
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="font-bold text-konekt-black truncate">
+                        <h3 className="font-bold text-white truncate">
                           {user.name}
                         </h3>
                         {isCurrentUser && (
@@ -250,7 +250,7 @@ export default function LeaderboardPage() {
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-konekt-black/60 truncate">
+                      <p className="text-sm text-white/60 truncate">
                         {user.school}
                       </p>
                     </div>
@@ -264,10 +264,10 @@ export default function LeaderboardPage() {
 
                     {/* Score */}
                     <div className="text-right">
-                      <div className="text-2xl font-bold text-konekt-black">
+                      <div className="text-2xl font-bold text-white">
                         {score.toLocaleString()}
                       </div>
-                      <div className="text-xs text-konekt-black/60">
+                      <div className="text-xs text-white/60">
                         {activeCategory === 'xp' ? 'XP' : activeCategory}
                       </div>
                     </div>
@@ -282,11 +282,11 @@ export default function LeaderboardPage() {
       {/* Empty State */}
       {leaderboardData.length === 0 && (
         <div className="text-center py-16">
-          <Trophy className="w-16 h-16 mx-auto mb-4 text-konekt-black/20" />
-          <h3 className="text-xl font-semibold text-konekt-black mb-2">
+          <Trophy className="w-16 h-16 mx-auto mb-4 text-white/20" />
+          <h3 className="text-xl font-semibold text-white mb-2">
             Žádná data zatím
           </h3>
-          <p className="text-konekt-black/60">Leaderboard bude brzy aktivní!</p>
+          <p className="text-white/60">Leaderboard bude brzy aktivní!</p>
         </div>
       )}
     </AppLayout>

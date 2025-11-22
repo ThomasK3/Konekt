@@ -78,21 +78,21 @@ export default function ProjectsPage() {
         {/* Filters Sidebar */}
         <aside className="w-72 flex-shrink-0 space-y-4">
           {/* Search */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-4">
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-konekt-black/40" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
               <input
                 type="text"
                 placeholder="Hledat projekty..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-konekt-cream border-2 border-konekt-black/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
+                className="w-full pl-10 pr-4 py-3 bg-[#151515] border-2 border-white/10 rounded-xl focus:outline-none focus:ring-2 focus:ring-konekt-green focus:border-transparent"
               />
             </div>
           </div>
 
           {/* Looking For Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 p-4">
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 p-4">
             <label className="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
@@ -102,15 +102,15 @@ export default function ProjectsPage() {
               />
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-konekt-pink" />
-                <span className="font-medium text-konekt-black">Hledají lidi</span>
+                <span className="font-medium text-white">Hledají lidi</span>
               </div>
             </label>
           </div>
 
           {/* Stage Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
-            <div className="p-4 border-b border-konekt-black/10 flex items-center justify-between">
-              <h3 className="font-bold text-konekt-black">Fáze projektu</h3>
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden">
+            <div className="p-4 border-b border-white/10 flex items-center justify-between">
+              <h3 className="font-bold text-white">Fáze projektu</h3>
               {selectedStages.length > 0 && (
                 <span className="text-xs bg-konekt-green text-konekt-white px-2 py-1 rounded-full">
                   {selectedStages.length}
@@ -126,7 +126,7 @@ export default function ProjectsPage() {
                     className={`w-full text-left px-3 py-2.5 rounded-lg text-sm transition-colors flex items-center gap-2 ${
                       selectedStages.includes(stage)
                         ? 'bg-konekt-green text-konekt-white font-medium'
-                        : 'hover:bg-konekt-cream text-konekt-black/70'
+                        : 'hover:bg-[#151515] text-white/70'
                     }`}
                   >
                     {!selectedStages.includes(stage) && (
@@ -140,9 +140,9 @@ export default function ProjectsPage() {
           </div>
 
           {/* Technologies Filter */}
-          <div className="bg-konekt-white rounded-2xl border-2 border-konekt-black/10 overflow-hidden">
-            <div className="p-4 border-b border-konekt-black/10 flex items-center justify-between">
-              <h3 className="font-bold text-konekt-black">Tech Stack</h3>
+          <div className="bg-[#1a1a1a] rounded-2xl border-2 border-white/10 overflow-hidden">
+            <div className="p-4 border-b border-white/10 flex items-center justify-between">
+              <h3 className="font-bold text-white">Tech Stack</h3>
               {selectedTechnologies.length > 0 && (
                 <span className="text-xs bg-konekt-green text-konekt-white px-2 py-1 rounded-full">
                   {selectedTechnologies.length}
@@ -158,7 +158,7 @@ export default function ProjectsPage() {
                     className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
                       selectedTechnologies.includes(tech)
                         ? 'bg-konekt-green text-konekt-white font-medium'
-                        : 'hover:bg-konekt-cream text-konekt-black/70'
+                        : 'hover:bg-[#151515] text-white/70'
                     }`}
                   >
                     {tech}
@@ -172,7 +172,7 @@ export default function ProjectsPage() {
           {hasActiveFilters && (
             <button
               onClick={clearFilters}
-              className="w-full bg-konekt-white border-2 border-konekt-black/10 rounded-2xl p-4 font-medium text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black transition-colors flex items-center justify-center gap-2"
+              className="w-full bg-[#1a1a1a] border-2 border-white/10 rounded-2xl p-4 font-medium text-white/70 hover:bg-[#151515] hover:text-white transition-colors flex items-center justify-center gap-2"
             >
               <X className="w-5 h-5" />
               Vymazat filtry
@@ -190,8 +190,8 @@ export default function ProjectsPage() {
             exit={fadeInUp.exit}
           >
             <div>
-              <h1 className="text-3xl font-bold text-konekt-black mb-2">Projekty</h1>
-              <p className="text-konekt-black/60">
+              <h1 className="text-3xl font-bold text-white mb-2">Projekty</h1>
+              <p className="text-white/60">
                 {filteredProjects.length} {filteredProjects.length === 1 ? 'projekt' : 'projektů'} nalezeno
               </p>
             </div>
@@ -252,12 +252,12 @@ export default function ProjectsPage() {
           {filteredProjects.length === 0 && (
             <div className="text-center py-16">
               <div className="w-16 h-16 mx-auto mb-4 bg-konekt-black/5 rounded-full flex items-center justify-center">
-                <Search className="w-8 h-8 text-konekt-black/20" />
+                <Search className="w-8 h-8 text-white/20" />
               </div>
-              <h3 className="text-xl font-semibold text-konekt-black mb-2">
+              <h3 className="text-xl font-semibold text-white mb-2">
                 Žádné projekty nenalezeny
               </h3>
-              <p className="text-konekt-black/60 mb-4">
+              <p className="text-white/60 mb-4">
                 Zkuste upravit své filtry nebo vyhledávací dotaz
               </p>
               {hasActiveFilters && (

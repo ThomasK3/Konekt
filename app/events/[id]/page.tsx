@@ -48,9 +48,9 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
   if (!event) {
     return (
-      <div className="min-h-screen bg-konekt-cream flex items-center justify-center">
+      <div className="min-h-screen bg-[#151515] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-konekt-black mb-2">Událost nenalezena</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Událost nenalezena</h1>
           <Link href="/events">
             <Button>Zpět na události</Button>
           </Link>
@@ -101,7 +101,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
   };
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
+    <div className="min-h-screen bg-[#151515]">
       {/* Hero Section */}
       <div className="relative h-96 overflow-hidden">
         <img
@@ -114,7 +114,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
         <div className="absolute bottom-0 left-0 right-0 p-8">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-center gap-3 mb-4">
-              <span className="px-4 py-2 bg-konekt-white/90 rounded-full text-sm font-semibold">
+              <span className="px-4 py-2 bg-[#1a1a1a]/90 rounded-full text-sm font-semibold">
                 {categoryEmojis[event.category]} {event.category.charAt(0).toUpperCase() + event.category.slice(1)}
               </span>
               {event.status === 'ongoing' && (
@@ -154,25 +154,25 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* Description */}
-            <div className="bg-konekt-white rounded-2xl p-8 border-2 border-konekt-black/10">
-              <h2 className="text-2xl font-bold text-konekt-black mb-4">O události</h2>
-              <p className="text-konekt-black/80 leading-relaxed">{event.description}</p>
+            <div className="bg-[#1a1a1a] rounded-2xl p-8 border-2 border-white/10">
+              <h2 className="text-2xl font-bold text-white mb-4">O události</h2>
+              <p className="text-white/80 leading-relaxed">{event.description}</p>
             </div>
 
             {/* Agenda */}
             {event.agenda && event.agenda.length > 0 && (
-              <div className="bg-konekt-white rounded-2xl p-8 border-2 border-konekt-black/10">
-                <h2 className="text-2xl font-bold text-konekt-black mb-6">Program</h2>
+              <div className="bg-[#1a1a1a] rounded-2xl p-8 border-2 border-white/10">
+                <h2 className="text-2xl font-bold text-white mb-6">Program</h2>
                 <div className="space-y-4">
                   {event.agenda.map((item, idx) => (
-                    <div key={idx} className="flex gap-4 pb-4 border-b border-konekt-black/10 last:border-0 last:pb-0">
+                    <div key={idx} className="flex gap-4 pb-4 border-b border-white/10 last:border-0 last:pb-0">
                       <div className="flex-shrink-0 w-20">
                         <span className="text-sm font-bold text-konekt-pink">{item.time}</span>
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-semibold text-konekt-black mb-1">{item.title}</h3>
+                        <h3 className="font-semibold text-white mb-1">{item.title}</h3>
                         {item.description && (
-                          <p className="text-sm text-konekt-black/70 mb-1">{item.description}</p>
+                          <p className="text-sm text-white/70 mb-1">{item.description}</p>
                         )}
                         {item.speaker && (
                           <p className="text-sm text-konekt-green font-medium">
@@ -188,8 +188,8 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
             {/* Materials */}
             {event.materials && event.materials.length > 0 && (
-              <div className="bg-konekt-white rounded-2xl p-8 border-2 border-konekt-black/10">
-                <h2 className="text-2xl font-bold text-konekt-black mb-6">Materiály</h2>
+              <div className="bg-[#1a1a1a] rounded-2xl p-8 border-2 border-white/10">
+                <h2 className="text-2xl font-bold text-white mb-6">Materiály</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {event.materials.map((material) => {
                     const Icon = materialIcons[material.type];
@@ -199,7 +199,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                         href={material.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex gap-4 p-4 bg-konekt-cream hover:bg-konekt-green/10 border-2 border-konekt-black/10 hover:border-konekt-green/30 rounded-xl transition-all group"
+                        className="flex gap-4 p-4 bg-[#151515] hover:bg-konekt-green/10 border-2 border-white/10 hover:border-konekt-green/30 rounded-xl transition-all group"
                       >
                         {material.thumbnail ? (
                           <img
@@ -208,16 +208,16 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                             className="w-16 h-16 rounded-lg object-cover flex-shrink-0"
                           />
                         ) : (
-                          <div className="w-16 h-16 bg-konekt-white rounded-lg flex items-center justify-center flex-shrink-0">
+                          <div className="w-16 h-16 bg-[#1a1a1a] rounded-lg flex items-center justify-center flex-shrink-0">
                             <Icon className="w-8 h-8 text-konekt-pink" />
                           </div>
                         )}
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-konekt-black mb-1 line-clamp-1 group-hover:text-konekt-green transition-colors">
+                          <h3 className="font-semibold text-white mb-1 line-clamp-1 group-hover:text-konekt-green transition-colors">
                             {material.title}
                           </h3>
                           {material.description && (
-                            <p className="text-xs text-konekt-black/60 line-clamp-2 mb-1">
+                            <p className="text-xs text-white/60 line-clamp-2 mb-1">
                               {material.description}
                             </p>
                           )}
@@ -227,7 +227,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                             </span>
                           )}
                         </div>
-                        <Download className="w-5 h-5 text-konekt-black/40 group-hover:text-konekt-green transition-colors flex-shrink-0" />
+                        <Download className="w-5 h-5 text-white/40 group-hover:text-konekt-green transition-colors flex-shrink-0" />
                       </a>
                     );
                   })}
@@ -237,11 +237,11 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
             {/* Networking Recommendations */}
             {isAttendee && recommendations.length > 0 && (
-              <div className="bg-konekt-white rounded-2xl p-8 border-2 border-konekt-black/10">
-                <h2 className="text-2xl font-bold text-konekt-black mb-2">
+              <div className="bg-[#1a1a1a] rounded-2xl p-8 border-2 border-white/10">
+                <h2 className="text-2xl font-bold text-white mb-2">
                   Doporučení pro networking
                 </h2>
-                <p className="text-sm text-konekt-black/60 mb-6">
+                <p className="text-sm text-white/60 mb-6">
                   Účastníci s podobnými skills jako ty
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -252,7 +252,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     return (
                       <div
                         key={person.id}
-                        className="flex gap-4 p-4 bg-konekt-cream hover:bg-konekt-green/5 border-2 border-konekt-black/10 hover:border-konekt-green/30 rounded-xl transition-all group"
+                        className="flex gap-4 p-4 bg-[#151515] hover:bg-konekt-green/5 border-2 border-white/10 hover:border-konekt-green/30 rounded-xl transition-all group"
                       >
                         <img
                           src={person.avatar || person.mainImage}
@@ -260,8 +260,8 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                           className="w-14 h-14 rounded-full object-cover flex-shrink-0"
                         />
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-konekt-black mb-1">{person.name}</h3>
-                          <p className="text-xs text-konekt-black/60 mb-2 line-clamp-1">{person.school}</p>
+                          <h3 className="font-semibold text-white mb-1">{person.name}</h3>
+                          <p className="text-xs text-white/60 mb-2 line-clamp-1">{person.school}</p>
                           <div className="flex flex-wrap gap-1">
                             {overlappingSkills.slice(0, 2).map((skill) => (
                               <span
@@ -272,7 +272,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                               </span>
                             ))}
                             {overlappingSkills.length > 2 && (
-                              <span className="px-2 py-0.5 bg-konekt-black/5 text-konekt-black/60 rounded text-xs">
+                              <span className="px-2 py-0.5 bg-konekt-black/5 text-white/60 rounded text-xs">
                                 +{overlappingSkills.length - 2}
                               </span>
                             )}
@@ -297,7 +297,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                 <p className="text-konekt-white/80 mb-6">Pouze pro organizátory</p>
 
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Users className="w-5 h-5" />
                       <span className="text-sm font-medium">Registrace</span>
@@ -308,7 +308,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     </p>
                   </div>
 
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <FileCheck className="w-5 h-5" />
                       <span className="text-sm font-medium">Check-in</span>
@@ -319,7 +319,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     </p>
                   </div>
 
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <UserPlus className="w-5 h-5" />
                       <span className="text-sm font-medium">Connections</span>
@@ -328,7 +328,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     <p className="text-xs text-konekt-white/70 mt-1">nová spojení</p>
                   </div>
 
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <MessageCircle className="w-5 h-5" />
                       <span className="text-sm font-medium">Zprávy</span>
@@ -337,7 +337,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     <p className="text-xs text-konekt-white/70 mt-1">vyměněných zpráv</p>
                   </div>
 
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Download className="w-5 h-5" />
                       <span className="text-sm font-medium">Materiály</span>
@@ -346,7 +346,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                     <p className="text-xs text-konekt-white/70 mt-1">stažení</p>
                   </div>
 
-                  <div className="bg-konekt-white/10 backdrop-blur-sm rounded-xl p-4">
+                  <div className="bg-[#1a1a1a]/10 backdrop-blur-sm rounded-xl p-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Zap className="w-5 h-5" />
                       <span className="text-sm font-medium">Projekty</span>
@@ -362,7 +362,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
           {/* Sidebar */}
           <div className="space-y-6">
             {/* CTA Card */}
-            <div className="bg-konekt-white rounded-2xl p-6 border-2 border-konekt-black/10 sticky top-24">
+            <div className="bg-[#1a1a1a] rounded-2xl p-6 border-2 border-white/10 sticky top-24">
               {event.status === 'upcoming' && !isAttendee && (
                 <Button className="w-full mb-4" size="lg">
                   Registrovat se
@@ -377,7 +377,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
               {event.status === 'completed' && (
                 <div className="mb-4 p-4 bg-konekt-black/5 rounded-xl text-center">
-                  <p className="text-sm font-medium text-konekt-black/60">Událost skončila</p>
+                  <p className="text-sm font-medium text-white/60">Událost skončila</p>
                 </div>
               )}
 
@@ -386,7 +386,7 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
                   href={event.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full p-3 border-2 border-konekt-black/10 rounded-xl hover:bg-konekt-cream transition-colors text-konekt-black font-medium"
+                  className="flex items-center justify-center gap-2 w-full p-3 border-2 border-white/10 rounded-xl hover:bg-[#151515] transition-colors text-white font-medium"
                 >
                   Oficiální web
                   <ExternalLink className="w-4 h-4" />
@@ -395,13 +395,13 @@ export default function EventDetailPage({ params }: { params: Promise<{ id: stri
 
               {/* Tags */}
               {event.tags && event.tags.length > 0 && (
-                <div className="mt-6 pt-6 border-t border-konekt-black/10">
-                  <h3 className="text-sm font-semibold text-konekt-black/60 mb-3">Tagy</h3>
+                <div className="mt-6 pt-6 border-t border-white/10">
+                  <h3 className="text-sm font-semibold text-white/60 mb-3">Tagy</h3>
                   <div className="flex flex-wrap gap-2">
                     {event.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1.5 bg-konekt-cream rounded-full text-xs font-medium text-konekt-black/70"
+                        className="px-3 py-1.5 bg-[#151515] rounded-full text-xs font-medium text-white/70"
                       >
                         #{tag}
                       </span>

@@ -37,8 +37,8 @@ export default function CalendarPage() {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-konekt-black mb-2">📅 Calendar</h1>
-            <p className="text-konekt-black/60">
+            <h1 className="text-3xl font-bold text-white mb-2">📅 Calendar</h1>
+            <p className="text-white/60">
               Manage your events and discover new opportunities
             </p>
           </div>
@@ -52,13 +52,13 @@ export default function CalendarPage() {
         </div>
 
         {/* View Tabs */}
-        <div className="bg-konekt-white rounded-xl border-2 border-konekt-black/10 p-2 flex gap-2">
+        <div className="bg-[#1a1a1a] rounded-xl border-2 border-white/10 p-2 flex gap-2">
           <button
             onClick={() => setViewMode('month')}
             className={`flex-1 px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
               viewMode === 'month'
                 ? 'bg-konekt-green text-white'
-                : 'text-konekt-black/70 hover:bg-konekt-cream'
+                : 'text-white/70 hover:bg-[#151515]'
             }`}
           >
             <Calendar className="w-5 h-5" />
@@ -70,7 +70,7 @@ export default function CalendarPage() {
               className={`w-full px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
                 viewMode === 'agenda'
                   ? 'bg-konekt-green text-white'
-                  : 'text-konekt-black/70 hover:bg-konekt-cream'
+                  : 'text-white/70 hover:bg-[#151515]'
               }`}
             >
               <List className="w-5 h-5" />
@@ -79,7 +79,7 @@ export default function CalendarPage() {
           </Link>
 
           <Link href="/calendar/discover" className="flex-1">
-            <button className="w-full px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 text-konekt-black/70 hover:bg-konekt-cream">
+            <button className="w-full px-4 py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 text-white/70 hover:bg-[#151515]">
               <Compass className="w-5 h-5" />
               <span>Discover</span>
             </button>

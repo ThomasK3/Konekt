@@ -71,9 +71,9 @@ export default function DashboardPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-konekt-cream dark:bg-[#0a0a0a] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-konekt-black dark:text-white mb-4">
+          <h2 className="text-2xl font-bold text-white mb-4">
             Pro zobrazení dashboardu se prosím přihlaste
           </h2>
           <Link href="/register">
@@ -148,21 +148,21 @@ export default function DashboardPage() {
 
       {/* HERO SECTION */}
       <motion.div
-        className="mb-8 p-8 bg-white dark:bg-[#1a1a1a] rounded-3xl border-2 border-konekt-black/10 dark:border-white/10"
+        className="mb-8 p-8 bg-[#1a1a1a] rounded-3xl border-2 border-white/10"
         initial={fadeInUp.initial}
         animate={fadeInUp.animate}
         exit={fadeInUp.exit}
       >
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-4xl font-bold text-konekt-black dark:text-white mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               {greetingEmoji} {greeting}, {user.name.split(' ')[0]}!
             </h1>
-            <p className="text-konekt-black/60 dark:text-white/70">
+            <p className="text-white/70">
               {dateString.charAt(0).toUpperCase() + dateString.slice(1)} • {timeString}
             </p>
           </div>
-          <div className="w-16 h-16 bg-gradient-to-br from-konekt-green to-konekt-pink rounded-2xl flex items-center justify-center text-3xl text-konekt-white font-bold">
+          <div className="w-16 h-16 bg-gradient-to-br from-konekt-green to-konekt-pink rounded-2xl flex items-center justify-center text-3xl text-white font-bold">
             {user.name.charAt(0)}
           </div>
         </div>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
@@ -221,8 +221,8 @@ export default function DashboardPage() {
                 <span>+3</span>
               </div>
             </div>
-            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalConnections}</div>
-            <div className="text-sm text-konekt-black/60 dark:text-white/70">Spojení</div>
+            <div className="text-3xl font-bold text-white mb-1">{totalConnections}</div>
+            <div className="text-sm text-white/70">Spojení</div>
           </motion.div>
         </Link>
 
@@ -232,7 +232,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
@@ -244,8 +244,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalMessages}</div>
-            <div className="text-sm text-konekt-black/60 dark:text-white/70">Zprávy</div>
+            <div className="text-3xl font-bold text-white mb-1">{totalMessages}</div>
+            <div className="text-sm text-white/70">Zprávy</div>
           </motion.div>
         </Link>
 
@@ -255,7 +255,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-green hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
@@ -267,8 +267,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalProjects}</div>
-            <div className="text-sm text-konekt-black/60 dark:text-white/70">Projekty</div>
+            <div className="text-3xl font-bold text-white mb-1">{totalProjects}</div>
+            <div className="text-sm text-white/70">Projekty</div>
           </motion.div>
         </Link>
 
@@ -278,7 +278,7 @@ export default function DashboardPage() {
             variants={staggerItem}
             whileHover={hoverScale}
             whileTap={tapScale}
-            className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
+            className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-pink hover:shadow-xl transition-all cursor-pointer group"
           >
             <div className="flex items-start justify-between mb-4">
               <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
@@ -291,8 +291,8 @@ export default function DashboardPage() {
                 </div>
               )}
             </div>
-            <div className="text-3xl font-bold text-konekt-black dark:text-white mb-1">{totalEvents}</div>
-            <div className="text-sm text-konekt-black/60 dark:text-white/70">Eventy</div>
+            <div className="text-3xl font-bold text-white mb-1">{totalEvents}</div>
+            <div className="text-sm text-white/70">Eventy</div>
           </motion.div>
         </Link>
       </motion.div>
@@ -310,15 +310,15 @@ export default function DashboardPage() {
           <div>
             <div className="flex items-center gap-2 mb-6">
               <Sparkles className="w-6 h-6 text-konekt-green" />
-              <h2 className="text-2xl font-bold text-konekt-black">Pro tebe dnes</h2>
+              <h2 className="text-2xl font-bold text-white">Pro tebe dnes</h2>
             </div>
 
             {/* MATCHED PEOPLE */}
-            <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 mb-6">
+            <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Target className="w-5 h-5 text-konekt-green" />
-                  <h3 className="text-xl font-bold text-konekt-black">
+                  <h3 className="text-xl font-bold text-white">
                     {matchedPeople.length} noví lidé které musíš vidět
                   </h3>
                 </div>
@@ -328,22 +328,22 @@ export default function DashboardPage() {
                 {matchedPeople.map((person) => (
                   <div
                     key={person.id}
-                    className="flex items-start gap-4 p-4 bg-konekt-cream rounded-xl hover:bg-konekt-cream/70 transition-colors"
+                    className="flex items-start gap-4 p-4 bg-[#151515] rounded-xl hover:bg-[#151515]/70 transition-colors"
                   >
                     <div className="w-12 h-12 bg-gradient-to-br from-konekt-green to-konekt-pink rounded-full flex items-center justify-center text-konekt-white font-bold text-lg flex-shrink-0">
                       {person.name.charAt(0)}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-bold text-konekt-black">{person.name}</h4>
-                        <span className="text-sm text-konekt-black/60">• {person.school}</span>
+                        <h4 className="font-bold text-white">{person.name}</h4>
+                        <span className="text-sm text-white/60">• {person.school}</span>
                       </div>
                       <div className="flex items-center gap-2 mb-2">
                         <span className="text-sm font-medium text-konekt-green">
                           Match: {person.matchScore}%
                         </span>
                         {person.sharedSkills.length > 0 && (
-                          <span className="text-sm text-konekt-black/60">
+                          <span className="text-sm text-white/60">
                             • {person.sharedSkills.slice(0, 2).join(', ')}
                           </span>
                         )}
@@ -384,11 +384,11 @@ export default function DashboardPage() {
             </div>
 
             {/* TRENDING PROJECTS */}
-            <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 mb-6">
+            <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 mb-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
                   <Rocket className="w-5 h-5 text-konekt-pink" />
-                  <h3 className="text-xl font-bold text-konekt-black">Trendy projekty tento týden</h3>
+                  <h3 className="text-xl font-bold text-white">Trendy projekty tento týden</h3>
                 </div>
               </div>
 
@@ -396,17 +396,17 @@ export default function DashboardPage() {
                 {trendingProjects.map((project) => (
                   <div
                     key={project.id}
-                    className="flex items-start gap-4 p-4 bg-konekt-cream rounded-xl hover:bg-konekt-cream/70 transition-colors"
+                    className="flex items-start gap-4 p-4 bg-[#151515] rounded-xl hover:bg-[#151515]/70 transition-colors"
                   >
                     <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center text-2xl flex-shrink-0">
                       🚀
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-bold text-konekt-black mb-1">{project.name}</h4>
-                      <p className="text-sm text-konekt-black/70 mb-2 line-clamp-1">
+                      <h4 className="font-bold text-white mb-1">{project.name}</h4>
+                      <p className="text-sm text-white/70 mb-2 line-clamp-1">
                         {project.description}
                       </p>
-                      <div className="flex items-center gap-3 text-xs text-konekt-black/60">
+                      <div className="flex items-center gap-3 text-xs text-white/60">
                         <div className="flex items-center gap-1">
                           <Eye className="w-3 h-3" />
                           <span>{Math.floor(Math.random() * 300) + 100} views</span>
@@ -437,7 +437,7 @@ export default function DashboardPage() {
             <div className="p-6 bg-gradient-to-br from-konekt-green/5 to-konekt-pink/5 rounded-2xl border-2 border-konekt-green/20">
               <div className="flex items-center gap-2 mb-4">
                 <GraduationCap className="w-5 h-5 text-konekt-green" />
-                <h3 className="text-xl font-bold text-konekt-black">Doporučený mentor pro tebe</h3>
+                <h3 className="text-xl font-bold text-white">Doporučený mentor pro tebe</h3>
               </div>
 
               <div className="flex items-start gap-4">
@@ -445,10 +445,10 @@ export default function DashboardPage() {
                   {recommendedMentor.name.charAt(0)}
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-bold text-konekt-black text-lg mb-1">
+                  <h4 className="font-bold text-white text-lg mb-1">
                     {recommendedMentor.name}
                   </h4>
-                  <p className="text-sm text-konekt-black/70 mb-2">
+                  <p className="text-sm text-white/70 mb-2">
                     {recommendedMentor.role} @ {recommendedMentor.company}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-3">
@@ -461,7 +461,7 @@ export default function DashboardPage() {
                       </span>
                     ))}
                   </div>
-                  <p className="text-sm text-konekt-black/80 italic mb-4">
+                  <p className="text-sm text-white/80 italic mb-4">
                     &quot;{recommendedMentor.bio}&quot;
                   </p>
                   <div className="flex gap-2">
@@ -480,21 +480,21 @@ export default function DashboardPage() {
           <div data-tour="analytics">
             <div className="flex items-center gap-2 mb-6">
               <BarChart3 className="w-6 h-6 text-konekt-pink" />
-              <h2 className="text-2xl font-bold text-konekt-black">📊 Tvoje Statistiky</h2>
+              <h2 className="text-2xl font-bold text-white">📊 Tvoje Statistiky</h2>
             </div>
 
             {user?.gamification && (
               <div className="space-y-6">
                 {/* Activity Heatmap */}
-                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
-                  <h3 className="text-lg font-bold text-konekt-black mb-4">Aktivita za poslední rok</h3>
+                <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
+                  <h3 className="text-lg font-bold text-white mb-4">Aktivita za poslední rok</h3>
                   <ActivityHeatmap data={generateActivityHeatmap(user.id)} />
                 </div>
 
                 {/* Connection Growth & Skills Radar */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
-                    <h3 className="text-lg font-bold text-konekt-black mb-4">Růst spojení</h3>
+                  <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
+                    <h3 className="text-lg font-bold text-white mb-4">Růst spojení</h3>
                     <ConnectionGrowthChart
                       data={generateConnectionGrowth(user.gamification.stats.connectionsCount)}
                       events={[
@@ -514,15 +514,15 @@ export default function DashboardPage() {
                     />
                   </div>
 
-                  <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
-                    <h3 className="text-lg font-bold text-konekt-black mb-4">Skills Distribution</h3>
+                  <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
+                    <h3 className="text-lg font-bold text-white mb-4">Skills Distribution</h3>
                     <SkillsRadarChart data={generateSkillsRadar(user.skills)} />
                   </div>
                 </div>
 
                 {/* Engagement Score */}
-                <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
-                  <h3 className="text-lg font-bold text-konekt-black mb-4">Engagement Score</h3>
+                <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
+                  <h3 className="text-lg font-bold text-white mb-4">Engagement Score</h3>
                   <EngagementScore
                     totalScore={generateEngagementScore(user.gamification.stats).totalScore}
                     breakdown={generateEngagementScore(user.gamification.stats).breakdown}
@@ -537,7 +537,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Briefcase className="w-6 h-6 text-konekt-green" />
-                <h2 className="text-2xl font-bold text-konekt-black">Tvoje Projekty</h2>
+                <h2 className="text-2xl font-bold text-white">Tvoje Projekty</h2>
               </div>
             </div>
 
@@ -546,19 +546,19 @@ export default function DashboardPage() {
                 userProjects.map((project) => (
                   <div
                     key={project.id}
-                    className="p-6 bg-white dark:bg-[#1a1a1a] rounded-2xl border-2 border-konekt-black/10 dark:border-white/10 hover:border-konekt-green hover:shadow-lg transition-all"
+                    className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-green hover:shadow-lg transition-all"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
-                          <h3 className="text-xl font-bold text-konekt-black">{project.name}</h3>
+                          <h3 className="text-xl font-bold text-white">{project.name}</h3>
                           <span
                             className={`px-3 py-1 text-xs font-medium rounded-full ${
                               project.stage === 'launched'
                                 ? 'bg-konekt-green/10 text-konekt-green'
                                 : project.stage === 'mvp'
                                 ? 'bg-blue-50 text-blue-600'
-                                : 'bg-konekt-black/5 text-konekt-black/60'
+                                : 'bg-konekt-black/5 text-white/60'
                             }`}
                           >
                             {project.stage === 'launched'
@@ -568,10 +568,10 @@ export default function DashboardPage() {
                               : '💡 Nápad'}
                           </span>
                         </div>
-                        <p className="text-sm text-konekt-black/70 mb-3 line-clamp-2">
+                        <p className="text-sm text-white/70 mb-3 line-clamp-2">
                           {project.description}
                         </p>
-                        <div className="flex items-center gap-4 text-sm text-konekt-black/60">
+                        <div className="flex items-center gap-4 text-sm text-white/60">
                           <div className="flex items-center gap-1">
                             <Eye className="w-4 h-4" />
                             <span>{Math.floor(Math.random() * 100) + 20} views tento týden</span>
@@ -596,9 +596,9 @@ export default function DashboardPage() {
                   </div>
                 ))
               ) : (
-                <div className="p-12 bg-konekt-white rounded-2xl border-2 border-dashed border-konekt-black/20 text-center">
-                  <Briefcase className="w-12 h-12 text-konekt-black/20 mx-auto mb-4" />
-                  <p className="text-konekt-black/60 mb-4">Zatím nemáš žádné projekty</p>
+                <div className="p-12 bg-[#1a1a1a] rounded-2xl border-2 border-dashed border-konekt-black/20 text-center">
+                  <Briefcase className="w-12 h-12 text-white/20 mx-auto mb-4" />
+                  <p className="text-white/60 mb-4">Zatím nemáš žádné projekty</p>
                   <Link href="/projects/new">
                     <Button>
                       <Plus className="w-4 h-4 mr-2" />
@@ -610,7 +610,7 @@ export default function DashboardPage() {
 
               {userProjects.length > 0 && (
                 <Link href="/projects/new">
-                  <button className="w-full p-6 bg-konekt-white rounded-2xl border-2 border-dashed border-konekt-black/20 hover:border-konekt-green hover:bg-konekt-green/5 transition-all flex items-center justify-center gap-2 text-konekt-green font-medium">
+                  <button className="w-full p-6 bg-[#1a1a1a] rounded-2xl border-2 border-dashed border-konekt-black/20 hover:border-konekt-green hover:bg-konekt-green/5 transition-all flex items-center justify-center gap-2 text-konekt-green font-medium">
                     <Plus className="w-5 h-5" />
                     <span>Vytvořit nový projekt</span>
                   </button>
@@ -623,54 +623,54 @@ export default function DashboardPage() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Zap className="w-6 h-6 text-konekt-pink" />
-              <h2 className="text-2xl font-bold text-konekt-black">Rychlé akce</h2>
+              <h2 className="text-2xl font-bold text-white">Rychlé akce</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Link href="/feed">
-                <button className="w-full p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-lg transition-all flex items-center gap-4 group">
+                <button className="w-full p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-green hover:shadow-lg transition-all flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                     <Search className="w-6 h-6 text-konekt-green" />
                   </div>
                   <div className="text-left">
-                    <div className="font-bold text-konekt-black">Najít spolupracovníky</div>
-                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Procházej profily</div>
+                    <div className="font-bold text-white">Najít spolupracovníky</div>
+                    <div className="text-sm text-white/70">Procházej profily</div>
                   </div>
                 </button>
               </Link>
 
               <Link href="/messages">
-                <button className="w-full p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-lg transition-all flex items-center gap-4 group">
+                <button className="w-full p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-pink hover:shadow-lg transition-all flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                     <MessageCircle className="w-6 h-6 text-konekt-pink" />
                   </div>
                   <div className="text-left">
-                    <div className="font-bold text-konekt-black">Nová zpráva</div>
-                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Začni konverzaci</div>
+                    <div className="font-bold text-white">Nová zpráva</div>
+                    <div className="text-sm text-white/70">Začni konverzaci</div>
                   </div>
                 </button>
               </Link>
 
               <Link href="/projects/new">
-                <button className="w-full p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-green hover:shadow-lg transition-all flex items-center gap-4 group">
+                <button className="w-full p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-green hover:shadow-lg transition-all flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-konekt-green/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-green/20 transition-colors">
                     <Rocket className="w-6 h-6 text-konekt-green" />
                   </div>
                   <div className="text-left">
-                    <div className="font-bold text-konekt-black">Přidat projekt</div>
-                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Sdílej svůj nápad</div>
+                    <div className="font-bold text-white">Přidat projekt</div>
+                    <div className="text-sm text-white/70">Sdílej svůj nápad</div>
                   </div>
                 </button>
               </Link>
 
               <Link href="/events">
-                <button className="w-full p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10 hover:border-konekt-pink hover:shadow-lg transition-all flex items-center gap-4 group">
+                <button className="w-full p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10 hover:border-konekt-pink hover:shadow-lg transition-all flex items-center gap-4 group">
                   <div className="w-12 h-12 bg-konekt-pink/10 rounded-xl flex items-center justify-center group-hover:bg-konekt-pink/20 transition-colors">
                     <Calendar className="w-6 h-6 text-konekt-pink" />
                   </div>
                   <div className="text-left">
-                    <div className="font-bold text-konekt-black">Připojit se k eventu</div>
-                    <div className="text-sm text-konekt-black/60 dark:text-white/70">Objevuj akce</div>
+                    <div className="font-bold text-white">Připojit se k eventu</div>
+                    <div className="text-sm text-white/70">Objevuj akce</div>
                   </div>
                 </button>
               </Link>
@@ -693,11 +693,11 @@ export default function DashboardPage() {
           />
 
           {/* UPCOMING CALENDAR */}
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+          <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-konekt-green" />
-                <h3 className="font-bold text-konekt-black">Nadcházející</h3>
+                <h3 className="font-bold text-white">Nadcházející</h3>
               </div>
             </div>
 
@@ -714,7 +714,7 @@ export default function DashboardPage() {
                   return (
                     <div
                       key={event.id}
-                      className="p-4 bg-konekt-cream rounded-xl hover:bg-konekt-cream/70 transition-colors"
+                      className="p-4 bg-[#151515] rounded-xl hover:bg-[#151515]/70 transition-colors"
                     >
                       <div className="flex items-start gap-3">
                         <div className="text-2xl">
@@ -738,7 +738,7 @@ export default function DashboardPage() {
                                 })}{' '}
                             • {eventDate.toLocaleTimeString('cs-CZ', { hour: '2-digit', minute: '2-digit' })}
                           </div>
-                          <div className="font-bold text-konekt-black text-sm mb-2 line-clamp-2">
+                          <div className="font-bold text-white text-sm mb-2 line-clamp-2">
                             {event.name}
                           </div>
                           <Link href={`/events/${event.id}/space`}>
@@ -752,7 +752,7 @@ export default function DashboardPage() {
                   );
                 })
               ) : (
-                <p className="text-sm text-konekt-black/40 text-center py-4">
+                <p className="text-sm text-white/40 text-center py-4">
                   Žádné nadcházející eventy
                 </p>
               )}
@@ -767,11 +767,11 @@ export default function DashboardPage() {
           </div>
 
           {/* RECENT CHATS */}
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+          <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <MessageCircle className="w-5 h-5 text-konekt-pink" />
-                <h3 className="font-bold text-konekt-black">Nedávné konverzace</h3>
+                <h3 className="font-bold text-white">Nedávné konverzace</h3>
               </div>
             </div>
 
@@ -782,7 +782,7 @@ export default function DashboardPage() {
 
                 return (
                   <Link key={conv.id} href="/messages">
-                    <div className="flex items-center gap-3 p-3 bg-konekt-cream rounded-lg hover:bg-konekt-cream/70 transition-colors">
+                    <div className="flex items-center gap-3 p-3 bg-[#151515] rounded-lg hover:bg-[#151515]/70 transition-colors">
                       <div className="relative">
                         <div className="w-10 h-10 bg-gradient-to-br from-konekt-green to-konekt-pink rounded-full flex items-center justify-center text-konekt-white font-bold">
                           {otherUser.name.charAt(0)}
@@ -794,14 +794,14 @@ export default function DashboardPage() {
                         )}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className={`text-sm ${hasUnread ? 'font-bold' : 'font-medium'} text-konekt-black truncate`}>
+                        <div className={`text-sm ${hasUnread ? 'font-bold' : 'font-medium'} text-white truncate`}>
                           {otherUser.name}
                         </div>
-                        <div className="text-xs text-konekt-black/60 truncate">
+                        <div className="text-xs text-white/60 truncate">
                           {conv.lastMessage?.content || ''}
                         </div>
                       </div>
-                      <div className="text-xs text-konekt-black/40">
+                      <div className="text-xs text-white/40">
                         {conv.lastMessage && (
                           <>
                             {new Date(conv.lastMessage.createdAt).toLocaleDateString('cs-CZ', {
@@ -837,11 +837,11 @@ export default function DashboardPage() {
           </div>
 
           {/* YOUR EVENTS */}
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+          <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Calendar className="w-5 h-5 text-konekt-green" />
-                <h3 className="font-bold text-konekt-black">Tvoje Eventy</h3>
+                <h3 className="font-bold text-white">Tvoje Eventy</h3>
               </div>
             </div>
 
@@ -852,11 +852,11 @@ export default function DashboardPage() {
                     <div className="flex items-center gap-2 mb-2">
                       <div className="w-2 h-2 bg-konekt-green rounded-full animate-pulse" />
                       <span className="text-xs font-bold text-konekt-green uppercase">Live</span>
-                      <span className="text-xs text-konekt-black/60">
+                      <span className="text-xs text-white/60">
                         • {event.attendees.filter((id) => mockUsers.find((u) => u.id === id)?.isOnline).length} online
                       </span>
                     </div>
-                    <div className="font-bold text-konekt-black mb-2">{event.name}</div>
+                    <div className="font-bold text-white mb-2">{event.name}</div>
                     <Button size="sm" className="w-full">
                       Otevřít
                     </Button>
@@ -866,7 +866,7 @@ export default function DashboardPage() {
 
               {upcomingEvents.slice(0, 2).map((event) => (
                 <Link key={event.id} href={`/events/${event.id}`}>
-                  <div className="p-4 bg-konekt-cream rounded-xl hover:bg-konekt-cream/70 transition-colors">
+                  <div className="p-4 bg-[#151515] rounded-xl hover:bg-[#151515]/70 transition-colors">
                     <div className="text-2xl mb-2">
                       {event.category === 'hackathon'
                         ? '🚀'
@@ -876,8 +876,8 @@ export default function DashboardPage() {
                         ? '🎓'
                         : '📅'}
                     </div>
-                    <div className="font-bold text-konekt-black text-sm mb-1">{event.name}</div>
-                    <div className="text-xs text-konekt-black/60">
+                    <div className="font-bold text-white text-sm mb-1">{event.name}</div>
+                    <div className="text-xs text-white/60">
                       Za {Math.ceil((event.date.getTime() - Date.now()) / (1000 * 60 * 60 * 24))} dny
                     </div>
                   </div>
@@ -894,42 +894,42 @@ export default function DashboardPage() {
           </div>
 
           {/* MINI NOTIFICATIONS */}
-          <div className="p-6 bg-konekt-white rounded-2xl border-2 border-konekt-black/10">
+          <div className="p-6 bg-[#1a1a1a] rounded-2xl border-2 border-white/10">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <Bell className="w-5 h-5 text-konekt-pink" />
-                <h3 className="font-bold text-konekt-black">Notifikace</h3>
+                <h3 className="font-bold text-white">Notifikace</h3>
               </div>
             </div>
 
             <div className="space-y-3">
-              <div className="flex items-start gap-3 p-3 bg-konekt-cream rounded-lg">
+              <div className="flex items-start gap-3 p-3 bg-[#151515] rounded-lg">
                 <div className="w-2 h-2 bg-konekt-pink rounded-full mt-1.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-konekt-black">
+                  <p className="text-sm text-white">
                     <span className="font-medium">Jana</span> ti poslala zprávu
                   </p>
-                  <p className="text-xs text-konekt-black/40">před 2 min</p>
+                  <p className="text-xs text-white/40">před 2 min</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 bg-konekt-cream rounded-lg">
+              <div className="flex items-start gap-3 p-3 bg-[#151515] rounded-lg">
                 <div className="w-2 h-2 bg-konekt-pink rounded-full mt-1.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-konekt-black">
+                  <p className="text-sm text-white">
                     <span className="font-medium">Petr</span> má zájem o tvůj projekt
                   </p>
-                  <p className="text-xs text-konekt-black/40">před 1h</p>
+                  <p className="text-xs text-white/40">před 1h</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3 p-3 bg-konekt-cream rounded-lg">
+              <div className="flex items-start gap-3 p-3 bg-[#151515] rounded-lg">
                 <div className="w-2 h-2 bg-konekt-black/20 rounded-full mt-1.5 flex-shrink-0" />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm text-konekt-black/70">
+                  <p className="text-sm text-white/70">
                     Nový materiál v <span className="font-medium">BeNextOne</span>
                   </p>
-                  <p className="text-xs text-konekt-black/40">včera</p>
+                  <p className="text-xs text-white/40">včera</p>
                 </div>
               </div>
             </div>

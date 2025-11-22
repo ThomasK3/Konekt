@@ -26,10 +26,10 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-konekt-cream flex items-center justify-center">
+      <div className="min-h-screen bg-[#151515] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-konekt-black mb-4">404</h1>
-          <p className="text-konekt-black/60 mb-6">Uživatel nenalezen</p>
+          <h1 className="text-4xl font-bold text-white mb-4">404</h1>
+          <p className="text-white/60 mb-6">Uživatel nenalezen</p>
           <Button onClick={() => router.push('/feed')}>Zpět na Feed</Button>
         </div>
       </div>
@@ -40,11 +40,11 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
   const userProjects = mockProjects.filter((p) => user.projectIds.includes(p.id));
 
   return (
-    <div className="min-h-screen bg-konekt-cream">
+    <div className="min-h-screen bg-[#151515]">
       {/* Header */}
-      <header className="bg-konekt-white border-b-2 border-konekt-black/10">
+      <header className="bg-[#1a1a1a] border-b-2 border-white/10">
         <div className="max-w-6xl mx-auto px-6 py-4">
-          <Link href="/feed" className="text-2xl font-bold text-konekt-black hover:text-konekt-green transition-colors">
+          <Link href="/feed" className="text-2xl font-bold text-white hover:text-konekt-green transition-colors">
             Konekt
           </Link>
         </div>
@@ -61,19 +61,19 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   {user.name.charAt(0)}
                 </div>
                 <div className="flex-1">
-                  <h1 className="text-3xl font-bold text-konekt-black mb-1">{user.name}</h1>
-                  <div className="flex items-center gap-2 text-konekt-black/60 mb-3">
+                  <h1 className="text-3xl font-bold text-white mb-1">{user.name}</h1>
+                  <div className="flex items-center gap-2 text-white/60 mb-3">
                     <MapPin className="w-4 h-4" />
                     <span>{user.school}</span>
                   </div>
-                  <p className="text-konekt-black/70">{user.bio}</p>
+                  <p className="text-white/70">{user.bio}</p>
                 </div>
               </div>
 
               {/* Badges Preview (Quick icons) */}
               {user.badges.length > 0 && (
-                <div className="flex items-center gap-2 mb-6 pb-6 border-b-2 border-konekt-black/10">
-                  <span className="text-sm text-konekt-black/60 mr-2">Odznaky:</span>
+                <div className="flex items-center gap-2 mb-6 pb-6 border-b-2 border-white/10">
+                  <span className="text-sm text-white/60 mr-2">Odznaky:</span>
                   {user.badges.slice(0, 5).map((badge) => (
                     <div
                       key={badge.id}
@@ -84,7 +84,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                     </div>
                   ))}
                   {user.badges.length > 5 && (
-                    <span className="text-sm text-konekt-black/40">+{user.badges.length - 5}</span>
+                    <span className="text-sm text-white/40">+{user.badges.length - 5}</span>
                   )}
                 </div>
               )}
@@ -103,7 +103,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
 
             {/* Skills */}
             <Card>
-              <h2 className="text-xl font-bold text-konekt-black mb-4">Dovednosti</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Dovednosti</h2>
               <div className="flex flex-wrap gap-2">
                 {user.skills.map((skill) => (
                   <span
@@ -118,37 +118,37 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
 
             {/* Projects */}
             <Card>
-              <h2 className="text-xl font-bold text-konekt-black mb-4">Projekty ({userProjects.length})</h2>
+              <h2 className="text-xl font-bold text-white mb-4">Projekty ({userProjects.length})</h2>
               <div className="space-y-4">
                 {userProjects.map((project) => (
                   <Link
                     key={project.id}
                     href={`/projects/${project.id}`}
-                    className="block p-4 bg-konekt-cream rounded-xl hover:bg-konekt-cream/70 transition-colors"
+                    className="block p-4 bg-[#151515] rounded-xl hover:bg-[#151515]/70 transition-colors"
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <h3 className="font-bold text-konekt-black">{project.name}</h3>
+                      <h3 className="font-bold text-white">{project.name}</h3>
                       <span
                         className={`px-3 py-1 rounded-full text-xs font-medium ${
                           project.stage === 'idea'
                             ? 'bg-konekt-pink/20 text-konekt-pink'
                             : project.stage === 'mvp'
                             ? 'bg-konekt-green/20 text-konekt-green'
-                            : 'bg-konekt-black/20 text-konekt-black'
+                            : 'bg-konekt-black/20 text-white'
                         }`}
                       >
                         {project.stage === 'idea' ? 'Idea' : project.stage === 'mvp' ? 'MVP' : 'Launched'}
                       </span>
                     </div>
-                    <p className="text-sm text-konekt-black/60 mb-3 line-clamp-2">{project.description}</p>
+                    <p className="text-sm text-white/60 mb-3 line-clamp-2">{project.description}</p>
                     <div className="flex flex-wrap gap-1.5">
                       {project.stack.slice(0, 3).map((tech) => (
-                        <span key={tech} className="px-2 py-1 bg-konekt-white text-xs text-konekt-black/70 rounded">
+                        <span key={tech} className="px-2 py-1 bg-[#1a1a1a] text-xs text-white/70 rounded">
                           {tech}
                         </span>
                       ))}
                       {project.stack.length > 3 && (
-                        <span className="px-2 py-1 text-xs text-konekt-black/50">
+                        <span className="px-2 py-1 text-xs text-white/50">
                           +{project.stack.length - 3} více
                         </span>
                       )}
@@ -156,7 +156,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   </Link>
                 ))}
                 {userProjects.length === 0 && (
-                  <p className="text-konekt-black/40 text-center py-8">Zatím žádné projekty</p>
+                  <p className="text-white/40 text-center py-8">Zatím žádné projekty</p>
                 )}
               </div>
             </Card>
@@ -177,7 +177,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
               <Card>
                 <div className="flex items-center gap-2 mb-6">
                   <Brain className="w-6 h-6 text-konekt-green" />
-                  <h2 className="text-xl font-bold text-konekt-black">Integrace & Osobnost</h2>
+                  <h2 className="text-xl font-bold text-white">Integrace & Osobnost</h2>
                 </div>
 
                 <div className="space-y-4">
@@ -206,7 +206,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
           <div className="space-y-6">
             {/* Co hledá */}
             <Card>
-              <h3 className="text-lg font-bold text-konekt-black mb-3">Co hledám</h3>
+              <h3 className="text-lg font-bold text-white mb-3">Co hledám</h3>
               {user.lookingFor.length > 0 ? (
                 <div className="space-y-2">
                   {user.lookingFor.map((role) => (
@@ -219,14 +219,14 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                   ))}
                 </div>
               ) : (
-                <p className="text-konekt-black/40 text-sm">Nic konkrétního</p>
+                <p className="text-white/40 text-sm">Nic konkrétního</p>
               )}
             </Card>
 
             {/* Public Stats */}
             {user.gamification && (
               <Card>
-                <h3 className="text-lg font-bold text-konekt-black mb-4">Activity Stats</h3>
+                <h3 className="text-lg font-bold text-white mb-4">Activity Stats</h3>
                 <div className="space-y-4">
                   {/* Response Rate */}
                   {(() => {
@@ -236,9 +236,9 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <Zap className="w-4 h-4 text-konekt-green" />
-                            <span className="text-sm font-medium text-konekt-black">Response Rate</span>
+                            <span className="text-sm font-medium text-white">Response Rate</span>
                           </div>
-                          <span className="text-sm text-konekt-black/60">
+                          <span className="text-sm text-white/60">
                             {stats.responseRate}%
                           </span>
                         </div>
@@ -248,7 +248,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                             style={{ width: `${stats.responseRate}%` }}
                           />
                         </div>
-                        <p className="text-xs text-konekt-black/50 mt-1">
+                        <p className="text-xs text-white/50 mt-1">
                           Responds in {stats.avgResponseTime.toFixed(1)} hours typically
                         </p>
                       </div>
@@ -263,9 +263,9 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4 text-konekt-pink" />
-                            <span className="text-sm font-medium text-konekt-black">Active Days</span>
+                            <span className="text-sm font-medium text-white">Active Days</span>
                           </div>
-                          <span className="text-sm text-konekt-black/60">
+                          <span className="text-sm text-white/60">
                             {activeDays}/30
                           </span>
                         </div>
@@ -275,7 +275,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                             style={{ width: `${(activeDays / 30) * 100}%` }}
                           />
                         </div>
-                        <p className="text-xs text-konekt-black/50 mt-1">Active {activeDays} of last 30 days</p>
+                        <p className="text-xs text-white/50 mt-1">Active {activeDays} of last 30 days</p>
                       </div>
                     );
                   })()}
@@ -288,9 +288,9 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center gap-2">
                             <Users className="w-4 h-4 text-konekt-green" />
-                            <span className="text-sm font-medium text-konekt-black">Collaboration</span>
+                            <span className="text-sm font-medium text-white">Collaboration</span>
                           </div>
-                          <span className="text-sm text-konekt-black/60">
+                          <span className="text-sm text-white/60">
                             {collab.successRate}%
                           </span>
                         </div>
@@ -300,7 +300,7 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
                             style={{ width: `${collab.successRate}%` }}
                           />
                         </div>
-                        <p className="text-xs text-konekt-black/50 mt-1">
+                        <p className="text-xs text-white/50 mt-1">
                           Started {collab.collaborativeProjects} projects with others
                         </p>
                       </div>
@@ -312,17 +312,17 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
 
             {/* Dostupnost */}
             <Card>
-              <h3 className="text-lg font-bold text-konekt-black mb-3">Dostupnost</h3>
+              <h3 className="text-lg font-bold text-white mb-3">Dostupnost</h3>
               <div className="space-y-3">
                 <div className="flex items-center gap-3 text-sm">
                   <Clock className="w-5 h-5 text-konekt-green" />
-                  <span className="text-konekt-black/70">
+                  <span className="text-white/70">
                     {user.availability.hoursPerWeek} hodin/týden
                   </span>
                 </div>
                 <div className="flex items-center gap-3 text-sm">
                   <DollarSign className="w-5 h-5 text-konekt-green" />
-                  <span className="text-konekt-black/70">
+                  <span className="text-white/70">
                     {user.availability.isPaid ? 'Placená spolupráce' : 'Projekt / Zkušenosti'}
                   </span>
                 </div>
@@ -332,9 +332,9 @@ export default function ProfilePage({ params }: { params: Promise<{ username: st
             {/* Video (if available) */}
             {user.videoUrl && (
               <Card>
-                <h3 className="text-lg font-bold text-konekt-black mb-3">Video představení</h3>
+                <h3 className="text-lg font-bold text-white mb-3">Video představení</h3>
                 <div className="aspect-video bg-konekt-black/5 rounded-lg flex items-center justify-center">
-                  <span className="text-konekt-black/40">Video player</span>
+                  <span className="text-white/40">Video player</span>
                 </div>
               </Card>
             )}
