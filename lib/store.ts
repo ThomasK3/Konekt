@@ -67,6 +67,15 @@ export const useUserStore = create<UserStore>()(
     }),
     {
       name: 'konekt-user-storage',
+      onRehydrateStorage: () => (state) => {
+        // Po načtení z localStorage zkontroluj dev mode
+        if (state && process.env.NEXT_PUBLIC_DEV_MODE === 'true') {
+          const devUser = getDevModeUser();
+          if (devUser && !state.user) {
+            state.user = devUser;
+          }
+        }
+      },
     }
   )
 );
