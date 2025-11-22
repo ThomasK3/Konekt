@@ -1,6 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User, RegistrationData, Project } from '@/types';
+import { mockUsers } from './mock-data';
+import { MOCK_USER_GAMIFICATION } from './gamification-mock';
 
 interface UserStore {
   user: User | null;
@@ -29,10 +31,25 @@ const initialRegistrationData: RegistrationData = {
   },
 };
 
+// Dev mode user - kombinace mock usera s gamification daty
+const getDevModeUser = (): User | null => {
+  if (typeof window === 'undefined') return null;
+
+  const isDevMode = process.env.NEXT_PUBLIC_DEV_MODE === 'true';
+  if (!isDevMode) return null;
+
+  // Vezmi prvního mock usera a přidej gamification data
+  const baseUser = mockUsers[0];
+  return {
+    ...baseUser,
+    gamification: MOCK_USER_GAMIFICATION,
+  };
+};
+
 export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
-      user: null,
+      user: getDevModeUser(),
       registrationData: initialRegistrationData,
       currentEvent: 'BeNextOne 2024',
       projects: [],
