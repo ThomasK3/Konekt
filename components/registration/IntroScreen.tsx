@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Sparkles, Rocket, FastForward } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -9,6 +10,14 @@ interface IntroScreenProps {
 }
 
 export const IntroScreen = ({ onStart, onSkip }: IntroScreenProps) => {
+  const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setDimensions({ width: window.innerWidth, height: window.innerHeight });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white flex items-center justify-center px-6 relative overflow-hidden">
       {/* Animated background particles */}
@@ -18,11 +27,11 @@ export const IntroScreen = ({ onStart, onSkip }: IntroScreenProps) => {
             key={i}
             className="absolute w-2 h-2 bg-konekt-green/30 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * dimensions.width,
+              y: Math.random() * dimensions.height,
             }}
             animate={{
-              y: [null, Math.random() * window.innerHeight],
+              y: [null, Math.random() * dimensions.height],
               opacity: [0, 1, 0],
             }}
             transition={{

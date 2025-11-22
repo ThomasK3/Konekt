@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { IntroScreen } from '@/components/registration/IntroScreen';
 import { ArchetypeSelection } from '@/components/registration/ArchetypeSelection';
@@ -53,6 +54,7 @@ export interface RegistrationData {
 }
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [data, setData] = useState<RegistrationData>({
@@ -88,7 +90,7 @@ export default function RegisterPage() {
   };
 
   if (showIntro) {
-    return <IntroScreen onStart={() => setShowIntro(false)} onSkip={() => window.location.href = '/dashboard'} />;
+    return <IntroScreen onStart={() => setShowIntro(false)} onSkip={() => router.push('/dashboard')} />;
   }
 
   const steps = [
