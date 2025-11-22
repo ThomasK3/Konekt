@@ -2,25 +2,195 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Variables for Theme System */
+:root {
+  /* Light Mode (Default Konekt Colors) */
+  --bg-primary: #f5f1e8;
+  --bg-secondary: #ffffff;
+  --surface-primary: #ffffff;
+  --surface-secondary: #f9fafb;
+  --surface-hover: #f3f4f6;
+  --surface-card: #ffffff;
+
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --text-inverse: #ffffff;
+
+  --border-primary: #e5e7eb;
+  --border-secondary: #d1d5db;
+  --border-hover: #c1c5cb;
+
+  --brand-primary: #4A6953;
+  --brand-secondary: #E97B8A;
+  --brand-accent: #f5f1e8;
+
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #3b82f6;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  /* Dark Mode - Matching Registration Page Exactly */
+
+  /* Backgrounds */
+  --bg-primary: #0a0a0a;          /* Main app background */
+  --bg-secondary: #141414;         /* Sidebar, secondary areas */
+  --bg-tertiary: #1a1a1a;          /* Elevated surfaces */
+  --bg-elevated: #1f1f1f;          /* Modals, dropdowns, popovers */
+  --bg-hover: #252525;             /* Hover state backgrounds */
+  --bg-active: #2a2a2a;            /* Active/pressed state backgrounds */
+
+  /* Surfaces (Cards, Panels) */
+  --surface-primary: #1a1a1a;      /* Main cards */
+  --surface-secondary: #222222;    /* Input backgrounds, secondary cards */
+  --surface-tertiary: #242424;     /* Alternative surface color */
+  --surface-hover: #2a2a2a;        /* Card hover state */
+  --surface-active: #2f2f2f;       /* Card active state */
+  --surface-card: #1a1a1a;         /* Card component default */
+
+  /* Text Colors */
+  --text-primary: #ffffff;         /* Main text (full white) */
+  --text-secondary: rgba(255, 255, 255, 0.6);   /* Secondary text (60% opacity) */
+  --text-tertiary: rgba(255, 255, 255, 0.4);    /* Muted text (40% opacity) */
+  --text-disabled: rgba(255, 255, 255, 0.3);    /* Disabled text (30% opacity) */
+  --text-inverse: #0a0a0a;         /* Text on colored backgrounds */
+  --text-on-brand: #ffffff;        /* Text on brand colors */
+
+  /* Borders */
+  --border-primary: rgba(255, 255, 255, 0.1);   /* Main borders (10% opacity) */
+  --border-secondary: rgba(255, 255, 255, 0.05); /* Subtle borders (5% opacity) */
+  --border-hover: rgba(255, 255, 255, 0.2);     /* Hover state borders (20% opacity) */
+  --border-focus: rgba(255, 255, 255, 0.3);     /* Focus rings (30% opacity) */
+  --border-active: rgba(255, 255, 255, 0.15);   /* Active state borders */
+
+  /* Brand Colors */
+  --brand-primary: #4A6953;        /* Konekt Green */
+  --brand-secondary: #E97B8A;      /* Konekt Pink */
+  --brand-accent: #f5f1e8;         /* Konekt Cream */
+  --brand-hover: #3d5744;          /* Darker green for hover */
+  --brand-light: #5a7d63;          /* Lighter green */
+
+  /* Semantic Colors */
+  --success: #10b981;              /* Success green */
+  --success-light: #34d399;        /* Light success */
+  --warning: #f59e0b;              /* Warning yellow/orange */
+  --warning-light: #fbbf24;        /* Light warning */
+  --error: #ef4444;                /* Error red */
+  --error-light: #f87171;          /* Light error */
+  --info: #3b82f6;                 /* Info blue */
+  --info-light: #60a5fa;           /* Light info */
+
+  /* Shadows (Stronger for dark mode) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.7);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+
+  /* Overlays */
+  --overlay-light: rgba(0, 0, 0, 0.5);
+  --overlay-medium: rgba(0, 0, 0, 0.7);
+  --overlay-heavy: rgba(0, 0, 0, 0.85);
+
+  /* Interactive States */
+  --interactive-hover: rgba(255, 255, 255, 0.05);
+  --interactive-active: rgba(255, 255, 255, 0.08);
+  --interactive-disabled: rgba(255, 255, 255, 0.02);
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @layer base {
   * {
     @apply border-konekt-black/10;
   }
-  body {
-    @apply bg-konekt-cream text-konekt-black;
-  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* 3D Card Effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+
+  /* Collapsible animations */
+  .animate-slideDown {
+    animation: slideDown 0.2s ease-out;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Custom scrollbar for sidebar */
+  .sidebar-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-primary);
+    border-radius: 3px;
+  }
+
+  .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+  }
+
+  /* Firefox */
+  .sidebar-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-primary) transparent;
   }
 }

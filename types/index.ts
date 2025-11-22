@@ -10,6 +10,43 @@ export interface Availability {
   isPaid: boolean;
 }
 
+export interface MBTIPersonality {
+  type: string; // e.g., "ENFP"
+  name: string; // e.g., "The Campaigner"
+  description: string;
+}
+
+export interface BigFivePersonality {
+  openness: number; // 0-100
+  conscientiousness: number;
+  extraversion: number;
+  agreeableness: number;
+  neuroticism: number;
+}
+
+export interface StrengthsFinder {
+  strengths: string[]; // Top 5 strengths
+}
+
+export interface SocialIntegration {
+  platform: 'linkedin' | 'github' | 'twitter' | 'portfolio';
+  username?: string;
+  url: string;
+  isConnected: boolean;
+  metadata?: {
+    repositories?: number;
+    followers?: number;
+    jobTitle?: string;
+  };
+}
+
+export interface WorkPreferences {
+  timezone: string;
+  communicationPreferences: ('slack' | 'email' | 'whatsapp' | 'discord')[];
+  workHours: 'morning' | 'night' | 'flexible';
+  workStyle: 'remote' | 'hybrid' | 'office';
+}
+
 export interface User {
   id: string;
   name: string;
@@ -20,11 +57,23 @@ export interface User {
   bio: string;
   videoUrl?: string;
   avatar?: string;
+  mainImage?: string;
+  gallery?: string[];
+  location?: string;
+  isOnline?: boolean;
   role: 'student' | 'mentor';
   lookingFor: string[];
   availability: Availability;
   badges: Badge[];
   projectIds: string[];
+  // Personality & Integrations
+  mbti?: MBTIPersonality;
+  bigFive?: BigFivePersonality;
+  strengthsFinder?: StrengthsFinder;
+  socialIntegrations?: SocialIntegration[];
+  workPreferences?: WorkPreferences;
+  // Gamification
+  gamification?: UserGamification;
 }
 
 export interface Channel {
@@ -57,6 +106,32 @@ export interface Mentor {
   bio: string;
   avatar?: string;
   connectionReason?: string;
+  isVerified?: boolean;
+  followers?: number;
+  location?: string;
+}
+
+export interface MentorPost {
+  id: string;
+  mentorId: string;
+  type: 'text' | 'article' | 'video' | 'ama' | 'job';
+  title?: string;
+  content: string;
+  media?: {
+    type: 'image' | 'video' | 'link';
+    url: string;
+    thumbnail?: string;
+    linkPreview?: {
+      title: string;
+      description: string;
+      image?: string;
+    };
+  };
+  createdAt: Date;
+  likes: number;
+  comments: number;
+  shares: number;
+  tags?: string[];
 }
 
 export interface ProjectRole {
@@ -65,17 +140,72 @@ export interface ProjectRole {
   count: number;
 }
 
+export interface ProjectMedia {
+  id: string;
+  type: 'image' | 'video';
+  url: string;
+  caption?: string;
+  thumbnail?: string;
+}
+
+export interface ProjectUpdate {
+  id: string;
+  projectId: string;
+  authorId: string;
+  content: string;
+  media?: ProjectMedia[];
+  createdAt: Date;
+  reactions: number;
+  comments: number;
+}
+
+export interface ProjectComment {
+  id: string;
+  projectId: string;
+  authorId: string;
+  author: User;
+  content: string;
+  createdAt: Date;
+  reactions: number;
+  replies?: ProjectComment[];
+}
+
 export interface Project {
   id: string;
   name: string;
-  description: string;
+  description: string; // Rich text/markdown
+  oneLiner: string; // Short pitch (80 chars max)
   stack: string[];
-  stage: 'idea' | 'mvp' | 'launched';
+  stage: 'idea' | 'development' | 'beta' | 'launched';
+  category: 'ai-ml' | 'web-app' | 'mobile-app' | 'design-tool' | 'hardware' | 'service' | 'other';
   lookingFor: ProjectRole[];
+  lookingForHelp: boolean;
+  collaborationMessage?: string;
   teamMembers: User[];
   ownerId: string;
   createdAt: Date;
-  image?: string;
+  updatedAt: Date;
+  coverImage?: string;
+  coverVideo?: string;
+  gallery?: ProjectMedia[];
+  links?: {
+    demo?: string;
+    github?: string;
+    figma?: string;
+    website?: string;
+    video?: string;
+    custom?: { label: string; url: string }[];
+  };
+  visibility: 'public' | 'private' | 'unlisted';
+  allowComments: boolean;
+  stats?: {
+    views: number;
+    saves: number;
+    reactions: number;
+    comments: number;
+  };
+  tags?: string[];
+  updates?: ProjectUpdate[];
 }
 
 export interface RegistrationData {
@@ -90,10 +220,146 @@ export interface RegistrationData {
   availability: Availability;
 }
 
+export interface EventMaterial {
+  id: string;
+  eventId: string;
+  title: string;
+  description?: string;
+  type: 'presentation' | 'document' | 'video' | 'link' | 'image';
+  url: string;
+  uploadedBy: string;
+  uploadedAt: Date;
+  category?: string;
+  thumbnail?: string;
+}
+
+export interface EventAnalytics {
+  totalAttendees: number;
+  checkedIn: number;
+  connectionsMode: number;
+  messagesExchanged: number;
+  materialsDownloaded: number;
+  projectsCreated: number;
+}
+
 export interface Event {
   id: string;
   name: string;
-  date: string;
+  date: Date;
+  endDate?: Date;
   location: string;
   description: string;
+  category: 'hackathon' | 'networking' | 'workshop' | 'conference' | 'meetup';
+  organizers: string[]; // User IDs
+  attendees: string[]; // User IDs
+  maxAttendees?: number;
+  image?: string;
+  gallery?: string[];
+  agenda?: {
+    time: string;
+    title: string;
+    description?: string;
+    speaker?: string;
+  }[];
+  materials?: EventMaterial[];
+  analytics?: EventAnalytics;
+  status: 'upcoming' | 'ongoing' | 'completed';
+  registrationDeadline?: Date;
+  tags?: string[];
+  website?: string;
+  isPublic: boolean;
+}
+
+export interface Message {
+  id: string;
+  conversationId: string;
+  senderId: string;
+  content: string;
+  createdAt: Date;
+  isRead: boolean;
+  attachments?: {
+    type: 'file' | 'image' | 'link';
+    url: string;
+    name: string;
+  }[];
+}
+
+export interface Conversation {
+  id: string;
+  participants: User[];
+  lastMessage?: Message;
+  unreadCount: number;
+  context?: {
+    type: 'event' | 'project' | 'discovery';
+    name: string;
+    id: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// ============================================
+// GAMIFICATION SYSTEM
+// ============================================
+
+export type AchievementRarity = 'common' | 'rare' | 'epic' | 'legendary';
+
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  rarity: AchievementRarity;
+  unlocked: boolean;
+  unlockedAt?: Date;
+  progress?: number;
+  target?: number;
+  xpReward: number;
+}
+
+export interface Level {
+  level: number;
+  xp: number;
+  xpToNextLevel: number;
+  title: string; // "Newbie", "Rising Star", "Pro Networker", etc.
+}
+
+export interface Streak {
+  current: number;
+  longest: number;
+  lastLoginDate: string; // YYYY-MM-DD
+  loginHistory: string[]; // Array of YYYY-MM-DD dates
+}
+
+export interface DailyChallenge {
+  id: string;
+  task: string;
+  description: string;
+  progress: number;
+  target: number;
+  xpReward: number;
+  completed: boolean;
+  expiresAt: Date;
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  user: User;
+  score: number;
+  change?: number; // +/- position change from yesterday
+}
+
+export interface UserGamification {
+  xp: number;
+  level: Level;
+  achievements: Achievement[];
+  streak: Streak;
+  dailyChallenges: DailyChallenge[];
+  stats: {
+    connectionsCount: number;
+    messagesSent: number;
+    projectsCreated: number;
+    eventsAttended: number;
+    profileViews: number;
+  };
 }

@@ -1,16 +1,23 @@
 'use client';
 
 import { useUserStore } from '@/lib/store';
+import { mockUsers } from '@/lib/mock-data';
 import { Button } from '@/components/ui/Button';
 import { useRouter } from 'next/navigation';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Zap } from 'lucide-react';
 
 export const Hero = () => {
   const router = useRouter();
   const currentEvent = useUserStore((state) => state.currentEvent);
+  const { user, setUser } = useUserStore();
 
   const handleCreateProfile = () => {
     router.push('/register');
+  };
+
+  const handleDevLogin = () => {
+    setUser(mockUsers[0]); // Login as Jakub Procházka (user1)
+    router.push('/dashboard');
   };
 
   return (
@@ -33,9 +40,22 @@ export const Hero = () => {
         Začni teď z {currentEvent}.
       </p>
 
-      <Button size="lg" onClick={handleCreateProfile}>
-        Vytvořit Profil
-      </Button>
+      <div className="flex flex-col gap-4">
+        <Button size="lg" onClick={handleCreateProfile}>
+          Vytvořit Profil
+        </Button>
+
+        {/* DEV: Quick Login Button */}
+        {process.env.NODE_ENV === 'development' && !user && (
+          <button
+            onClick={handleDevLogin}
+            className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-konekt-green to-konekt-pink text-konekt-white font-bold rounded-xl hover:opacity-90 transition-opacity"
+          >
+            <Zap className="w-5 h-5" />
+            <span>DEV: Přihlásit se jako Jakub</span>
+          </button>
+        )}
+      </div>
 
       <div className="mt-20 grid grid-cols-3 gap-12 max-w-2xl">
         <div>

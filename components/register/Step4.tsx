@@ -47,6 +47,20 @@ export const Step4: React.FC<Step4Props> = ({ onBack }) => {
       availability: { hoursPerWeek, isPaid },
     });
 
+    createUserAndRedirect();
+  };
+
+  const handleSkip = () => {
+    // Set default values when skipping
+    updateRegistrationData({
+      lookingFor: [],
+      availability: { hoursPerWeek: 10, isPaid: false },
+    });
+
+    createUserAndRedirect();
+  };
+
+  const createUserAndRedirect = () => {
     // Create user profile
     const username = registrationData.name
       .toLowerCase()
@@ -63,8 +77,8 @@ export const Step4: React.FC<Step4Props> = ({ onBack }) => {
       bio: registrationData.bio,
       videoUrl: registrationData.videoUrl,
       role: 'student' as const,
-      lookingFor,
-      availability: { hoursPerWeek, isPaid },
+      lookingFor: registrationData.lookingFor,
+      availability: registrationData.availability,
       badges: [],
       projectIds: [],
     };
@@ -80,7 +94,7 @@ export const Step4: React.FC<Step4Props> = ({ onBack }) => {
           Co hledáš?
         </h2>
         <p className="text-konekt-black/60">
-          Jakou roli nebo spolupracovníka potřebuješ?
+          Jakou roli nebo spolupracovníka potřebuješ? (volitelné)
         </p>
       </div>
 
@@ -193,11 +207,14 @@ export const Step4: React.FC<Step4Props> = ({ onBack }) => {
       </div>
 
       <div className="flex gap-3">
-        <Button onClick={onBack} variant="outline" className="flex-1">
+        <Button onClick={onBack} variant="outline">
           Zpět
         </Button>
+        <Button onClick={handleSkip} variant="outline" className="flex-1">
+          Přeskočit
+        </Button>
         <Button onClick={handleComplete} className="flex-1">
-          Dokončit registraci
+          Dokončit
         </Button>
       </div>
     </div>
