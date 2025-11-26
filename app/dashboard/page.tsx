@@ -20,8 +20,15 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function DashboardPage() {
-  const { user } = useUserStore();
+  const { user, setUser } = useUserStore();
   const [greeting, setGreeting] = useState('');
+
+  // Auto-login in development mode
+  useEffect(() => {
+    if (!user && process.env.NODE_ENV === 'development') {
+      setUser(mockUsers[0]);
+    }
+  }, [user, setUser]);
 
   // Dynamic greeting based on time
   useEffect(() => {
