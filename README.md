@@ -140,15 +140,14 @@ MIT License - see [LICENSE](LICENSE) file
 ## 📧 Contact
 
 **Tomas Kanuch**
-- Email: [your-email]
-- LinkedIn: [your-linkedin]
-- Twitter: [@your-handle]
+- Email: [tomkanuch150@gmail.com]
+- LinkedIn: [https://www.linkedin.com/in/tomas-kanuch-617631279/]
 
 ---
 
 ## 🙏 Acknowledgments
 
-- Event partners: BeNextOne, Festup, Dny AI
+- Event partners: BeNextOne
 - Early adopters & beta testers
 - Czech startup community
 
