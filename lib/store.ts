@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { User, RegistrationData, Project } from '@/types';
+import { mockUsers } from '@/lib/mock-data';
 
 interface UserStore {
   user: User | null;
@@ -29,10 +30,18 @@ const initialRegistrationData: RegistrationData = {
   },
 };
 
+// Initialize with dev user in development mode
+const getInitialUser = (): User | null => {
+  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+    return mockUsers[0];
+  }
+  return null;
+};
+
 export const useUserStore = create<UserStore>()(
   persist(
     (set) => ({
-      user: null,
+      user: getInitialUser(),
       registrationData: initialRegistrationData,
       currentEvent: 'BeNextOne 2024',
       projects: [],
@@ -50,6 +59,12 @@ export const useUserStore = create<UserStore>()(
     }),
     {
       name: 'konekt-user-storage',
+      onRehydrateStorage: () => (state) => {
+        // After rehydration, if no user and in dev mode, set dev user
+        if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development' && !state?.user) {
+          state?.setUser(mockUsers[0]);
+        }
+      },
     }
   )
 );

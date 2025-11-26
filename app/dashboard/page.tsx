@@ -20,15 +20,8 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function DashboardPage() {
-  const { user, setUser } = useUserStore();
+  const { user } = useUserStore();
   const [greeting, setGreeting] = useState('');
-
-  // Auto-login in development mode
-  useEffect(() => {
-    if (!user && process.env.NODE_ENV === 'development') {
-      setUser(mockUsers[0]);
-    }
-  }, [user, setUser]);
 
   // Dynamic greeting based on time
   useEffect(() => {
@@ -42,16 +35,14 @@ export default function DashboardPage() {
     }
   }, []);
 
+  // In development mode, user should always be set by store
+  // Show loading spinner briefly during store hydration
   if (!user) {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            Pro zobrazení dashboardu se prosím přihlaste
-          </h2>
-          <Link href="/register">
-            <Button>Registrace</Button>
-          </Link>
+          <div className="w-12 h-12 border-4 border-konekt-green border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-white/60">Loading...</p>
         </div>
       </div>
     );
