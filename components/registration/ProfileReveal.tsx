@@ -5,6 +5,8 @@ import { RegistrationData } from '@/app/register/page';
 import { useEffect, useState } from 'react';
 import { Sparkles, CheckCircle, Rocket, Edit } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useUserStore } from '@/lib/store';
+import { mockUsers } from '@/lib/mock-data';
 
 interface ProfileRevealProps {
   data: RegistrationData;
@@ -15,6 +17,14 @@ export const ProfileReveal = ({ data }: ProfileRevealProps) => {
   const [progress, setProgress] = useState(0);
   const [showConfetti, setShowConfetti] = useState(false);
   const router = useRouter();
+  const { setUser } = useUserStore();
+
+  useEffect(() => {
+    // Auto-login user after registration (in development mode)
+    if (process.env.NODE_ENV === 'development') {
+      setUser(mockUsers[0]);
+    }
+  }, [setUser]);
 
   useEffect(() => {
     // Fake loading animation

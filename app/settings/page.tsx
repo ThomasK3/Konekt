@@ -1,13 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useUserStore } from '@/lib/store';
-import { useTheme } from '@/components/providers/ThemeProvider';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { SkillSuggestions } from '@/components/ai/SkillSuggestions';
-import { getSkillSuggestions } from '@/lib/ai-matching';
 import {
   User,
   Mail,
@@ -28,16 +25,13 @@ import {
   Check,
   Download,
   QrCode,
-  Moon,
-  Sun,
 } from 'lucide-react';
 import AppLayout from '@/components/layout/AppLayout';
 
-type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integrations' | 'referral' | 'preferences';
+type TabType = 'profile' | 'account' | 'privacy' | 'notifications' | 'integrations' | 'referral' | 'export';
 
 export default function SettingsPage() {
   const { user, setUser } = useUserStore();
-  const { theme, setTheme } = useTheme();
   const [activeTab, setActiveTab] = useState<TabType>('profile');
 
   // Profile state
@@ -47,17 +41,6 @@ export default function SettingsPage() {
   const [newSkill, setNewSkill] = useState('');
   const [lookingFor, setLookingFor] = useState<string[]>(user?.lookingFor || []);
   const [newRole, setNewRole] = useState('');
-  const [skillSuggestions, setSkillSuggestions] = useState<string[]>([]);
-
-  // Update skill suggestions when skills change
-  useEffect(() => {
-    if (skills.length > 0) {
-      const suggestions = getSkillSuggestions(skills);
-      setSkillSuggestions(suggestions);
-    } else {
-      setSkillSuggestions([]);
-    }
-  }, [skills]);
 
   // Account state
   const [email, setEmail] = useState(user?.email || '');
@@ -217,15 +200,15 @@ export default function SettingsPage() {
                 </button>
 
                 <button
-                  onClick={() => setActiveTab('preferences')}
+                  onClick={() => setActiveTab('export')}
                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium transition-all ${
-                    activeTab === 'preferences'
+                    activeTab === 'export'
                       ? 'bg-konekt-green text-konekt-white'
                       : 'text-konekt-black/70 hover:bg-konekt-cream hover:text-konekt-black'
                   }`}
                 >
-                  <Palette className="w-5 h-5" />
-                  <span>Vzhled & Export</span>
+                  <Download className="w-5 h-5" />
+                  <span>Export dat</span>
                 </button>
               </nav>
             </div>
@@ -300,12 +283,6 @@ export default function SettingsPage() {
                         <Plus className="w-5 h-5" />
                       </Button>
                     </div>
-
-                    {/* AI Skill Suggestions */}
-                    <SkillSuggestions
-                      suggestions={skillSuggestions}
-                      onAdd={addSkill}
-                    />
 
                     <div className="flex flex-wrap gap-2 mb-3">
                       {skills.map((skill) => (

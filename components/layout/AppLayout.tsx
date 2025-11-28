@@ -9,23 +9,13 @@ import {
   Search,
   Calendar,
   CalendarDays,
-  MessageCircle,
   Settings,
-  TrendingUp,
-  Plus,
-  Trophy,
-  Briefcase,
-  Compass,
   Users,
-  GraduationCap,
-  BriefcaseBusiness,
-  BookOpen,
   UserCircle,
   Hash,
-  FolderOpen,
+  Plus,
   LayoutDashboard,
 } from 'lucide-react';
-import { RealtimeStatsPopup } from '@/components/social-proof/RealtimeStatsPopup';
 import { CollapsibleSection } from '@/components/layout/CollapsibleSection';
 
 interface AppLayoutProps {
@@ -37,7 +27,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const { user, setUser } = useUserStore();
 
   const isActive = (path: string) => {
-    if (path === '/feed' && (pathname === '/feed' || pathname === '/discover')) return true;
     if (pathname === path) return true;
     if (path !== '/' && pathname?.startsWith(path + '/')) return true;
     return false;
@@ -46,8 +35,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
   const userEvents = user
     ? mockEvents.filter((event) => event.attendees.includes(user.id))
     : [];
-
-  const unreadCount = mockConversations.filter((c) => c.unreadCount > 0).length;
 
   return (
     <div className="min-h-screen bg-konekt-cream dark:bg-[#0a0a0a]">
@@ -73,12 +60,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors">
                 <Search className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
               </button>
-              <Link href="/notifications">
-                <button className="p-2 hover:bg-konekt-cream dark:hover:bg-white/10 rounded-lg transition-colors relative">
-                  <Bell className="w-5 h-5 text-konekt-black/60 dark:text-white/70" />
-                  <div className="absolute top-1.5 right-1.5 w-2 h-2 bg-konekt-pink rounded-full" />
-                </button>
-              </Link>
               {user && (
                 <Link href={`/profile/${user.username}`}>
                   <div className="w-10 h-10 rounded-full bg-konekt-green flex items-center justify-center text-konekt-white font-semibold cursor-pointer hover:opacity-80 transition-opacity">
@@ -91,9 +72,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
         </div>
       </header>
 
-      {/* Real-time Stats Popup */}
-      <RealtimeStatsPopup />
-
       {/* Main Layout with Sidebar */}
       <div className="max-w-[1800px] mx-auto px-6 py-8 pt-24">
         <div className="flex gap-8">
@@ -105,34 +83,29 @@ export default function AppLayout({ children }: AppLayoutProps) {
               <div className="p-3 border-b border-konekt-black/10 dark:border-white/10 flex-shrink-0">
                 {/* PRIMARY NAVIGATION */}
                 <nav className="space-y-1">
-                  <Link href="/feed" data-tour="nav-feed">
+                  <Link href="/dashboard">
                     <button
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
-                        isActive('/feed')
+                        isActive('/dashboard')
                           ? 'bg-konekt-green text-white'
                           : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
-                      <Compass className="w-5 h-5 flex-shrink-0" />
-                      <span>Discover</span>
+                      <LayoutDashboard className="w-5 h-5 flex-shrink-0" />
+                      <span>Dashboard</span>
                     </button>
                   </Link>
 
-                  <Link href="/messages" data-tour="nav-messages">
+                  <Link href="/events">
                     <button
                       className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition-all ${
-                        isActive('/messages')
+                        pathname === '/events'
                           ? 'bg-konekt-green text-white'
                           : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
                       }`}
                     >
-                      <MessageCircle className="w-5 h-5 flex-shrink-0" />
-                      <span>Messages</span>
-                      {unreadCount > 0 && (
-                        <span className="ml-auto text-xs bg-konekt-pink px-2 py-0.5 rounded-full text-white font-bold">
-                          {unreadCount}
-                        </span>
-                      )}
+                      <Calendar className="w-5 h-5 flex-shrink-0" />
+                      <span>Events</span>
                     </button>
                   </Link>
 
@@ -195,168 +168,21 @@ export default function AppLayout({ children }: AppLayoutProps) {
                   </div>
                 </CollapsibleSection>
 
-                {/* MENTORSHIP (Collapsible) */}
-                <CollapsibleSection
-                  title="Mentorship"
-                  icon={<GraduationCap className="w-4 h-4" />}
-                  defaultOpen={false}
-                >
-                  <div className="space-y-0.5">
-                    <Link href="/mentors">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          isActive('/mentors')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Users className="w-4 h-4 flex-shrink-0" />
-                        <span>Find Mentors</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/mentorship/sessions">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname?.startsWith('/mentorship')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Calendar className="w-4 h-4 flex-shrink-0" />
-                        <span>Your Sessions</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/mentors/dashboard">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname?.startsWith('/mentors/dashboard')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <LayoutDashboard className="w-4 h-4 flex-shrink-0" />
-                        <span>Mentor Dashboard</span>
-                      </button>
-                    </Link>
-                  </div>
-                </CollapsibleSection>
-
-                {/* RESOURCES (Collapsible) */}
-                <CollapsibleSection
-                  title="Resources"
-                  icon={<BookOpen className="w-4 h-4" />}
-                  defaultOpen={false}
-                >
-                  <div className="space-y-0.5">
-                    <Link href="/library">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname === '/library'
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <BookOpen className="w-4 h-4 flex-shrink-0" />
-                        <span>Knowledge Library</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/library/collections">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname?.startsWith('/library/collections')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <FolderOpen className="w-4 h-4 flex-shrink-0" />
-                        <span>Collections</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/library/contribute">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname?.startsWith('/library/contribute')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Plus className="w-4 h-4 flex-shrink-0" />
-                        <span>Contribute</span>
-                      </button>
-                    </Link>
-                  </div>
-                </CollapsibleSection>
-
-                {/* COMMUNITY (Collapsible) */}
-                <CollapsibleSection
-                  title="Community"
-                  icon={<Users className="w-4 h-4" />}
-                  defaultOpen={false}
-                >
-                  <div className="space-y-0.5">
-                    <Link href="/people">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          isActive('/people')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Users className="w-4 h-4 flex-shrink-0" />
-                        <span>People</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/projects">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname?.startsWith('/projects')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Briefcase className="w-4 h-4 flex-shrink-0" />
-                        <span>Projects</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/jobs">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          isActive('/jobs')
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <BriefcaseBusiness className="w-4 h-4 flex-shrink-0" />
-                        <span>Opportunities</span>
-                      </button>
-                    </Link>
-
-                    <Link href="/events">
-                      <button
-                        className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                          pathname === '/events'
-                            ? 'bg-konekt-green text-white'
-                            : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                        }`}
-                      >
-                        <Calendar className="w-4 h-4 flex-shrink-0" />
-                        <span>All Events</span>
-                        <span className="ml-auto text-xs bg-konekt-pink/20 text-konekt-pink px-1.5 py-0.5 rounded-full">
-                          {mockEvents.filter((e) => e.status !== 'completed').length}
-                        </span>
-                      </button>
-                    </Link>
-                  </div>
-                </CollapsibleSection>
-
                 {/* Standalone Items */}
                 <div className="px-2 mt-2 space-y-0.5">
+                  <Link href="/people">
+                    <button
+                      className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
+                        isActive('/people')
+                          ? 'bg-konekt-green text-white'
+                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
+                      }`}
+                    >
+                      <Users className="w-4 h-4 flex-shrink-0" />
+                      <span>People</span>
+                    </button>
+                  </Link>
+
                   {user && (
                     <Link href={`/profile/${user.username}`}>
                       <button
@@ -371,32 +197,6 @@ export default function AppLayout({ children }: AppLayoutProps) {
                       </button>
                     </Link>
                   )}
-
-                  <Link href="/dashboard">
-                    <button
-                      className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                        isActive('/dashboard')
-                          ? 'bg-konekt-green text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                      }`}
-                    >
-                      <TrendingUp className="w-4 h-4 flex-shrink-0" />
-                      <span>Dashboard</span>
-                    </button>
-                  </Link>
-
-                  <Link href="/leaderboard">
-                    <button
-                      className={`w-full flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all text-sm ${
-                        isActive('/leaderboard')
-                          ? 'bg-gradient-to-r from-amber-400 to-orange-500 text-white'
-                          : 'text-konekt-black/70 dark:text-white/60 hover:bg-konekt-cream dark:hover:bg-white/10 hover:text-konekt-black dark:hover:text-white'
-                      }`}
-                    >
-                      <Trophy className="w-4 h-4 flex-shrink-0" />
-                      <span>Leaderboard</span>
-                    </button>
-                  </Link>
                 </div>
               </div>
 

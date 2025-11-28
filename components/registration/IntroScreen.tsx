@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import { Sparkles, Rocket, FastForward } from 'lucide-react';
+import { useUserStore } from '@/lib/store';
+import { mockUsers } from '@/lib/mock-data';
 
 interface IntroScreenProps {
   onStart: () => void;
@@ -9,6 +11,15 @@ interface IntroScreenProps {
 }
 
 export const IntroScreen = ({ onStart, onSkip }: IntroScreenProps) => {
+  const { setUser } = useUserStore();
+
+  const handleSkip = () => {
+    // Auto-login user when skipping registration (in development mode)
+    if (process.env.NODE_ENV === 'development') {
+      setUser(mockUsers[0]);
+    }
+    onSkip();
+  };
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white flex items-center justify-center px-6 relative overflow-hidden">
       {/* Animated background particles */}
@@ -95,7 +106,7 @@ export const IntroScreen = ({ onStart, onSkip }: IntroScreenProps) => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={onSkip}
+            onClick={handleSkip}
             className="px-8 py-4 border-2 border-white/20 text-white/80 rounded-2xl font-semibold text-lg hover:bg-white/5 transition-colors flex items-center gap-3"
           >
             <FastForward className="w-6 h-6" />

@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ToastProvider } from "@/components/providers/ToastProvider";
-import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
 export const metadata: Metadata = {
-  title: "Konekt - Propojujeme studenty a mentory",
-  description: "Platforma pro networking studentů a mentorů z českého startup ekosystému",
+  title: "Konekt - Event Management Platform",
+  description: "Profesionální platforma pro organizátory eventů. Real-time analytics, attendee intelligence a long-term community engagement.",
 };
 
 export default function RootLayout({
@@ -14,24 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="cs" data-theme="dark" suppressHydrationWarning>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                const theme = localStorage.getItem('konekt-theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
-              } catch (e) {}
-            `,
-          }}
-        />
-      </head>
-      <body className="antialiased">
-        <ThemeProvider>
-          {children}
-          <ToastProvider />
-        </ThemeProvider>
+    <html lang="cs" suppressHydrationWarning>
+      <body className="antialiased bg-bg-primary text-text-primary">
+        {children}
+        <ToastProvider />
       </body>
     </html>
   );

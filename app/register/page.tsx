@@ -1,17 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import dynamic from 'next/dynamic';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IntroScreen } from '@/components/registration/IntroScreen';
-import { ArchetypeSelection } from '@/components/registration/ArchetypeSelection';
-import { AvatarCreation } from '@/components/registration/AvatarCreation';
-import { SkillsBuilder } from '@/components/registration/SkillsBuilder';
-import { QuestSetup } from '@/components/registration/QuestSetup';
-import { StoryMode } from '@/components/registration/StoryMode';
-import { VideoChallenge } from '@/components/registration/VideoChallenge';
-import { PowerUps } from '@/components/registration/PowerUps';
-import { ProfileReveal } from '@/components/registration/ProfileReveal';
 import { ChevronLeft } from 'lucide-react';
+
+// Dynamically import registration components to avoid SSR issues
+const IntroScreen = dynamic(() => import('@/components/registration/IntroScreen').then(mod => ({ default: mod.IntroScreen })), { ssr: false });
+const ArchetypeSelection = dynamic(() => import('@/components/registration/ArchetypeSelection').then(mod => ({ default: mod.ArchetypeSelection })), { ssr: false });
+const AvatarCreation = dynamic(() => import('@/components/registration/AvatarCreation').then(mod => ({ default: mod.AvatarCreation })), { ssr: false });
+const SkillsBuilder = dynamic(() => import('@/components/registration/SkillsBuilder').then(mod => ({ default: mod.SkillsBuilder })), { ssr: false });
+const QuestSetup = dynamic(() => import('@/components/registration/QuestSetup').then(mod => ({ default: mod.QuestSetup })), { ssr: false });
+const StoryMode = dynamic(() => import('@/components/registration/StoryMode').then(mod => ({ default: mod.StoryMode })), { ssr: false });
+const VideoChallenge = dynamic(() => import('@/components/registration/VideoChallenge').then(mod => ({ default: mod.VideoChallenge })), { ssr: false });
+const PowerUps = dynamic(() => import('@/components/registration/PowerUps').then(mod => ({ default: mod.PowerUps })), { ssr: false });
+const ProfileReveal = dynamic(() => import('@/components/registration/ProfileReveal').then(mod => ({ default: mod.ProfileReveal })), { ssr: false });
 
 export interface RegistrationData {
   // Step 1: Archetype
@@ -53,6 +57,7 @@ export interface RegistrationData {
 }
 
 export default function RegisterPage() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(0);
   const [showIntro, setShowIntro] = useState(true);
   const [data, setData] = useState<RegistrationData>({
@@ -88,7 +93,7 @@ export default function RegisterPage() {
   };
 
   if (showIntro) {
-    return <IntroScreen onStart={() => setShowIntro(false)} onSkip={() => window.location.href = '/dashboard'} />;
+    return <IntroScreen onStart={() => setShowIntro(false)} onSkip={() => router.push('/dashboard')} />;
   }
 
   const steps = [
